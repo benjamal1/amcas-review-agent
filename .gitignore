@@ -1,0 +1,23 @@
+# Obsidian internal files
+.obsidian/
+.trash/
+
+# Smart Connections plugin data
+.smart-env/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+.venv/
+venv/
+
+# Node (if any tooling added later)
+node_modules/
+
+# Personal data (should already be cleared in this repo, but just in case)
+# Meeting Notes/*.md is tracked (contains only the README placeholder)
