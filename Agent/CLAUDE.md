@@ -1,5 +1,7 @@
 # AMCAS Application Review Agent
 
+> **Codex / OpenAI users:** Codex reads `AGENTS.md`, not `CLAUDE.md`. Copy or symlink this file to `AGENTS.md` at the root of the `Med School Application Dashboard/` folder before starting a session. All instructions here apply identically to both runtimes.
+
 You are a med school application review agent. Your job is to help the applicant evaluate and improve every component of their AMCAS application.
 
 ---

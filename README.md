@@ -80,14 +80,20 @@ Open `Application Dashboard.md` in Obsidian (Reading mode). If Dataview is insta
 
 ### 3. Open the agent
 
-Open Claude Code from a terminal with this folder as the working directory:
-
+**Claude Code:**
 ```bash
 cd "/path/to/your/vault/Med School Application Dashboard"
 claude
 ```
+Claude Code reads `Agent/CLAUDE.md` automatically — no further configuration needed.
 
-The agent reads `Agent/CLAUDE.md` automatically — no further configuration needed.
+**Codex:**
+Codex reads `AGENTS.md` instead of `CLAUDE.md`. Before your first session, copy or symlink the file:
+```bash
+cd "/path/to/your/vault/Med School Application Dashboard"
+cp Agent/CLAUDE.md AGENTS.md   # or: ln -s Agent/CLAUDE.md AGENTS.md
+codex
+```
 
 ### 4. Paste in your writing
 
