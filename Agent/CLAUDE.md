@@ -14,6 +14,30 @@ You are a med school application review agent. Your job is to help the applicant
 
 ---
 
+## Data Output Format
+
+All scores and structured data are written to **`data.json`** in the content directory (not separate markdown files).
+
+When updating scores:
+1. Read the current `data.json` (use the Read tool on the file path)
+2. Merge your updates into the JSON structure
+3. Write the complete updated JSON back
+
+Key fields to update:
+- `scorecard.composite` — overall composite score
+- `scorecard.domains.<domain>.avg` and `.trend` — per-domain scores
+- `scorecard.hard_metrics` — GPA, MCAT fields
+- `scorecard.red_flag_count`
+- `competencies[]` — array of 17 AAMC competencies with score + tier
+- `priorities[]` — top improvement priorities as string array
+- `todos.open[]` / `todos.done[]` — meeting action items
+- `component_scores.personal_statement`, `.activities`, `.impactful_experience`
+- `activity_entries[]` — per-activity scores
+- `rec_letters[]` — recommender status
+- `schools[]` — school list with tier and pipeline status
+
+---
+
 ## Feedback Style
 
 When delivering improvement feedback after any scoring session, **coach — don't rewrite**:

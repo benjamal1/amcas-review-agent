@@ -1,0 +1,51 @@
+{
+  "scorecard": {
+    "composite": null,
+    "red_flag_count": 0,
+    "domains": {
+      "personal_narrative":   { "avg": null, "trend": "→", "last_updated": "" },
+      "clinical_experience":  { "avg": null, "trend": "→", "last_updated": "" },
+      "research_academics":   { "avg": null, "trend": "→", "last_updated": "" },
+      "extracurriculars":     { "avg": null, "trend": "→", "last_updated": "" },
+      "service_community":    { "avg": null, "trend": "→", "last_updated": "" }
+    },
+    "hard_metrics": {
+      "gpa_cumulative": null,
+      "gpa_bcpm": null,
+      "mcat_total": null,
+      "mcat_cars": null,
+      "mcat_cp": null,
+      "mcat_bb": null,
+      "mcat_ps": null
+    }
+  },
+  "competencies": [
+    { "name": "Service Orientation",          "score": null, "tier": null, "supported_by": [] },
+    { "name": "Social Skills",                "score": null, "tier": null, "supported_by": [] },
+    { "name": "Cultural Competence",          "score": null, "tier": null, "supported_by": [] },
+    { "name": "Teamwork",                     "score": null, "tier": null, "supported_by": [] },
+    { "name": "Oral Communication",           "score": null, "tier": null, "supported_by": [] },
+    { "name": "Ethical Responsibility",       "score": null, "tier": null, "supported_by": [] },
+    { "name": "Reliability and Dependability","score": null, "tier": null, "supported_by": [] },
+    { "name": "Resilience and Adaptability",  "score": null, "tier": null, "supported_by": [] },
+    { "name": "Capacity for Improvement",     "score": null, "tier": null, "supported_by": [] },
+    { "name": "Critical Thinking",            "score": null, "tier": null, "supported_by": [] },
+    { "name": "Quantitative Reasoning",       "score": null, "tier": null, "supported_by": [] },
+    { "name": "Scientific Inquiry",           "score": null, "tier": null, "supported_by": [] },
+    { "name": "Written Communication",        "score": null, "tier": null, "supported_by": [] },
+    { "name": "Living and Working with Others","score": null,"tier": null, "supported_by": [] },
+    { "name": "Empathy and Compassion",       "score": null, "tier": null, "supported_by": [] },
+    { "name": "Human Behavior",               "score": null, "tier": null, "supported_by": [] },
+    { "name": "Medical Knowledge",            "score": null, "tier": null, "supported_by": [] }
+  ],
+  "priorities": [],
+  "todos": { "open": [], "done": [] },
+  "component_scores": {
+    "personal_statement":   { "score": null, "last_scored": "" },
+    "activities":           { "score": null, "last_scored": "" },
+    "impactful_experience": { "score": null, "last_scored": "" }
+  },
+  "activity_entries": [],
+  "rec_letters": [],
+  "schools": []
+}
