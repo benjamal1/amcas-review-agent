@@ -2,6 +2,7 @@
   "name": "amcas-review-agent",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "concurrently -k -p \"[{name}]\" -n \"server,client\" -c \"cyan,green\" \"npm run dev:server\" \"npm run dev:client\"",
     "dev:server": "tsx watch server/index.ts",
