@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import { useEffect, useRef } from 'react'
 import { Dashboard } from './components/dashboard/Dashboard'
 import { EditorPanel } from './components/editor/EditorPanel'
 import { TerminalPanel } from './components/terminal/TerminalPanel'

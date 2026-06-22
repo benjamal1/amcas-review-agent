@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type { RecLetter } from '../../lib/types'
 function icon(s?: string) { const v = (s ?? '').toLowerCase(); return v.includes('submitted') || v.includes('received') ? '✓' : v.includes('pending') ? '◷' : '○' }
 export function RecLettersList({ letters }: { letters: RecLetter[] }) {

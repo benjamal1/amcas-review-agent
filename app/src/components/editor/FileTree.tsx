@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import '../../styles/editor.css'
 type Groups = Record<string, string[]>
 function group(files: string[]): Groups {

@@ -1,4 +1,4 @@
-import React from 'react'
+import { useEffect } from 'react'
 import '../../styles/dashboard.css'
 import { useScores } from '../../hooks/useScores'
 import { CompositeTile } from './CompositeTile'
@@ -16,7 +16,7 @@ import { SchoolListPanel } from './SchoolListPanel'
 
 export function Dashboard({ registerReload }: { registerReload?: (fn: () => void) => void }) {
   const { data, loading, error, reload } = useScores()
-  React.useEffect(() => { registerReload?.(reload) }, [registerReload, reload])
+  useEffect(() => { registerReload?.(reload) }, [registerReload, reload])
   if (loading) return <div className="dashboard__loading">Loading dashboard…</div>
   if (error) return <div className="dashboard__error">Error loading data: {error}</div>
   if (!data) return <div className="dashboard__empty">No data. Set CONTENT_DIR to your vault folder and restart.</div>

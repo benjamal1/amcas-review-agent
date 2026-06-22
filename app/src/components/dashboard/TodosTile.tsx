@@ -1,4 +1,4 @@
-import React from 'react'
+
 export function TodosTile({ open, done }: { open: number; done: number }) {
   return (
     <div className="tile tile--todos">

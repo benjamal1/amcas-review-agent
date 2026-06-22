@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type { Scorecard } from '../../lib/types'
 export function RedFlagsTile({ sc }: { sc: Scorecard | null }) {
   const n = sc?.red_flag_count ?? 0

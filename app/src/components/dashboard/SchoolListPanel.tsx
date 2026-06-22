@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type { SchoolEntry } from '../../lib/types'
 const TIERS = ['reach', 'target', 'safety'] as const
 const TC: Record<string, string> = { reach: 'var(--color-danger)', target: 'var(--color-warn)', safety: 'var(--color-pos)' }

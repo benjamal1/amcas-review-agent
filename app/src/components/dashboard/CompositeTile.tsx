@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type { Scorecard } from '../../lib/types'
 export function CompositeTile({ sc }: { sc: Scorecard | null }) {
   const t = Object.values(sc?.domains ?? {})[0]?.trend ?? '→'

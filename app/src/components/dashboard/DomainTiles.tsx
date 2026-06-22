@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type { DomainScore } from '../../lib/types'
 const LABELS: Record<string, string> = { personal_narrative: 'Personal Narrative', clinical_experience: 'Clinical', research_academics: 'Research / Academics', extracurriculars: 'Extracurriculars', service_community: 'Service' }
 const sc = (v: number) => v >= 8 ? 'var(--color-pos)' : v >= 5 ? 'var(--color-warn)' : 'var(--color-danger)'

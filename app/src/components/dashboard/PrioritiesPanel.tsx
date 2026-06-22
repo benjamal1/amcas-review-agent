@@ -1,4 +1,4 @@
-import React from 'react'
+
 export function PrioritiesPanel({ priorities }: { priorities: string[] }) {
   return (
     <div className="priorities">

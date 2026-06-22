@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type { ComponentScore } from '../../lib/types'
 function Card({ label, s }: { label: string; s: ComponentScore | null }) {
   return (

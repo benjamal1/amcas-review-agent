@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Terminal } from './Terminal'
 import { GradeButtons } from './GradeButtons'
 export function TerminalPanel() {

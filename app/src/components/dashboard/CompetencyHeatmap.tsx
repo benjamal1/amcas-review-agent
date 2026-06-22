@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type { Competency } from '../../lib/types'
 function color(tier?: string, score?: number) {
   if (tier === 'Strong' || (score !== undefined && score >= 8)) return 'var(--color-pos)'

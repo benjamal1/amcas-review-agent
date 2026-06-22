@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { FileTree } from './FileTree'
 import { Editor } from './Editor'
 import { useFiles } from '../../hooks/useFiles'

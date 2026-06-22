@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { getSharedTerminal } from './Terminal'
 
 // Trigger phrases from Agent/CLAUDE.md

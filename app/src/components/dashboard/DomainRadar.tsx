@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Radar, RadarChart, PolarGrid, PolarAngleAxis, ResponsiveContainer } from 'recharts'
 import type { DomainScore } from '../../lib/types'
 const SHORT: Record<string, string> = { personal_narrative: 'Personal', clinical_experience: 'Clinical', research_academics: 'Research', extracurriculars: 'Extracurricular', service_community: 'Service' }

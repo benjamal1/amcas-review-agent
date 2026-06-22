@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { useFiles } from '../hooks/useFiles'
 
 interface Props {

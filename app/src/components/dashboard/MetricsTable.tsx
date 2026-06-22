@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type { HardMetrics } from '../../lib/types'
 export function MetricsTable({ metrics }: { metrics: HardMetrics | undefined }) {
   if (!metrics) return <div className="tile__empty">No metrics</div>

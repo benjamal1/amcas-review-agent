@@ -1,4 +1,4 @@
-import React from 'react'
+
 import type { ActivityEntry } from '../../lib/types'
 export function ActivityTable({ entries }: { entries: ActivityEntry[] }) {
   if (!entries.length) return <div className="tile__empty">No activity entries</div>
