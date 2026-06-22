@@ -19,3 +19,17 @@ export interface DashboardData {
   psScore: ComponentScore | null; activitiesScore: ComponentScore | null; ieScore: ComponentScore | null
   activityEntries: ActivityEntry[]; recLetters: RecLetter[]; schools: SchoolEntry[]
 }
+export interface AppData {
+  scorecard: Scorecard
+  competencies: Competency[]
+  priorities: string[]
+  todos: { open: string[]; done: string[] }
+  component_scores: {
+    personal_statement: ComponentScore
+    activities: ComponentScore
+    impactful_experience: ComponentScore
+  }
+  activity_entries: ActivityEntry[]
+  rec_letters: RecLetter[]
+  schools: SchoolEntry[]
+}

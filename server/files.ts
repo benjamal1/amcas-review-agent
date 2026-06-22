@@ -17,12 +17,13 @@ function sandboxPath(contentDir: string, userPath: string): string | null {
   return resolved
 }
 
-async function listMarkdown(contentDir: string): Promise<string[]> {
-  const base = path.resolve(contentDir)
+async function listMarkdown(dir: string): Promise<string[]> {
+  const base = path.resolve(dir)
   const entries = await fs.readdir(base, { recursive: true })
   return (entries as string[])
     .filter(e => e.endsWith('.md'))
     .sort()
+    .map(e => path.join(base, e))
 }
 
 async function readFileParsed(fullPath: string): Promise<{ content: string; frontmatter: Record<string, unknown> }> {
@@ -37,8 +38,40 @@ async function writeFilePreserving(fullPath: string, newContent: string, frontma
 }
 
 export async function registerFileRoutes(app: FastifyInstance, contentDir: string) {
-  app.get('/api/files', async () => {
-    return listMarkdown(contentDir)
+  app.get('/api/files', async (_req, reply) => {
+    const docsDir = path.join(contentDir, 'documents')
+    try {
+      const files = await listMarkdown(docsDir)
+      return reply.send(files.map(f => 'documents/' + path.relative(docsDir, f)))
+    } catch {
+      return reply.send([])
+    }
+  })
+
+  // GET /api/data — read data.json
+  app.get('/api/data', async (_req, reply) => {
+    const dataPath = path.join(contentDir, 'data.json')
+    try {
+      const raw = await fs.readFile(dataPath, 'utf-8')
+      return reply.send(JSON.parse(raw))
+    } catch (e: unknown) {
+      if ((e as NodeJS.ErrnoException).code === 'ENOENT') return reply.code(404).send({ error: 'data.json not found' })
+      return reply.code(500).send({ error: 'failed to read data.json' })
+    }
+  })
+
+  // PUT /api/data — write data.json atomically
+  app.put('/api/data', async (req, reply) => {
+    const dataPath = path.join(contentDir, 'data.json')
+    const tmpPath = path.join(contentDir, '.data.json.tmp')
+    try {
+      const body = req.body as unknown
+      await fs.writeFile(tmpPath, JSON.stringify(body, null, 2), 'utf-8')
+      await fs.rename(tmpPath, dataPath)
+      return reply.send({ ok: true })
+    } catch {
+      return reply.code(500).send({ error: 'failed to write data.json' })
+    }
   })
 
   app.get<{ Querystring: { path?: string } }>('/api/file', async (req, reply) => {
