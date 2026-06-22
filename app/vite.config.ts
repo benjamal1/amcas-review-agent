@@ -9,9 +9,11 @@ export default defineConfig({
     emptyOutDir: true,
   },
   server: {
+    host: true,
     proxy: {
       '/api': 'http://127.0.0.1:3001',
-      '/ws': { target: 'ws://127.0.0.1:3001', ws: true },
+      '/pty':   { target: 'ws://127.0.0.1:3001', ws: true },
+      '/watch': { target: 'ws://127.0.0.1:3001', ws: true },
     },
   },
 })
