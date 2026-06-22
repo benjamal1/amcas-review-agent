@@ -1,0 +1,21 @@
+export interface DomainScore { avg: number; trend: string; last_updated?: string }
+export interface HardMetrics {
+  gpa_cumulative?: number; gpa_bcpm?: number; mcat_total?: number
+  mcat_cars?: number; mcat_cp?: number; mcat_bb?: number; mcat_ps?: number
+  [k: string]: number | undefined
+}
+export interface Scorecard {
+  composite?: number; red_flag_count?: number
+  domains?: Record<string, DomainScore>; hard_metrics?: HardMetrics
+}
+export interface Competency { name: string; score?: number; tier?: string; supported_by?: string[] }
+export interface ComponentScore { score?: number; last_scored?: string; mode?: string }
+export interface ActivityEntry { name: string; description_quality?: number; most_meaningful_depth?: number; [k: string]: unknown }
+export interface RecLetter { recommender?: string; status?: string; submitted?: boolean; name?: string; [k: string]: unknown }
+export interface SchoolEntry { name: string; tier?: string; pipeline?: string; casper_required?: boolean; preview_required?: boolean; [k: string]: unknown }
+export interface DashboardData {
+  scorecard: Scorecard | null; competencies: Competency[]
+  priorities: string[]; todoOpen: number; todoDone: number
+  psScore: ComponentScore | null; activitiesScore: ComponentScore | null; ieScore: ComponentScore | null
+  activityEntries: ActivityEntry[]; recLetters: RecLetter[]; schools: SchoolEntry[]
+}
