@@ -1,8 +1,10 @@
 import type { FastifyInstance } from 'fastify'
+import { createRequire } from 'module'
 
-// ponytail: graceful-degrade — node-pty has native build; isolate so it can't break the server
+// node-pty is CJS-only; use createRequire so it loads under ESM ("type":"module")
+const _require = createRequire(import.meta.url)
 let nodePty: typeof import('node-pty') | null = null
-try { nodePty = require('node-pty') } catch { console.warn('[pty] node-pty unavailable — terminal disabled') }
+try { nodePty = _require('node-pty') } catch (e) { console.warn('[pty] node-pty unavailable — terminal disabled', e) }
 
 export function registerPtyRoute(app: FastifyInstance, contentDir: string) {
   if (!nodePty) {
