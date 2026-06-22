@@ -1,0 +1,23 @@
+.filetree { overflow-y: auto; height: 100%; }
+.filetree__group { margin-bottom: 2px; }
+.filetree__folder { display: flex; align-items: center; gap: 6px; width: 100%; background: none; border: none; color: var(--color-muted); font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; padding: 5px 12px; cursor: pointer; text-align: left; }
+.filetree__folder:hover { color: var(--color-text); }
+.filetree__chevron { font-size: 8px; }
+.filetree__file { display: block; width: 100%; background: none; border: none; color: var(--color-text); font-size: 12px; font-family: var(--font-mono); padding: 4px 12px 4px 24px; cursor: pointer; text-align: left; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; transition: background 100ms, color 100ms; }
+.filetree__file:hover { background: var(--color-raised); }
+.filetree__file--active { background: var(--color-raised); color: var(--color-accent); }
+.editor-wrap { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
+.editor-toolbar { display: flex; align-items: center; gap: 8px; padding: 4px 10px; background: var(--color-raised); border-bottom: 1px solid var(--color-hairline); min-height: 30px; flex-shrink: 0; flex-wrap: wrap; }
+.editor-toolbar__path { font-family: var(--font-mono); font-size: 11px; color: var(--color-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px; }
+.editor-toolbar__save { font-size: 11px; }
+.editor-toolbar__save--saved { color: var(--color-pos); }
+.editor-toolbar__save--error { color: var(--color-danger); }
+.editor-toolbar__save--saving { color: var(--color-warn); }
+.editor-toolbar__chars { font-family: var(--font-mono); font-size: 10px; color: var(--color-muted); margin-left: auto; }
+.editor-toolbar__chars--over { color: var(--color-danger); font-weight: 700; }
+.editor-toolbar__empty { font-size: 11px; color: var(--color-muted); }
+.editor-cm { flex: 1; overflow: hidden; }
+.editor-cm .cm-editor { height: 100%; }
+.editor-panel { display: grid; grid-template-columns: 200px 1fr; height: 100%; overflow: hidden; }
+.editor-panel__tree { border-right: 1px solid var(--color-hairline); overflow-y: auto; }
+.editor-panel__editor { overflow: hidden; }
