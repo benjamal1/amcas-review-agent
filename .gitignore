@@ -21,3 +21,20 @@ node_modules/
 
 # Personal data (should already be cleared in this repo, but just in case)
 # Meeting Notes/*.md is tracked (contains only the README placeholder)
+
+# Content directory (gitignored — use content.example/ as template)
+/content/
+
+# Generated score files
+*-scores.md
+applicant-image.md
+session-context-*.md
+
+# Agent workspace
+.agents/
+
+# Build output
+dist/
+
+# Local overrides
+*.local

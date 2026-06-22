@@ -3,6 +3,7 @@ import staticPlugin from '@fastify/static'
 import websocketPlugin from '@fastify/websocket'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { existsSync, cpSync } from 'node:fs'
 import { registerFileRoutes } from './files.js'
 import { registerPtyRoute } from './pty.js'
 import { registerWatchRoute } from './watch.js'
@@ -12,6 +13,13 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url))
 const CONTENT_DIR = path.resolve(process.env.CONTENT_DIR ?? './content')
 const PORT = Number(process.env.PORT ?? 3001)
 const HOST = '127.0.0.1'
+
+// First-run: seed content/ from content.example/ if absent
+const contentExample = new URL('../../content.example', import.meta.url).pathname
+if (!existsSync(CONTENT_DIR) && existsSync(contentExample)) {
+  cpSync(contentExample, CONTENT_DIR, { recursive: true })
+  console.log(`[server] First run — copied content.example → ${CONTENT_DIR}`)
+}
 
 console.log(`[server] CONTENT_DIR → ${CONTENT_DIR}`)
 
