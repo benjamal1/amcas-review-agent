@@ -26,19 +26,17 @@ export default function App() {
         <span className="logo">AMCAS</span>
         <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--color-muted)' }}>Local Review Agent</span>
       </header>
-      <div className="app-body">
-        <main className="app-main">
-          <section className="panel panel--dashboard" aria-label="Dashboard">
-            <Dashboard registerReload={fn => { reloadRef.current = fn }} />
-          </section>
-          <section className="panel panel--editor" aria-label="Editor">
-            <EditorPanel />
-          </section>
-          <section className="panel panel--terminal" aria-label="Terminal">
-            <TerminalPanel />
-          </section>
-        </main>
-      </div>
+      <main className="app-main">
+        <section className="panel panel--dashboard" aria-label="Dashboard">
+          <Dashboard registerReload={fn => { reloadRef.current = fn }} />
+        </section>
+        <section className="panel panel--editor" aria-label="Editor">
+          <EditorPanel />
+        </section>
+        <section className="panel panel--terminal" aria-label="Terminal">
+          <TerminalPanel />
+        </section>
+      </main>
     </div>
   )
 }
