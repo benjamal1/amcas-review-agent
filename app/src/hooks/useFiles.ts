@@ -6,13 +6,19 @@ export function useFiles() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    fetch('/api/files')
+    const controller = new AbortController()
+    fetch('/api/files', { signal: controller.signal })
       .then(r => {
         if (!r.ok) throw new Error(`HTTP ${r.status}`)
         return r.json() as Promise<string[]>
       })
       .then(data => { setFiles(data); setLoading(false) })
-      .catch(e => { setError(String(e)); setLoading(false) })
+      .catch(e => {
+        if (e instanceof Error && e.name === 'AbortError') return
+        setError(String(e))
+        setLoading(false)
+      })
+    return () => controller.abort()
   }, [])
 
   return { files, loading, error }

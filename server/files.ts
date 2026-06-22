@@ -56,7 +56,11 @@ export async function registerFileRoutes(app: FastifyInstance, contentDir: strin
   }, async (req, reply) => {
     const safe = sandboxPath(contentDir, req.query.path ?? '')
     if (!safe) return reply.code(400).send({ error: 'invalid path' })
-    await writeFilePreserving(safe, req.body.content, req.body.frontmatter)
+    try {
+      await writeFilePreserving(safe, req.body.content, req.body.frontmatter)
+    } catch {
+      return reply.code(500).send({ error: 'write failed' })
+    }
     return { ok: true }
   })
 }
