@@ -1,33 +1,41 @@
-import React, { useState } from 'react'
-import { Sidebar } from './components/Sidebar'
+import React, { useEffect, useRef } from 'react'
+import { Dashboard } from './components/dashboard/Dashboard'
+import { EditorPanel } from './components/editor/EditorPanel'
+import { TerminalPanel } from './components/terminal/TerminalPanel'
 
 export default function App() {
-  const [selectedFile, setSelectedFile] = useState<string | null>(null)
+  const reloadRef = useRef<(() => void) | null>(null)
+
+  // Wire chokidar file-change events → dashboard reload
+  useEffect(() => {
+    let ws: WebSocket | null = null
+    function connect() {
+      ws = new WebSocket(`ws://${location.host}/watch`)
+      ws.onmessage = e => {
+        try { const m = JSON.parse(e.data); if (m.type === 'file-changed' && m.isScore) reloadRef.current?.() } catch {}
+      }
+      ws.onclose = () => setTimeout(connect, 3000)
+    }
+    connect()
+    return () => ws?.close()
+  }, [])
 
   return (
     <div className="app-shell">
       <header className="app-header">
         <span className="logo">AMCAS</span>
-        {selectedFile && (
-          <span className="app-header__file">{selectedFile}</span>
-        )}
+        <span style={{ marginLeft: 'auto', fontSize: 11, color: 'var(--color-muted)' }}>Local Review Agent</span>
       </header>
       <div className="app-body">
-        <Sidebar selected={selectedFile} onSelect={setSelectedFile} />
         <main className="app-main">
           <section className="panel panel--dashboard" aria-label="Dashboard">
-            <div className="panel__heading">Dashboard</div>
-            <p className="panel__placeholder">Score data — phase 02</p>
+            <Dashboard registerReload={fn => { reloadRef.current = fn }} />
           </section>
           <section className="panel panel--editor" aria-label="Editor">
-            <div className="panel__heading">Editor</div>
-            <p className="panel__placeholder">
-              {selectedFile ? selectedFile : 'Select a file to edit — phase 03'}
-            </p>
+            <EditorPanel />
           </section>
           <section className="panel panel--terminal" aria-label="Terminal">
-            <div className="panel__heading">Terminal</div>
-            <p className="panel__placeholder">Claude session — phase 04</p>
+            <TerminalPanel />
           </section>
         </main>
       </div>

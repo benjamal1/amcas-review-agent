@@ -1,8 +1,11 @@
 import Fastify from 'fastify'
 import staticPlugin from '@fastify/static'
+import websocketPlugin from '@fastify/websocket'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { registerFileRoutes } from './files.js'
+import { registerPtyRoute } from './pty.js'
+import { registerWatchRoute } from './watch.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
@@ -13,6 +16,7 @@ const HOST = '127.0.0.1'
 console.log(`[server] CONTENT_DIR → ${CONTENT_DIR}`)
 
 const app = Fastify({ logger: false })
+await app.register(websocketPlugin)
 
 // Serve built UI (skip in dev — vite handles it)
 if (process.env.NODE_ENV === 'production') {
@@ -27,6 +31,9 @@ app.get('/api/health', async () => ({ ok: true, contentDir: CONTENT_DIR }))
 
 // File routes (implemented in T3 — stub registered here)
 await registerFileRoutes(app, CONTENT_DIR)
+
+registerPtyRoute(app, CONTENT_DIR)
+registerWatchRoute(app, CONTENT_DIR)
 
 await app.listen({ port: PORT, host: HOST })
 console.log(`[server] listening on http://${HOST}:${PORT}`)

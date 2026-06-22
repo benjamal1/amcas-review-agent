@@ -1,0 +1,11 @@
+.terminal-container { width: 100%; height: 100%; background: #0F1419; }
+.terminal-panel { display: grid; grid-template-columns: 1fr 200px; height: 100%; overflow: hidden; }
+.terminal-panel__term { overflow: hidden; background: #0F1419; }
+.terminal-panel__buttons { border-left: 1px solid var(--color-hairline); overflow-y: auto; background: var(--color-panel); }
+.grade-buttons { padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; }
+.grade-buttons__label { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-muted); }
+.grade-buttons__hint { font-size: 10px; color: var(--color-warn); padding: 4px 0; line-height: 1.3; }
+.grade-buttons__grid { display: flex; flex-direction: column; gap: 3px; }
+.grade-btn { background: var(--color-raised); border: 1px solid var(--color-hairline); color: var(--color-text); font-size: 11px; padding: 6px 8px; border-radius: var(--radius-sm); cursor: pointer; text-align: left; transition: background 120ms, border-color 120ms, color 120ms; width: 100%; }
+.grade-btn:hover { border-color: var(--color-accent); color: var(--color-accent); background: var(--color-raised); }
+.grade-btn:active { opacity: 0.7; }
