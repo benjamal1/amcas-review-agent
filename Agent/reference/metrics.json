@@ -1,0 +1,24 @@
+{
+  "source": "AAMC matriculant data (medians) + 2026 AMCAS Applicant Guide; see Agent/reference/amcas/ and Agent/reference/msar/",
+  "year": 2026,
+  "note": "Tiers are advisory adcom norms, not hard cutoffs. Science/BCPM GPA weighs more than cumulative for MD. CARS below the floor is flagged regardless of total.",
+  "gpa_tiers": [
+    { "min": 3.80, "max": 4.00, "label": "Strong", "note": "At or above median for most MD programs." },
+    { "min": 3.60, "max": 3.79, "label": "Competitive", "note": "In range for most programs; may limit top-10 reach." },
+    { "min": 3.40, "max": 3.59, "label": "Borderline", "note": "Competitive for mid-tier MD; DO more accessible." },
+    { "min": 0.00, "max": 3.39, "label": "Challenging for MD", "note": "Significant upward trend or post-bacc typically needed." }
+  ],
+  "mcat_tiers": [
+    { "min": 517, "max": 528, "label": "Top tier", "note": "Competitive for all MD programs including top-10." },
+    { "min": 511, "max": 516, "label": "Strong", "note": "Competitive for most MD programs." },
+    { "min": 507, "max": 510, "label": "Competitive", "note": "Solid for mid-tier MD programs." },
+    { "min": 500, "max": 506, "label": "Borderline MD", "note": "Competitive for DO; some MD with a strong app." },
+    { "min": 472, "max": 499, "label": "Retake recommended", "note": "Retake advised before applying MD." }
+  ],
+  "cars_floor": 127,
+  "cars_note": "Many programs flag a CARS score below 127 regardless of total.",
+  "gpa_scale": { "min": 0.0, "max": 4.0 },
+  "mcat_scale": { "min": 472, "max": 528 },
+  "section_scale": { "min": 118, "max": 132 },
+  "school_medians": {}
+}
