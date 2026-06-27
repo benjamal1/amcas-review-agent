@@ -16,9 +16,12 @@ export function registerPtyRoute(app: FastifyInstance, contentDir: string) {
   }
   app.get('/pty', { websocket: true }, (socket) => {
     const shell = process.env.SHELL ?? (process.platform === 'win32' ? 'powershell.exe' : 'bash')
+    // Launch at repo root so `claude` auto-loads the router CLAUDE.md + .claude/agents/.
+    // The content dir is passed via CONTENT_DIR so agents resolve data.json/documents/feedback.
     const proc = nodePty!.spawn(shell, [], {
       name: 'xterm-color', cols: 80, rows: 24,
-      cwd: contentDir, env: process.env as Record<string, string>,
+      cwd: process.cwd(),
+      env: { ...process.env, CONTENT_DIR: contentDir } as Record<string, string>,
     })
     proc.onData(data => { try { socket.send(data) } catch {} })
     socket.on('message', (msg: Buffer | string) => {

@@ -21,11 +21,12 @@ CONTENT_DIR=/path/to/obsidian/vault npm run dev
 
 ## Using it
 
-1. **Dashboard** — auto-populated from score file YAML frontmatter
+1. **Dashboard** — auto-populated from `content/data.json`; metrics, rec letters, todos, coursework,
+   and the school list are **editable inline** (writes back to `data.json`)
 2. **Editor** — click any file; edits autosave with AMCAS char-count hints
 3. **Terminal** — type `claude` to start a session; **Grade Buttons** inject trigger phrases
 
-When the agent writes score files, the dashboard refreshes automatically (~1s).
+When the agent or a form writes `data.json`, the dashboard refreshes automatically (~1s).
 
 ## Stack
 
@@ -43,4 +44,17 @@ Plain markdown + YAML frontmatter in `CONTENT_DIR`. Obsidian is optional storage
 
 ## Agent
 
-`Agent/CLAUDE.md` contains the scoring agent. Run it from the Terminal panel via `claude` or click a Grade Button.
+The scoring agent is a **router** (`CLAUDE.md` at repo root) that dispatches to specialist
+subagents in `.claude/agents/` (essay-scorer, activities-scorer, experiences-scorer,
+competency-assessor, metrics-advisor, rec-letter-reviewer, meeting-todo-extractor, coursework-mapper).
+The Terminal panel launches `claude` **from the repo root**, so the router + subagents auto-load; it
+passes `CONTENT_DIR` so agents read/write `data.json`, `documents/`, and `feedback/`.
+
+Rubrics live in `Agent/rubrics/` (shared `essay-base-rubric.md` + per-essay overlays); reference data
+(AAMC tiers, MSAR/AMCAS PDFs) in `Agent/reference/`.
+
+**Codex users:** Codex reads `AGENTS.md` (generated — router + subagent bodies inlined). After
+editing `CLAUDE.md` or `.claude/agents/`, regenerate: `node Agent/build-agents-md.mjs`.
+
+Data entry (GPA/MCAT, school pipeline, rec-letter status, todos, coursework) is done in the website,
+not the terminal — the agent reads those records and focuses on scoring/coaching.
