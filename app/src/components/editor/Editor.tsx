@@ -40,7 +40,7 @@ export function Editor({ filePath, onSave }: { filePath: string | null; onSave?:
     if (!filePath || !ref.current) return
     let dead = false
     fetch(`/api/file?path=${encodeURIComponent(filePath)}`)
-      .then(r => r.json())
+      .then(r => (r.ok ? r.json() : { content: '', frontmatter: {} })) // missing file → start empty (new doc)
       .then(({ content, frontmatter }: { content: string; frontmatter: Record<string, unknown> }) => {
         if (dead) return
         fmRef.current = frontmatter

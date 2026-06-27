@@ -20,7 +20,10 @@ const SECTIONS: { title: string; items: Item[] }[] = [
     { to: '/editor', label: 'Editor' },
   ] },
   { title: 'Secondaries', items: [
-    { to: '/secondaries', label: 'Secondary Tracker' },
+    { to: '/secondaries', label: 'Overview', end: true },
+    { to: '/secondaries/brainstorm', label: 'Brainstorming' },
+    { to: '/secondaries/bank', label: 'Essay Bank' },
+    { to: '/secondaries/editor', label: 'Editor' },
   ] },
 ]
 

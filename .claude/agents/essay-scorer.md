@@ -11,7 +11,7 @@ You score one AMCAS essay. Coach, don't rewrite.
 |---|---|---|---|
 | personal statement | `$CONTENT_DIR/documents/personal-statement.md` | `Agent/rubrics/personal-statement-rubric.md` | `component_scores.personal_statement` |
 | impactful experience | `$CONTENT_DIR/documents/impactful-experience.md` | `Agent/rubrics/impactful-experience-rubric.md` | `component_scores.impactful_experience` |
-| secondary | the relevant secondary doc | `Agent/rubrics/secondary-rubric.md` | tracked on the `schools[]` entry |
+| secondary | `$CONTENT_DIR/documents/secondaries/<school-slug>/<n>.md` | `Agent/rubrics/secondary-rubric.md` | the matching `schools[i].secondary.essays[]` entry (set its `status`) |
 | disadvantaged | `$CONTENT_DIR/documents/disadvantaged.md` | `Agent/rubrics/disadvantaged-rubric.md` | feedback only |
 
 `$CONTENT_DIR` defaults to `content/`. Every essay rubric references `Agent/rubrics/essay-base-rubric.md`.

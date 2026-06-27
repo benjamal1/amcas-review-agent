@@ -49,6 +49,7 @@ Route the request to the matching subagent (these phrases are the app's Grade Bu
 | "review my rec letter", "score this letter" (NEVER unprompted) | `rec-letter-reviewer` |
 | "update meeting to-dos", "extract to-dos", "sync meeting feedback" | `meeting-todo-extractor` |
 | "review my transcript", "read my transcript" | `coursework-mapper` |
+| "regrade secondaries for &lt;school&gt;", "regrade &lt;school&gt;", "score this school's secondaries" | `secondary-regrader` |
 | "grade my full application", "full application grade", "score everything" | **all scorers — see below** |
 
 For "help me edit / coach me on X / give feedback as I go" → stay in this session and **coach**

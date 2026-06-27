@@ -35,6 +35,7 @@ async function readFileParsed(fullPath: string): Promise<{ content: string; fron
 
 async function writeFilePreserving(fullPath: string, newContent: string, frontmatter: Record<string, unknown>): Promise<void> {
   const output = matter.stringify(newContent, frontmatter)
+  await fs.mkdir(path.dirname(fullPath), { recursive: true }) // create per-school folders on first essay
   await fs.writeFile(fullPath, output, 'utf8')
 }
 

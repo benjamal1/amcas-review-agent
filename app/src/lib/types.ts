@@ -33,7 +33,37 @@ export interface SchoolEntry {
   secondary_submitted_date?: string
   interview_date?: string
   secondary_submitted?: boolean; interview?: boolean; notes?: string
+  secondary?: SchoolSecondary
   [k: string]: unknown
+}
+
+// ── Secondaries ──
+// One school's secondary prompt + the draft answering it (maps to a bank archetype).
+export interface SecondaryEssay {
+  prompt: string; word_limit?: number
+  maps_to?: string            // archetype key from the essay bank
+  doc_path?: string           // content/documents/secondaries/<school-slug>/<n>.md
+  status: ComponentStatus
+}
+// Per-school secondary block: research notes, prompts/essays, and the school-specific regrade.
+export interface SchoolSecondary {
+  research_notes_path?: string  // …/<school-slug>/_research.md
+  prompt_source_year?: string   // e.g. "2025-2026 (prior-year)"
+  essays: SecondaryEssay[]
+  scorecard?: Scorecard         // full per-school recompute (primary baseline + these secondaries)
+  last_regraded?: string
+}
+// A master archetype draft in the essay bank (pre-written, reused across schools).
+export interface BankEssay {
+  archetype: string           // "adversity" | "leadership" | … | custom key
+  label: string
+  doc_path: string            // content/documents/secondaries/_bank/<archetype>.md
+  status: ComponentStatus
+  pre_writable?: boolean      // false for "why us" (anchor + per-school only)
+}
+export interface Secondaries {
+  brainstorm_path?: string    // content/documents/secondaries/_brainstorm.md
+  essay_bank: BankEssay[]
 }
 // Top-level primary-application checklist.
 export interface ApplicationChecklist {
@@ -65,4 +95,5 @@ export interface AppData {
   application_checklist?: ApplicationChecklist
   primary_components?: Record<string, PrimaryComponent>
   red_flags?: RedFlag[]
+  secondaries?: Secondaries
 }

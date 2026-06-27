@@ -53,6 +53,7 @@ Route the request to the matching subagent (these phrases are the app's Grade Bu
 | "review my rec letter", "score this letter" (NEVER unprompted) | `rec-letter-reviewer` |
 | "update meeting to-dos", "extract to-dos", "sync meeting feedback" | `meeting-todo-extractor` |
 | "review my transcript", "read my transcript" | `coursework-mapper` |
+| "regrade secondaries for &lt;school&gt;", "regrade &lt;school&gt;", "score this school's secondaries" | `secondary-regrader` |
 | "grade my full application", "full application grade", "score everything" | **all scorers — see below** |
 
 For "help me edit / coach me on X / give feedback as I go" → stay in this session and **coach**
@@ -196,7 +197,7 @@ You score one AMCAS essay. Coach, don't rewrite.
 |---|---|---|---|
 | personal statement | `$CONTENT_DIR/documents/personal-statement.md` | `Agent/rubrics/personal-statement-rubric.md` | `component_scores.personal_statement` |
 | impactful experience | `$CONTENT_DIR/documents/impactful-experience.md` | `Agent/rubrics/impactful-experience-rubric.md` | `component_scores.impactful_experience` |
-| secondary | the relevant secondary doc | `Agent/rubrics/secondary-rubric.md` | tracked on the `schools[]` entry |
+| secondary | `$CONTENT_DIR/documents/secondaries/<school-slug>/<n>.md` | `Agent/rubrics/secondary-rubric.md` | the matching `schools[i].secondary.essays[]` entry (set its `status`) |
 | disadvantaged | `$CONTENT_DIR/documents/disadvantaged.md` | `Agent/rubrics/disadvantaged-rubric.md` | feedback only |
 
 `$CONTENT_DIR` defaults to `content/`. Every essay rubric references `Agent/rubrics/essay-base-rubric.md`.
@@ -311,5 +312,38 @@ voice. `$CONTENT_DIR` defaults to `content/`.
 
 Note status/dates (recommender, status, submitted) are entered by the applicant in the website — you
 don't key those in. Flag the Brown HCA deadline if a letter is still "draft" within 5 days of it.
+
+---
+
+## secondary-regrader
+
+You produce ONE school's regrade: the applicant's whole-application composite **as that school would
+see it**, given the primary application PLUS this school's secondary essays as added evidence. Coach,
+don't rewrite. De-personalized — refer to "the applicant," never a name.
+
+## Inputs
+- Primary baseline: `data.json.scorecard` (composite, domains) + `competencies`.
+- The school: match `data.json.schools[]` by name (the request names the school).
+- That school's secondary docs: `$CONTENT_DIR/documents/secondaries/<school-slug>/*.md`
+  (slug = kebab-cased school name) and the prompts in `schools[i].secondary.essays[]`.
+- Rubrics: `Agent/rubrics/secondary-rubric.md` (+ `essay-base-rubric.md`). For domain/competency
+  framing reuse the same domain definitions the primary scorers use.
+
+## Process
+1. Read the primary `scorecard` + `competencies` as the starting point.
+2. Read the school's secondary essays + prompts.
+3. **Full recompute:** for each domain (personal_narrative, clinical_experience, research_academics,
+   extracurriculars, service_community), re-judge 1–10 using primary evidence **plus** what the
+   secondaries newly reveal. A strong secondary can raise a domain; a weak/contradictory one can lower
+   it. Cite specific secondary text for any change from baseline; unchanged domains keep the baseline.
+4. Recompute the composite with the router formula (same weights as the primary composite).
+5. Write the result to `schools[i].secondary.scorecard` (shape = `Scorecard`: composite + domains) and
+   set `schools[i].secondary.last_regraded` to today (Read → merge → write the whole file).
+6. Write coaching prose to `$CONTENT_DIR/feedback/secondary-<school-slug>.md` — quote → issue →
+   direction, 3–5 items, focused on what the secondaries add or fail to add vs. the primary. No rewrite.
+
+Do NOT touch the primary `scorecard` (that view is primary-only). The secondaries grading **overview**
+is the app-computed average across all schools' `secondary.scorecard` — you write per school; the app
+averages. Never invent metrics. Never rewrite the applicant's text unless explicitly asked.
 
 ---

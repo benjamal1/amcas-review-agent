@@ -67,10 +67,29 @@
       "preview_required": false,
       "secondary_submitted": false,
       "interview": false,
-      "notes": ""
+      "notes": "",
+      "secondary": {
+        "research_notes_path": "documents/secondaries/school-name/_research.md",
+        "prompt_source_year": "2025-2026 (prior-year)",
+        "essays": [
+          { "prompt": "Why do you want to attend our school?", "word_limit": 300, "maps_to": "why-us", "status": "not-started" }
+        ]
+      }
     }
   ],
   "coursework": [
     { "name": "Organic Chemistry I", "subject": "Chemistry" }
-  ]
+  ],
+  "secondaries": {
+    "brainstorm_path": "documents/secondaries/_brainstorm.md",
+    "essay_bank": [
+      { "archetype": "adversity",  "label": "Adversity / Challenge / Failure", "doc_path": "documents/secondaries/_bank/adversity.md",  "status": "not-started", "pre_writable": true },
+      { "archetype": "leadership", "label": "Leadership",                       "doc_path": "documents/secondaries/_bank/leadership.md", "status": "not-started", "pre_writable": true },
+      { "archetype": "diversity",  "label": "Diversity / Contribution",         "doc_path": "documents/secondaries/_bank/diversity.md",  "status": "not-started", "pre_writable": true },
+      { "archetype": "service",    "label": "Community Service",                "doc_path": "documents/secondaries/_bank/service.md",    "status": "not-started", "pre_writable": true },
+      { "archetype": "research",   "label": "Research",                         "doc_path": "documents/secondaries/_bank/research.md",   "status": "not-started", "pre_writable": true },
+      { "archetype": "additional", "label": "Additional Info / Anything else",  "doc_path": "documents/secondaries/_bank/additional.md", "status": "not-started", "pre_writable": true },
+      { "archetype": "why-us",     "label": "Why Us",                           "doc_path": "documents/secondaries/_bank/why-us.md",     "status": "not-started", "pre_writable": false }
+    ]
+  }
 }
