@@ -2,6 +2,7 @@ import type { FastifyInstance } from 'fastify'
 import fs from 'node:fs/promises'
 import path from 'node:path'
 import matter from 'gray-matter'
+import { validateData } from './validate.js'
 
 // ponytail: single trust boundary — all path ops go through this
 function sandboxPath(contentDir: string, userPath: string): string | null {
@@ -79,6 +80,8 @@ export async function registerFileRoutes(app: FastifyInstance, contentDir: strin
     const tmpPath = path.join(contentDir, '.data.json.tmp')
     try {
       const body = req.body as unknown
+      const v = validateData(body)
+      if (!v.ok) return reply.code(400).send({ error: v.error })
       await fs.writeFile(tmpPath, JSON.stringify(body, null, 2), 'utf-8')
       await fs.rename(tmpPath, dataPath)
       return reply.send({ ok: true })

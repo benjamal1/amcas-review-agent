@@ -6,6 +6,7 @@ import { fileURLToPath } from 'node:url'
 import { existsSync, cpSync } from 'node:fs'
 import { registerFileRoutes } from './files.js'
 import { registerRubricRoutes } from './rubrics.js'
+import { registerSchoolRoutes } from './schools.js'
 import { registerPtyRoute } from './pty.js'
 import { registerWatchRoute } from './watch.js'
 
@@ -43,6 +44,7 @@ app.get('/api/health', async () => ({ ok: true, contentDir: CONTENT_DIR }))
 // File routes (implemented in T3 — stub registered here)
 await registerFileRoutes(app, CONTENT_DIR)
 registerRubricRoutes(app, RUBRICS_DIR)
+registerSchoolRoutes(app, CONTENT_DIR)
 
 registerPtyRoute(app, CONTENT_DIR)
 registerWatchRoute(app, CONTENT_DIR)
