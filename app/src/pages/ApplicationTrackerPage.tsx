@@ -7,6 +7,7 @@ const COMPONENTS: { key: string; label: string }[] = [
   { key: 'personal_statement', label: 'Personal Statement' },
   { key: 'activities', label: 'Work & Activities' },
   { key: 'most_meaningful', label: 'Most Meaningful (3)' },
+  { key: 'impactful_experience', label: 'Impactful Experience' },
   { key: 'letters_eval', label: 'Letters of Evaluation' },
   { key: 'transcripts', label: 'Transcripts' },
   { key: 'coursework_list', label: 'Coursework List' },
@@ -17,6 +18,7 @@ const C_STATUS: { v: ComponentStatus; label: string }[] = [
   { v: 'not-started', label: 'Not started' }, { v: 'drafting', label: 'Drafting' },
   { v: 'under-review', label: 'Under review' }, { v: 'final-edits', label: 'Final edits' },
   { v: 'ready', label: 'Ready to submit' }, { v: 'submitted', label: 'Submitted' },
+  { v: 'not-applicable', label: 'N/A' },
 ]
 const DONE: ComponentStatus[] = ['ready', 'submitted']
 
@@ -101,8 +103,10 @@ export function ApplicationTrackerPage() {
     setDraft(null); setDirty(false) // re-sync from the just-written data
   }
 
-  const readyCount = COMPONENTS.filter(c => DONE.includes(draft.pc[c.key]?.status ?? 'not-started')).length
-  const pct = Math.round((readyCount / COMPONENTS.length) * 100)
+  // N/A components drop out of the denominator entirely.
+  const tracked = COMPONENTS.filter(c => (draft.pc[c.key]?.status ?? 'not-started') !== 'not-applicable')
+  const readyCount = tracked.filter(c => DONE.includes(draft.pc[c.key]?.status ?? 'not-started')).length
+  const pct = tracked.length ? Math.round((readyCount / tracked.length) * 100) : 0
 
   return (
     <div className="page page--single tracker">
@@ -120,7 +124,7 @@ export function ApplicationTrackerPage() {
       <section className="tracker__primary">
         <div className="tracker__primary-head">
           <h2 className="tracker__h">Primary Application</h2>
-          <span className="tracker__ready">{readyCount}/{COMPONENTS.length} ready</span>
+          <span className="tracker__ready">{readyCount}/{tracked.length} ready</span>
         </div>
         <div className="tracker__bar"><span className="tracker__bar-fill" style={{ width: `${pct}%` }} /></div>
         <ul className="tracker__components">

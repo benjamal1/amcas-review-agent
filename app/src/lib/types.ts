@@ -43,7 +43,7 @@ export interface ApplicationChecklist {
 
 // Per-component progress through the primary application.
 export type ComponentStatus =
-  | 'not-started' | 'drafting' | 'under-review' | 'final-edits' | 'ready' | 'submitted'
+  | 'not-started' | 'drafting' | 'under-review' | 'final-edits' | 'ready' | 'submitted' | 'not-applicable'
 export interface StatusEvent { status: ComponentStatus | SchoolStatus; date: string }
 export interface PrimaryComponent { status: ComponentStatus; status_history?: StatusEvent[] }
 export interface CourseEntry { name: string; subject?: string }
