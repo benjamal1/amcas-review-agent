@@ -38,6 +38,11 @@ legacy `*-scores.md` or `Agent/scorecard.md` — those are retired.
 1. **Score components** against the rubrics; write structured scores to `data.json` + prose to `feedback/`.
 2. **Maintain** `scorecard`, `priorities`, `competencies` in `data.json` after every scoring session.
 
+**Priorities hygiene:** when a primary component in `data.json.primary_components` is marked
+`submitted`, **delete any priority that targets it** (and resolve related red flags) — a
+submitted component can't be improved, so it must not sit in Top Priorities. Do this whenever you
+touch `data.json`, not only on a full grade.
+
 ---
 
 ## Dispatch table

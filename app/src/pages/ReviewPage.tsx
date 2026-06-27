@@ -34,10 +34,12 @@ export function ReviewPage() {
 
   const cs = data.component_scores
   const comps = [
+    { label: 'Experiences', sc: cs?.experiences },
     { label: 'Personal Statement', sc: cs?.personal_statement },
     { label: 'Work & Activities', sc: cs?.activities },
+    { label: 'Competency', sc: cs?.competency },
     { label: 'Impactful Experience', sc: cs?.impactful_experience },
-  ]
+  ].filter(c => c.sc)
   const competencies = data.competencies ?? []
   const priorities = data.priorities ?? []
   const flags = data.red_flags ?? []
