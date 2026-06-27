@@ -11,8 +11,8 @@ export interface Scorecard {
 export interface Competency { name: string; score?: number; tier?: string; supported_by?: string[] }
 export interface ComponentScore { score?: number; last_scored?: string; mode?: string }
 export interface ActivityEntry { name: string; description_quality?: number; most_meaningful_depth?: number; [k: string]: unknown }
-export interface RecLetter { recommender?: string; status?: string; submitted?: boolean; name?: string; [k: string]: unknown }
-export interface SchoolEntry { name: string; tier?: string; pipeline?: string; casper_required?: boolean; preview_required?: boolean; [k: string]: unknown }
+export interface RecLetter { recommender?: string; title?: string; relationship?: string; status?: string; submitted?: boolean; requested_date?: string; received_date?: string; notes?: string; name?: string; [k: string]: unknown }
+export interface SchoolEntry { name: string; tier?: string; pipeline?: string; casper_required?: boolean; preview_required?: boolean; secondary_submitted?: boolean; interview?: boolean; notes?: string; [k: string]: unknown }
 export interface DashboardData {
   scorecard: Scorecard | null; competencies: Competency[]
   priorities: string[]; todoOpen: number; todoDone: number

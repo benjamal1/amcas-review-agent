@@ -13,8 +13,11 @@ Data model unchanged (markdown + frontmatter). Obsidian → optional file storag
 | **03 — Editor** | CodeMirror markdown editor, load/save, debounced autosave | AC6 |
 | **04 — Terminal + grading** | `@xterm/xterm` + `node-pty` over ws; grade buttons inject into visible session; chokidar refresh | AC7–AC10 |
 | **05 — Separation + cutover** | gitignore content; ship engine+templates; drop `Application Dashboard.md`+`demo.gif`; README + CLAUDE.md update; verify parity vs old dashboard | AC11–AC13 |
+| **06 — Data-model refactor** | Single `content/data.json` + `documents/` replaces per-score md files; `/api/data` | — |
+| **07 — Structure cutover** | Archive legacy root vault dirs → `old-version-files/`; fold Rec Letters + School List into `data.json`; relocate Meeting Notes + Transcripts → `documents/` | — |
 
 Phases are sequential-ish but 02/03 can overlap (independent panels). 01 gates all.
+Milestone shipped; 06–07 were post-rebuild structure cleanup.
 
 ## Backlog (post-rebuild, unchanged)
 

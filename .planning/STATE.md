@@ -1,7 +1,7 @@
 # STATE — amcas-review-agent
 
 last_updated: 2026-06-27
-current_phase: 06-data-model-refactor (DONE, verified)
+current_phase: 07-structure-cutover (DONE)
 milestone: Local-app rebuild — COMPLETE & BOOT-VERIFIED
 mode: built → verified running → ready for live-data + backlog
 
@@ -18,6 +18,10 @@ Roadmap: `.planning/ROADMAP.md`.
 - Phase 05 cutover — gitignore + README + merge to main.
 - Phase 06 data-model refactor — dropped per-score md files; single `content/data.json`
   + `content/documents/`. `/api/data` endpoint, `scores.ts` reads data.json.
+- Phase 07 structure cutover — archived 8 legacy root vault dirs → `old-version-files/`;
+  folded content.example Rec Letters + School List into `data.json` (rec_letters[]/schools[]);
+  relocated Meeting Notes + Transcripts → `documents/`; refreshed content.example README;
+  extended RecLetter/SchoolEntry types. Plan: `phases/07-structure-cutover/`.
 
 ## Boot verification (2026-06-27)
 `npm run dev` → server :3001, vite :5173. Verified end-to-end:

@@ -46,6 +46,28 @@
     "impactful_experience": { "score": null, "last_scored": "" }
   },
   "activity_entries": [],
-  "rec_letters": [],
-  "schools": []
+  "rec_letters": [
+    {
+      "recommender": "Dr. Jane Smith",
+      "title": "Professor of Biology",
+      "relationship": "Research supervisor",
+      "status": "pending",
+      "submitted": false,
+      "requested_date": "",
+      "received_date": "",
+      "notes": ""
+    }
+  ],
+  "schools": [
+    {
+      "name": "School Name",
+      "tier": "target",
+      "pipeline": "researching",
+      "casper_required": false,
+      "preview_required": false,
+      "secondary_submitted": false,
+      "interview": false,
+      "notes": ""
+    }
+  ]
 }
