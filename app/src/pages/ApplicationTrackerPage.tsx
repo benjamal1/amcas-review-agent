@@ -78,9 +78,9 @@ export function ApplicationTrackerPage() {
     setNewName('')
   }
 
-  function save() {
+  async function save() {
     const t = today()
-    mutate(d => {
+    await mutate(d => {
       // primary components — append a status event only when the stage changed
       const basePc = d.primary_components ?? {}
       const pc: Record<string, PrimaryComponent> = {}
@@ -100,7 +100,9 @@ export function ApplicationTrackerPage() {
       })
       return { ...d, primary_components: pc, schools }
     })
-    setDraft(null); setDirty(false) // re-sync from the just-written data
+    // mutate resolves after the PUT settles — re-sync the draft from the final persisted
+    // state (the written data on success, or the rolled-back base on failure).
+    setDraft(null); setDirty(false)
   }
 
   // N/A components drop out of the denominator entirely.
@@ -169,7 +171,7 @@ export function ApplicationTrackerPage() {
                 const overdue = s.secondary_deadline && s.secondary_deadline < today()
                   && !['secondary-submitted', 'interview-invited', 'interviewed', 'waitlisted', 'accepted', 'rejected', 'withdrawn'].includes(s.status ?? '')
                 return (
-                  <tr key={i}>
+                  <tr key={s.name}>
                     <td className="tracker__name">{s.name}</td>
                     <td><input className="tracker__sm" value={s.tier ?? ''} placeholder="reach/target/safety" onChange={e => setSchool(i, { tier: e.target.value })} /></td>
                     <td><input className="tracker__xs" type="number" value={s.rank ?? ''} onChange={e => setSchool(i, { rank: e.target.value === '' ? undefined : Number(e.target.value) })} /></td>

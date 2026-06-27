@@ -26,9 +26,13 @@ export function GradeButtons({ sessionActive }: { sessionActive: boolean }) {
       return
     }
     if (!sessionActive) {
-      // Start claude first, then send phrase after a moment
+      // Start claude first, then send phrase after a moment. Re-fetch the socket inside the
+      // timeout — the original may have closed/reconnected during the 3s wait.
       ws.send(JSON.stringify({ type: 'input', data: 'claude\n' }))
-      setTimeout(() => ws.send(JSON.stringify({ type: 'input', data: phrase + '\n' })), 3000)
+      setTimeout(() => {
+        const { ws: live } = getSharedTerminal()
+        if (live && live.readyState === WebSocket.OPEN) live.send(JSON.stringify({ type: 'input', data: phrase + '\n' }))
+      }, 3000)
       return
     }
     ws.send(JSON.stringify({ type: 'input', data: phrase + '\n' }))

@@ -20,10 +20,14 @@ export function ReviewPage() {
   useEffect(() => {
     let dead = false
     fetch('/api/files?dir=feedback').then(r => r.json()).then(async (files: string[]) => {
-      const loaded = await Promise.all(files.map(async p => {
-        const { content } = await fetch(`/api/file?path=${encodeURIComponent(p)}`).then(r => r.json())
-        return { path: p, html: marked.parse(content) as string, title: (p.split('/').pop() ?? p).replace(/\.md$/, '') }
+      const settled = await Promise.allSettled(files.map(async p => {
+        const r = await fetch(`/api/file?path=${encodeURIComponent(p)}`)
+        if (!r.ok) throw new Error(`load ${p}`)
+        const { content } = await r.json()
+        return { path: p, html: marked.parse(content ?? '') as string, title: (p.split('/').pop() ?? p).replace(/\.md$/, '') }
       }))
+      // one bad file shouldn't drop the rest
+      const loaded = settled.filter(s => s.status === 'fulfilled').map(s => (s as PromiseFulfilledResult<Doc>).value)
       if (!dead) setDocs(loaded)
     }).catch(() => { if (!dead) setDocs([]) })
     return () => { dead = true }
