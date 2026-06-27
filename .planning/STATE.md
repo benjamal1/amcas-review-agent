@@ -1,9 +1,9 @@
 # STATE — amcas-review-agent
 
 last_updated: 2026-06-27
-current_phase: 07-structure-cutover (DONE)
-milestone: Local-app rebuild — COMPLETE & BOOT-VERIFIED
-mode: built → verified running → ready for live-data + backlog
+current_phase: 08-agent-restructure-web-editing (PLANNED, ready to execute)
+milestone: Agent restructure + web editing
+mode: pipeline plan complete (Steps 1–6) → ready for Step 7 implementation
 
 ## Milestone
 Rebuild Obsidian-vault folder → standalone local web app. Same repo (`main`),
@@ -44,3 +44,12 @@ See ROADMAP.md. Parked non-goals: SDK, headless, hosting.
 ## Pipeline Skips
 - [2026-06-21] Phase 01, Step 2 (provision-project): skipped — global ~/.claude skills apply.
   Backfill if project-local skills wanted: /provision-project --target ./.claude --type software
+- [2026-06-27] Phase 08, Step 1 (gsd-discuss-phase): satisfied by approved spec + brainstorming;
+  CONTEXT derived from spec rather than re-asking. Backfill: n/a.
+- [2026-06-27] Phase 08, Step 2 (provision-project): skipped — global ~/.claude skills apply.
+- [2026-06-27] Phase 08, Step 3 (search-first): done inline during exploration (app edit-surface
+  + harness mapping). Backfill: n/a.
+- [2026-06-27] Phase 08, Step 5 (gsd-plan-phase research): covered by the design spec; no separate
+  RESEARCH.md. Backfill: run gsd-plan-phase --research-phase 08 if deeper research wanted.
+- [2026-06-27] Phase 08, Step 6 (plan-orchestrate): /orchestrate not assumed installed — used manual
+  per-task annotations in PLAN.md (agent/skill/model/depends_on). Backfill: re-annotate if installed.
