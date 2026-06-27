@@ -69,5 +69,8 @@
       "interview": false,
       "notes": ""
     }
+  ],
+  "coursework": [
+    { "name": "Organic Chemistry I", "subject": "Chemistry" }
   ]
 }

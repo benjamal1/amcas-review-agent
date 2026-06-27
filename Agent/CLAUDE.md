@@ -279,7 +279,7 @@ When running a competency coverage score:
 **Triggered by:** "update meeting to-dos" / "extract to-dos from meeting notes" / "sync meeting feedback"
 
 **Process:**
-1. Read all files in `Meeting Notes/` (skip `README.md`)
+1. Read all files in `documents/meeting-notes/` (skip `README.md`)
 2. For each file, detect format:
    - **Processed notes**: look for checkbox lists (`- [ ]`), numbered action items, sections titled "Action Items", "To-Do", "Next Steps", or "Clear To-Do List" — extract directly
    - **Raw transcripts**: scan for action language — phrases starting with or containing "you should", "make sure to", "next step", "I'd recommend", "consider", "don't forget", "revise", "rewrite", "add", "remove", "change" — extract as implied actions
@@ -303,13 +303,19 @@ When the applicant manually checks off an item in `meeting-todos.md` by changing
 
 **Triggered by:** "read my transcript" / "review my transcript"
 
-This is a one-time read. The transcript is used **only** for science competency evidence — not for GPA calculation or academic narrative assessment.
+The transcript is stored as the **`coursework`** array in `data.json` — each entry is
+`{ name, subject }` (subject = AMCAS subject area, which determines the GPA bucket). GPA and MCAT
+themselves live in `scorecard.hard_metrics`, not here. Coursework is used **only** for science
+competency evidence and School List requirements checks — not for GPA calculation or academic
+narrative assessment.
 
 **Process:**
-1. Read `Transcript/Courses.md`
+1. Read `coursework` from `data.json`
 2. Map each course to the relevant AAMC competencies below
-3. Update `Agent/competency-coverage.md` — add coursework evidence to the Supported By column for any competency that gains support
-4. Do NOT recalculate scores from coursework alone — treat it as supporting evidence that may strengthen an existing score or surface a competency not yet covered by essays
+3. Update `competencies[]` in `data.json` — add coursework evidence to `supported_by` for any
+   competency that gains support
+4. Do NOT recalculate scores from coursework alone — treat it as supporting evidence that may
+   strengthen an existing score or surface a competency not yet covered by essays
 
 **Competency mapping:**
 
@@ -430,10 +436,10 @@ Use this whole-application view to prioritize feedback. A weakness that duplicat
 
 > **Storage (post-refactor):** Schools live as objects in the **`schools[]`** array of `data.json`
 > (content directory) — **one entry per school**, not one `.md` per school. The per-school field
-> set below describes the **shape of each `schools[]` entry**. The MSAR lookup
-> (`msar-lookup.json`) and the academic transcript live under the content directory as reference
-> data: `documents/transcripts/` for transcript text; place `msar-lookup.json` at the content-dir
-> root (or wherever `MSAR_LOOKUP` points). The old `School List/` vault folder and its Dataview
+> set below describes the **shape of each `schools[]` entry**. The transcript is the `coursework`
+> array in `data.json` (GPA/MCAT in `scorecard.hard_metrics`). The MSAR lookup
+> (`msar-lookup.json`) sits at the content-dir root (or wherever `MSAR_LOOKUP` points). The old
+> `School List/` vault folder and its Dataview
 > overview are retired (archived in `old-version-files/`); the dashboard's School List panel reads
 > `schools[]`. Anywhere below that says "create/read a school `.md`", operate on the matching
 > `schools[]` entry instead.
@@ -509,7 +515,7 @@ Plus, on the same entry:
 
 **Triggered by:** `"check requirements for [School]"` / `"requirements status"` (all schools)
 
-**Course category mapping** (use when cross-referencing `documents/transcripts/`):
+**Course category mapping** (use when cross-referencing `data.json` `coursework`):
 
 | MSAR course category | Transcript evidence keywords |
 |---|---|
@@ -524,7 +530,7 @@ Match is **case-insensitive and partial** — a transcript course matches if any
 
 **Single-school process:**
 1. Read the school's entry in `data.json` `schools[]` — its `course_requirements`
-2. Read `documents/transcripts/` (transcript course list)
+2. Read `coursework` from `data.json` (the transcript course list)
 3. For each course with `status = Required` in the entry: check if any transcript course matches the category mapping above
 4. Update the entry: `courses_verified: true`, `courses_missing: [list of Required course names not covered]`; write `data.json` back
 5. Report in this exact format:
