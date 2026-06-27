@@ -1,16 +1,26 @@
 # STATE — amcas-review-agent
 
 last_updated: 2026-06-27
-current_phase: 08-agent-restructure-web-editing (PLANNED, ready to execute)
+current_phase: 08-agent-restructure-web-editing (DONE)
 milestone: Agent restructure + web editing
-mode: pipeline plan complete (Steps 1–6) → ready for Step 7 implementation
+mode: implemented + verified (26 tests, build green) → shipping
 
 ## Milestone
 Rebuild Obsidian-vault folder → standalone local web app. Same repo (`main`),
 history preserved. Spec: `.planning/specs/2026-06-21-local-app-migration-design.md`.
 Roadmap: `.planning/ROADMAP.md`.
 
-## Position — all phases shipped to `main`
+## Position
+Phase 08 (agent restructure + web editing) DONE on branch `working-structure-continue-planning`:
+- `CLAUDE.md` router (root) + 8 `.claude/agents/` subagents + generated `AGENTS.md`; `claude`
+  launches from repo root (pty cwd change), CONTENT_DIR via env.
+- Shared essay rubric base + 4 per-essay overlays; `Agent/reference/metrics.json`.
+- Server: `PUT /api/data` validation; `POST /api/schools/lookup` + `/requirements`.
+- Web: `useData()` write hook + inline-edit panels (metrics, rec letters, todos, coursework) +
+  School add/detail flow. 26 tests green, app build + server tsc green.
+- Reversed PROJECT.md "no root CLAUDE.md" (required for repo-root launch).
+
+## Local-app rebuild — all phases shipped to `main`
 - Phase 01 app-foundation — Fastify + sandboxed file API (TDD) + 3-panel dark cockpit.
 - Phase 02 dashboard — Recharts radar/heatmap/tiles, reads `/api/data`.
 - Phase 03 editor — CodeMirror 6 + autosave.
