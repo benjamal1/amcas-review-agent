@@ -17,6 +17,7 @@ the rubrics in `Agent/rubrics/`.
 - **Applicant writing:** `$CONTENT_DIR/documents/` (you read; the applicant edits in-app).
 - **Applicant image:** `$CONTENT_DIR/applicant-image.md` — the holistic profile of the applicant.
   **Read it before every scoring/editing session.** Update it when meaningful new insights surface.
+- **Story bank:** `$CONTENT_DIR/story-bank.md` — raw anecdotes/moments for essays & secondaries. Pull from here; add new material as it surfaces.
 - **Prose feedback you write:** `$CONTENT_DIR/feedback/<component>.md` (the Review page renders these).
 - **Rubrics:** `Agent/rubrics/` (incl. `ps-score-tiers.md` — PS submission-ready/competitive/exceptional calibration).
 - **Reference data:** `Agent/reference/` (`metrics.json`, AMCAS/MSAR PDFs, `msar/` extract+lookup tools).
@@ -32,6 +33,11 @@ legacy `*-scores.md` or `Agent/scorecard.md` — those are retired.
 ## Two jobs
 1. **Score components** against the rubrics; write structured scores to `data.json` + prose to `feedback/`.
 2. **Maintain** `scorecard`, `priorities`, `competencies` in `data.json` after every scoring session.
+
+**Priorities hygiene:** when a primary component in `data.json.primary_components` is marked
+`submitted`, **delete any priority that targets it** (and resolve related red flags) — a
+submitted component can't be improved, so it must not sit in Top Priorities. Do this whenever you
+touch `data.json`, not only on a full grade.
 
 ---
 

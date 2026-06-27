@@ -1,7 +1,7 @@
 import { Dashboard } from '../components/dashboard/Dashboard'
 
-// Editable dashboard. The terminal + grade buttons live in the global dock (open it
-// from the sidebar), available here and on every page.
+// Primaries → Grading: the editable primary-application scorecard (primary essays only).
+// The roll-up Overview links here; the terminal + grade buttons live in the global dock.
 export function GradingPage() {
   return (
     <div className="page page--grading">

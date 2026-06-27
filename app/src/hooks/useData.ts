@@ -8,11 +8,13 @@ export function useData() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const ref = useRef<AppData | null>(null)
+  const inFlight = useRef(0) // open PUTs — suppress /watch reloads that would clobber optimistic state
 
   const reload = useCallback(async () => {
+    if (inFlight.current > 0) return // a mutate is mid-PUT; its result is authoritative, not the server's stale read
     try {
       const r = await fetch('/api/data')
-      if (!r.ok) { ref.current = null; setData(null); setLoading(false); return }
+      if (!r.ok) { ref.current = null; setData(null); setError(`load failed (${r.status})`); setLoading(false); return }
       const d = (await r.json()) as AppData
       ref.current = d; setData(d); setError(null); setLoading(false)
     } catch (e) {
@@ -44,6 +46,7 @@ export function useData() {
     if (!base) return
     const next = fn(structuredClone(base))
     ref.current = next; setData(next); setError(null)
+    inFlight.current++
     try {
       const r = await fetch('/api/data', {
         method: 'PUT', headers: { 'content-type': 'application/json' }, body: JSON.stringify(next),
@@ -54,6 +57,8 @@ export function useData() {
       }
     } catch (e) {
       ref.current = base; setData(base); setError(String(e))
+    } finally {
+      inFlight.current--
     }
   }, [])
 

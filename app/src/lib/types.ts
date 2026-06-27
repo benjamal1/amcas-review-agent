@@ -87,6 +87,8 @@ export interface AppData {
     personal_statement: ComponentScore
     activities: ComponentScore
     impactful_experience: ComponentScore
+    experiences?: ComponentScore
+    competency?: ComponentScore
   }
   activity_entries: ActivityEntry[]
   rec_letters: RecLetter[]

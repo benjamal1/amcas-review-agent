@@ -44,8 +44,10 @@ export function ScoreHistoryPage() {
   const cs = data.component_scores
   const sections = [
     { id: 'composite', title: 'Composite', rows: data.scorecard?.composite_history ?? [], key: 'composite' as const },
+    { id: 'experiences', title: 'Experiences', rows: cs?.experiences?.history ?? [], key: 'avg' as const },
     { id: 'ps', title: 'Personal Statement', rows: cs?.personal_statement?.history ?? [], key: 'avg' as const },
     { id: 'activities', title: 'Work & Activities', rows: cs?.activities?.history ?? [], key: 'avg' as const },
+    { id: 'competency', title: 'Competency Coverage', rows: cs?.competency?.history ?? [], key: 'avg' as const },
     { id: 'ie', title: 'Impactful Experience', rows: cs?.impactful_experience?.history ?? [], key: 'avg' as const },
   ]
 
