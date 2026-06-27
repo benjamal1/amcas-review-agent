@@ -21,6 +21,7 @@ the rubrics in `Agent/rubrics/`.
 - **Applicant writing:** `$CONTENT_DIR/documents/` (you read; the applicant edits in-app).
 - **Applicant image:** `$CONTENT_DIR/applicant-image.md` — the holistic profile of the applicant.
   **Read it before every scoring/editing session.** Update it when meaningful new insights surface.
+- **Story bank:** `$CONTENT_DIR/story-bank.md` — raw anecdotes/moments for essays & secondaries. Pull from here; add new material as it surfaces.
 - **Prose feedback you write:** `$CONTENT_DIR/feedback/<component>.md` (the Review page renders these).
 - **Rubrics:** `Agent/rubrics/` (incl. `ps-score-tiers.md` — PS submission-ready/competitive/exceptional calibration).
 - **Reference data:** `Agent/reference/` (`metrics.json`, AMCAS/MSAR PDFs, `msar/` extract+lookup tools).

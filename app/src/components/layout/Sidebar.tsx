@@ -9,6 +9,7 @@ const SECTIONS: { title: string; items: Item[] }[] = [
     { to: '/', label: 'Overview', end: true },
     { to: '/tracker', label: 'Application Tracker' },
     { to: '/applicant-image', label: 'Applicant Image' },
+    { to: '/story-bank', label: 'Story Bank' },
     { to: '/knowledge', label: 'Knowledge' },
   ] },
   { title: 'Primaries', items: [
