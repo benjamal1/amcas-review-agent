@@ -12,7 +12,12 @@ export interface Scorecard {
   domains?: Record<string, DomainScore>; hard_metrics?: HardMetrics
   composite_history?: ScoreSnapshot[]
 }
-export interface Competency { name: string; score?: number; tier?: string; supported_by?: string[] }
+export interface Competency { name: string; score?: number; tier?: string; supported_by?: string[]; history?: ScoreSnapshot[] }
+// Red-flag log (active negatives + resolved history).
+export interface RedFlag {
+  id?: string; flag: string; location?: string; severity?: string
+  status: 'active' | 'resolved'; resolution?: string; resolved_date?: string
+}
 export interface ComponentScore { score?: number; last_scored?: string; mode?: string; history?: ScoreSnapshot[] }
 export interface ActivityEntry { name: string; description_quality?: number; most_meaningful_depth?: number; [k: string]: unknown }
 export interface RecLetter { recommender?: string; title?: string; relationship?: string; status?: string; submitted?: boolean; requested_date?: string; received_date?: string; notes?: string; name?: string; [k: string]: unknown }
@@ -52,4 +57,5 @@ export interface AppData {
   schools: SchoolEntry[]
   coursework: CourseEntry[]
   application_checklist?: ApplicationChecklist
+  red_flags?: RedFlag[]
 }

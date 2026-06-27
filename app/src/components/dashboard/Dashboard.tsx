@@ -11,6 +11,7 @@ import { ComponentCards } from './ComponentCards'
 import { ActivityTable } from './ActivityTable'
 import { RecLettersList } from './RecLettersList'
 import { PrioritiesPanel } from './PrioritiesPanel'
+import { RedFlagsPanel } from './RedFlagsPanel'
 import { SchoolListPanel } from './SchoolListPanel'
 
 // readOnly wraps the editable controls in a disabled fieldset → Overview shows the same
@@ -45,6 +46,7 @@ export function Dashboard({ readOnly = false }: { readOnly?: boolean }) {
         <RecLettersList letters={data.rec_letters ?? []} mutate={mutate} />
         <PrioritiesPanel priorities={data.priorities ?? []} />
       </div>
+      <RedFlagsPanel flags={data.red_flags ?? []} />
       <SchoolListPanel schools={data.schools ?? []} coursework={data.coursework} mutate={mutate} />
     </fieldset>
   )

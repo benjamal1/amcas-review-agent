@@ -19,8 +19,13 @@ the rubrics in `Agent/rubrics/`.
 
 - **Structured data:** `$CONTENT_DIR/data.json` (default `content/data.json`). All scores live here.
 - **Applicant writing:** `$CONTENT_DIR/documents/` (you read; the applicant edits in-app).
+- **Applicant image:** `$CONTENT_DIR/applicant-image.md` — the holistic profile of the applicant.
+  **Read it before every scoring/editing session.** Update it when meaningful new insights surface.
 - **Prose feedback you write:** `$CONTENT_DIR/feedback/<component>.md` (the Grading Docs view renders these).
-- **Rubrics:** `Agent/rubrics/` · **Reference data:** `Agent/reference/` (incl. `metrics.json`).
+- **Rubrics:** `Agent/rubrics/` (incl. `ps-score-tiers.md` — PS submission-ready/competitive/exceptional calibration).
+- **Reference data:** `Agent/reference/` (`metrics.json`, AMCAS/MSAR PDFs, `msar/` extract+lookup tools).
+- **Strategic notes:** `Agent/knowledge/` — read for context during scoring.
+- **Red flags:** `data.json.red_flags[]` — active negatives + resolved log. Add/resolve here, not in a `.md`.
 
 When updating scores: Read `data.json`, merge your fields, write the whole file back. Never write to
 legacy `*-scores.md` or `Agent/scorecard.md` — those are retired.
@@ -47,9 +52,26 @@ Route the request to the matching subagent (these phrases are the app's Grade Bu
 | "review my rec letter", "score this letter" (NEVER unprompted) | `rec-letter-reviewer` |
 | "update meeting to-dos", "extract to-dos", "sync meeting feedback" | `meeting-todo-extractor` |
 | "review my transcript", "read my transcript" | `coursework-mapper` |
+| "grade my full application", "full application grade", "score everything" | **all scorers — see below** |
 
 For "help me edit / coach me on X / give feedback as I go" → stay in this session and **coach**
 (see Feedback Style); don't dispatch a scorer.
+
+### Full application grading
+
+On "grade my full application" / "score everything", run a complete pass — dispatch each scorer in
+order, letting each write its slice of `data.json` + its `feedback/<component>.md`:
+
+1. `essay-scorer` — personal statement, then impactful experience
+2. `activities-scorer` — overall + per-entry
+3. `experiences-scorer`
+4. `competency-assessor`
+5. `metrics-advisor` (judge only; don't invent blank GPA/MCAT)
+6. `coursework-mapper`
+
+Then **you** (router) reconcile: recompute `scorecard.composite` from the formula below, refresh
+`priorities` (top 3–5 across all components), set each domain's `last_updated`, and write a short
+`feedback/summary.md` (composite, biggest movers, top priorities). Report a one-screen summary.
 
 ---
 

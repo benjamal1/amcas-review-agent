@@ -55,6 +55,18 @@
 .school-tier__item { font-size: 11px; padding: 2px 0; display: flex; align-items: center; gap: 4px; }
 .school-tag { font-size: 8px; background: var(--color-panel); border: 1px solid var(--color-hairline); padding: 1px 3px; border-radius: 2px; color: var(--color-muted); }
 .dashboard { padding: 12px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; height: 100%; border: 0; margin: 0; min-width: 0; }
+/* red flags */
+.redflags-panel { background: var(--color-raised); border: 1px solid var(--color-hairline); border-radius: var(--radius-md); padding: 12px 14px; }
+.redflags-panel__label { font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 8px; }
+.redflags-panel__clear { font-size: 12px; color: var(--color-pos); }
+.redflags-panel__list { list-style: none; display: flex; flex-direction: column; gap: 6px; margin: 4px 0; }
+.redflags-panel__item { display: flex; flex-direction: column; gap: 2px; font-size: 12px; padding-left: 10px; border-left: 2px solid var(--color-hairline); }
+.redflags-panel__item--active { border-left-color: var(--color-danger); }
+.redflags-panel__item--resolved { border-left-color: var(--color-pos); opacity: .8; }
+.redflags-panel__flag { color: var(--color-text); }
+.redflags-panel__loc, .redflags-panel__res { font-size: 10px; color: var(--color-muted); }
+.redflags-panel__toggle { background: none; border: none; color: var(--color-muted); font-size: 11px; cursor: pointer; padding: 6px 0 0; }
+.redflags-panel__toggle:hover { color: var(--color-accent); }
 /* read-only Overview: disabled fieldset already blocks input; soften the greying so it still reads cleanly */
 .dashboard--readonly input, .dashboard--readonly select, .dashboard--readonly button { opacity: 1; cursor: default; }
 .dashboard__loading, .dashboard__error, .dashboard__empty { padding: 20px; color: var(--color-muted); font-size: 13px; }

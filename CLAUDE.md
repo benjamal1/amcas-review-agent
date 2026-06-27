@@ -18,7 +18,10 @@ the rubrics in `Agent/rubrics/`.
 - **Applicant image:** `$CONTENT_DIR/applicant-image.md` — the holistic profile of the applicant.
   **Read it before every scoring/editing session.** Update it when meaningful new insights surface.
 - **Prose feedback you write:** `$CONTENT_DIR/feedback/<component>.md` (the Grading Docs view renders these).
-- **Rubrics:** `Agent/rubrics/` · **Reference data:** `Agent/reference/` (incl. `metrics.json`).
+- **Rubrics:** `Agent/rubrics/` (incl. `ps-score-tiers.md` — PS submission-ready/competitive/exceptional calibration).
+- **Reference data:** `Agent/reference/` (`metrics.json`, AMCAS/MSAR PDFs, `msar/` extract+lookup tools).
+- **Strategic notes:** `Agent/knowledge/` — read for context during scoring.
+- **Red flags:** `data.json.red_flags[]` — active negatives + resolved log. Add/resolve here, not in a `.md`.
 
 When updating scores: Read `data.json`, merge your fields, write the whole file back. Never write to
 legacy `*-scores.md` or `Agent/scorecard.md` — those are retired.
