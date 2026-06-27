@@ -14,12 +14,7 @@ export interface ActivityEntry { name: string; description_quality?: number; mos
 export interface RecLetter { recommender?: string; title?: string; relationship?: string; status?: string; submitted?: boolean; requested_date?: string; received_date?: string; notes?: string; name?: string; [k: string]: unknown }
 export interface SchoolEntry { name: string; tier?: string; pipeline?: string; casper_required?: boolean; preview_required?: boolean; secondary_submitted?: boolean; interview?: boolean; notes?: string; [k: string]: unknown }
 export interface CourseEntry { name: string; subject?: string }
-export interface DashboardData {
-  scorecard: Scorecard | null; competencies: Competency[]
-  priorities: string[]; todoOpen: number; todoDone: number
-  psScore: ComponentScore | null; activitiesScore: ComponentScore | null; ieScore: ComponentScore | null
-  activityEntries: ActivityEntry[]; recLetters: RecLetter[]; schools: SchoolEntry[]
-}
+export type Mutate = (fn: (d: AppData) => AppData) => void
 export interface AppData {
   scorecard: Scorecard
   competencies: Competency[]

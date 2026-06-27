@@ -58,3 +58,40 @@
 .dashboard__scores { display: grid; grid-template-columns: 1fr 260px; gap: 8px; }
 .dashboard__scores-left { display: flex; flex-direction: column; gap: 8px; }
 .dashboard__right-col { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+/* --- editable controls (Phase 08) --- */
+.metrics-table input, .coursework-panel input, .rec-list input[type="text"], .rec-list__name,
+.rec-list select, .school-add input, .school-add select, .school-detail input, .school-detail select,
+.school-detail textarea, .todos__add input, .coursework-panel input {
+  background: var(--color-panel); color: var(--color-text);
+  border: 1px solid var(--color-hairline); border-radius: 3px; padding: 2px 5px; font-size: 11px; width: 100%;
+}
+.metrics-table input { max-width: 70px; text-align: right; }
+.metrics-table input:focus, .coursework-panel input:focus, .rec-list input:focus, .rec-list select:focus,
+.school-add input:focus, .school-detail input:focus, .school-detail textarea:focus {
+  outline: none; border-color: var(--color-accent);
+}
+.todos__list { list-style: none; padding: 0; margin: 4px 0; font-size: 11px; max-height: 140px; overflow-y: auto; }
+.todos__list li { padding: 1px 0; }
+.todos__done s { color: var(--color-muted); }
+.todos__add, .rec-list__add, .school-add, .coursework-panel tr:last-child { display: flex; gap: 4px; margin-top: 4px; }
+.todos__add button, .rec-list__add button, .school-add button, .school-detail button {
+  background: var(--color-accent); color: #fff; border: none; border-radius: 3px; padding: 2px 8px; font-size: 11px; cursor: pointer;
+}
+.rec-list__item { display: flex; gap: 4px; align-items: center; margin-bottom: 3px; }
+.rec-list__name { flex: 1; }
+.rec-list__submitted { font-size: 9px; color: var(--color-muted); white-space: nowrap; }
+.school-add__note { font-size: 10px; color: var(--color-muted); margin: 2px 0; }
+.school-tier__name { background: none; border: none; color: var(--color-text); cursor: pointer; font-size: 11px; padding: 0; text-align: left; display: flex; gap: 4px; align-items: center; }
+.school-tier__name:hover { color: var(--color-accent); }
+.school-detail { background: var(--color-panel); border: 1px solid var(--color-hairline); border-radius: 4px; padding: 6px; margin: 4px 0; display: flex; flex-direction: column; gap: 6px; }
+.school-detail__row { display: flex; gap: 8px; }
+.school-detail__row label { font-size: 9px; color: var(--color-muted); display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.school-detail__toggles { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; font-size: 10px; }
+.school-detail__notes { display: flex; flex-direction: column; font-size: 9px; color: var(--color-muted); }
+.school-detail__notes textarea { min-height: 40px; resize: vertical; }
+.school-detail__req-result { font-size: 10px; margin-top: 4px; }
+.school-detail__err { color: var(--color-danger); font-size: 10px; }
+.coursework-panel table { width: 100%; }
+.coursework-panel td { padding: 1px 2px; }
+.coursework-panel button { background: none; border: 1px solid var(--color-hairline); color: var(--color-muted); border-radius: 3px; cursor: pointer; }
