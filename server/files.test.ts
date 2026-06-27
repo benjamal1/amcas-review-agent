@@ -21,13 +21,15 @@ afterEach(async () => {
 })
 
 describe('GET /api/files', () => {
-  it('lists .md files', async () => {
-    await fs.writeFile(path.join(tmpDir, 'test.md'), '# hi')
-    await fs.writeFile(path.join(tmpDir, 'ignore.txt'), 'nope')
+  it('lists .md files under documents/', async () => {
+    const docs = path.join(tmpDir, 'documents')
+    await fs.mkdir(docs, { recursive: true })
+    await fs.writeFile(path.join(docs, 'test.md'), '# hi')
+    await fs.writeFile(path.join(docs, 'ignore.txt'), 'nope')
     const res = await app.inject({ method: 'GET', url: '/api/files' })
     expect(res.statusCode).toBe(200)
-    expect(JSON.parse(res.body)).toContain('test.md')
-    expect(JSON.parse(res.body)).not.toContain('ignore.txt')
+    expect(JSON.parse(res.body)).toContain('documents/test.md')
+    expect(JSON.parse(res.body)).not.toContain('documents/ignore.txt')
   })
 })
 
