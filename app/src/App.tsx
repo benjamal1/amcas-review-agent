@@ -3,7 +3,6 @@ import { Sidebar } from './components/layout/Sidebar'
 import { TerminalDock, TerminalDockProvider } from './components/terminal/TerminalDock'
 import { UserGuidePage } from './pages/UserGuidePage'
 import { OverviewPage } from './pages/OverviewPage'
-import { GradingPage } from './pages/GradingPage'
 import { ApplicationTrackerPage } from './pages/ApplicationTrackerPage'
 import { SecondariesPage } from './pages/SecondariesPage'
 import { CourseworkPage } from './pages/CourseworkPage'
@@ -36,7 +35,6 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<OverviewPage />} />
           <Route path="guide" element={<UserGuidePage />} />
-          <Route path="grading" element={<GradingPage />} />
           <Route path="tracker" element={<ApplicationTrackerPage />} />
           <Route path="secondaries" element={<SecondariesPage />} />
           <Route path="coursework" element={<CourseworkPage />} />

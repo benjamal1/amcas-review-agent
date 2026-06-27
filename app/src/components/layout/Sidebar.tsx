@@ -13,12 +13,11 @@ const SECTIONS: { title: string; items: Item[] }[] = [
     { to: '/knowledge', label: 'Knowledge' },
   ] },
   { title: 'Primaries', items: [
-    { to: '/grading', label: 'Grading' },
-    { to: '/score-history', label: 'Score History' },
-    { to: '/review', label: 'Review' },
-    { to: '/rubrics', label: 'Rubrics' },
-    { to: '/coursework', label: 'Coursework' },
     { to: '/editor', label: 'Editor' },
+    { to: '/review', label: 'Review' },
+    { to: '/coursework', label: 'Coursework' },
+    { to: '/rubrics', label: 'Rubrics' },
+    { to: '/score-history', label: 'Score History' },
   ] },
   { title: 'Secondaries', items: [
     { to: '/secondaries', label: 'Secondary Tracker' },

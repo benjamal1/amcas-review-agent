@@ -1,10 +1,11 @@
 import { Dashboard } from '../components/dashboard/Dashboard'
 
-// At-a-glance, read-only. All editing happens on the Grading page.
+// The single scorecard surface — editable. Grade buttons + terminal live in the global
+// dock (open from the sidebar), available on every page.
 export function OverviewPage() {
   return (
     <div className="page page--grading">
-      <Dashboard readOnly />
+      <Dashboard />
     </div>
   )
 }
