@@ -4,6 +4,7 @@ import { TerminalDock, TerminalDockProvider } from './components/terminal/Termin
 import { OverviewPage } from './pages/OverviewPage'
 import { GradingPage } from './pages/GradingPage'
 import { ApplicationTrackerPage } from './pages/ApplicationTrackerPage'
+import { SecondariesPage } from './pages/SecondariesPage'
 import { CourseworkPage } from './pages/CourseworkPage'
 import { ApplicantImagePage } from './pages/ApplicantImagePage'
 import { GradingDocsPage } from './pages/GradingDocsPage'
@@ -32,6 +33,7 @@ export default function App() {
           <Route index element={<OverviewPage />} />
           <Route path="grading" element={<GradingPage />} />
           <Route path="tracker" element={<ApplicationTrackerPage />} />
+          <Route path="secondaries" element={<SecondariesPage />} />
           <Route path="coursework" element={<CourseworkPage />} />
           <Route path="applicant-image" element={<ApplicantImagePage />} />
           <Route path="grading-docs" element={<GradingDocsPage />} />

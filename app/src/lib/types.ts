@@ -26,11 +26,11 @@ export type SchoolStatus =
   | 'pre-secondary' | 'secondary-received' | 'secondary-submitted'
   | 'interview-invited' | 'interviewed' | 'waitlisted' | 'accepted' | 'rejected' | 'withdrawn'
 export interface SchoolEntry {
-  name: string; tier?: string; pipeline?: string
-  status?: SchoolStatus
+  name: string; tier?: string; rank?: number; location?: string; pipeline?: string
+  status?: SchoolStatus; status_history?: StatusEvent[]
   casper_required?: boolean; preview_required?: boolean; secondary_fee?: number
-  secondary_deadline?: string; target_submit_date?: string
-  secondary_received_date?: string; secondary_submitted_date?: string
+  secondary_received_date?: string; secondary_deadline?: string; target_submit_date?: string
+  secondary_submitted_date?: string
   interview_date?: string
   secondary_submitted?: boolean; interview?: boolean; notes?: string
   [k: string]: unknown
@@ -40,6 +40,12 @@ export interface ApplicationChecklist {
   amcas_submitted_date?: string; transcripts_sent?: boolean; mcat_released?: boolean
   lor_count?: number; committee_letter?: boolean; casper_done?: boolean; preview_done?: boolean
 }
+
+// Per-component progress through the primary application.
+export type ComponentStatus =
+  | 'not-started' | 'drafting' | 'under-review' | 'final-edits' | 'ready' | 'submitted'
+export interface StatusEvent { status: ComponentStatus | SchoolStatus; date: string }
+export interface PrimaryComponent { status: ComponentStatus; status_history?: StatusEvent[] }
 export interface CourseEntry { name: string; subject?: string }
 export type Mutate = (fn: (d: AppData) => AppData) => void
 export interface AppData {
@@ -57,5 +63,6 @@ export interface AppData {
   schools: SchoolEntry[]
   coursework: CourseEntry[]
   application_checklist?: ApplicationChecklist
+  primary_components?: Record<string, PrimaryComponent>
   red_flags?: RedFlag[]
 }
