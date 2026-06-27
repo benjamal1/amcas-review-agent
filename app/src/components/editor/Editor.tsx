@@ -51,6 +51,7 @@ export function Editor({ filePath, onSave }: { filePath: string | null; onSave?:
             doc: content,
             extensions: [
               basicSetup, markdown(), oneDark,
+              EditorView.lineWrapping, // essays are one long line per paragraph — wrap them
               EditorView.updateListener.of(u => {
                 if (!u.docChanged) return
                 const c = u.state.doc.toString(); setCharCount(c.length)

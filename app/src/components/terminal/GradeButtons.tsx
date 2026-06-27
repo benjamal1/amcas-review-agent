@@ -38,6 +38,9 @@ export function GradeButtons({ sessionActive }: { sessionActive: boolean }) {
     <div className="grade-buttons">
       <div className="grade-buttons__label">GRADE BUTTONS</div>
       {!sessionActive && <div className="grade-buttons__hint">No active session — will start claude first</div>}
+      <button className="grade-btn grade-btn--full" onClick={() => inject('grade my full application')}>
+        ★ Full Application Grading
+      </button>
       <div className="grade-buttons__grid">
         {COMMANDS.map(c => <button key={c.label} className="grade-btn" onClick={() => inject(c.phrase)}>{c.label}</button>)}
       </div>
