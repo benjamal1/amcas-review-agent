@@ -428,18 +428,15 @@ Use this whole-application view to prioritize feedback. A weakness that duplicat
 
 ## School List
 
-### Folder Structure
-
-```
-School List/
-├── MSAR/
-│   ├── extract_msar.py        ← run on Mac to regenerate lookup (never run this yourself)
-│   ├── import_csv.py          ← run once to import spreadsheet (never run this yourself)
-│   └── msar-lookup.json       ← read this; never edit manually
-├── Schools/
-│   └── [School Name].md       ← one note per school
-└── School List Overview.md    ← Dataview overview table
-```
+> **Storage (post-refactor):** Schools live as objects in the **`schools[]`** array of `data.json`
+> (content directory) — **one entry per school**, not one `.md` per school. The per-school field
+> set below describes the **shape of each `schools[]` entry**. The MSAR lookup
+> (`msar-lookup.json`) and the academic transcript live under the content directory as reference
+> data: `documents/transcripts/` for transcript text; place `msar-lookup.json` at the content-dir
+> root (or wherever `MSAR_LOOKUP` points). The old `School List/` vault folder and its Dataview
+> overview are retired (archived in `old-version-files/`); the dashboard's School List panel reads
+> `schools[]`. Anywhere below that says "create/read a school `.md`", operate on the matching
+> `schools[]` entry instead.
 
 ---
 
@@ -448,15 +445,15 @@ School List/
 **Triggered by:** `"add [School] to my list"` / `"add [School] as a [tier]"`
 
 **Process:**
-1. Read `School List/MSAR/msar-lookup.json`
+1. Read `msar-lookup.json` (content-dir root / `MSAR_LOOKUP`)
 2. Search keys for the school name — exact match first, then partial (check if all significant words of the query appear in the key)
 3. Skip any JSON key that looks like an OCR artifact (contains "The record", "We will", "Pass/Fail", "Required", or starts with "|")
-4. If found: create `School List/Schools/[Official MSAR Name].md` using the full frontmatter template below
-5. If not found: create note with MSAR fields set to `unknown` / empty; tell the applicant: "Couldn't find [School] in MSAR lookup — MSAR fields left blank. Check the full official MSAR name or look it up in the MSAR web interface."
+4. If found: read `data.json`, append a new object to `schools[]` using the full field set below
+5. If not found: append entry with MSAR fields set to `unknown` / empty; tell the applicant: "Couldn't find [School] in MSAR lookup — MSAR fields left blank. Check the full official MSAR name or look it up in the MSAR web interface."
 6. Set `tier` to the specified value (`reach`, `target`, `safety`) or `unknown` if not specified
-7. Confirm: "Added [School Name] as [tier]. Note: School List/Schools/[name].md"
+7. Write `data.json` back; confirm: "Added [School Name] as [tier] to schools[]."
 
-**Full frontmatter template for new school notes:**
+**Full field set for a `schools[]` entry** (object keys; `course_requirements` and `admission_notes` carry what were the note-body sections):
 
 ```yaml
 ---
@@ -502,9 +499,9 @@ courses_missing: []
 ---
 ```
 
-Follow frontmatter with:
-- `## Course Requirements` — markdown table from MSAR lookup (`name`, `status`, `notes` columns)
-- `## Admission Notes` — free-text from MSAR lookup
+Plus, on the same entry:
+- `course_requirements` — array of `{ name, status, notes }` from MSAR lookup
+- `admission_notes` — free-text from MSAR lookup
 
 ---
 
@@ -512,7 +509,7 @@ Follow frontmatter with:
 
 **Triggered by:** `"check requirements for [School]"` / `"requirements status"` (all schools)
 
-**Course category mapping** (use when cross-referencing Transcript/Courses.md):
+**Course category mapping** (use when cross-referencing `documents/transcripts/`):
 
 | MSAR course category | Transcript evidence keywords |
 |---|---|
@@ -526,10 +523,10 @@ Follow frontmatter with:
 Match is **case-insensitive and partial** — a transcript course matches if any listed keyword appears anywhere in its title.
 
 **Single-school process:**
-1. Read `School List/Schools/[School Name].md` — Course Requirements table in the note body
-2. Read `Transcript/Courses.md`
-3. For each course with `Status = Required` in the school's table: check if any transcript course matches the category mapping above
-4. Update frontmatter: `courses_verified: true`, `courses_missing: [list of Required course names not covered]`
+1. Read the school's entry in `data.json` `schools[]` — its `course_requirements`
+2. Read `documents/transcripts/` (transcript course list)
+3. For each course with `status = Required` in the entry: check if any transcript course matches the category mapping above
+4. Update the entry: `courses_verified: true`, `courses_missing: [list of Required course names not covered]`; write `data.json` back
 5. Report in this exact format:
 
 ```
@@ -552,7 +549,7 @@ Pipeline: primary [✅ submitted | ⬜ not yet submitted]
 ```
 
 **"requirements status" across all schools:**
-Run the same check on every note in `School List/Schools/`. Summarize in tier order (reach → target → safety → unknown):
+Run the same check on every entry in `schools[]`. Summarize in tier order (reach → target → safety → unknown):
 - Schools where all Required courses are covered (list names)
 - Schools with missing Required courses (name + which courses)
 - Schools where CASPer required + not completed (list names)
@@ -567,7 +564,9 @@ Do NOT modify transcript or course files.
 
 **Triggered by:** `"update [School] — [status]"` or natural language equivalents
 
-| Phrase | Frontmatter field updated |
+Edit the matching `schools[]` entry, then write `data.json` back.
+
+| Phrase | Entry field updated |
 |---|---|
 | "primary submitted" | `primary_submitted: true` |
 | "secondary received" / "secondary requested" | `secondary_requested: true` |
@@ -590,16 +589,16 @@ After updating: confirm the change and show one-line pipeline status for that sc
 ### Querying the School List
 
 **`"school list status"`:**
-Read all school notes. Report:
+Read `schools[]` in `data.json`. Report:
 - Totals: N schools (reach: X / target: Y / safety: Z / unknown: W)
 - Pipeline: N primaries submitted, N secondaries in, N interviews scheduled
 - Open: schools needing CASPer (list), schools needing PREview (list)
 
 **`"which schools require CASPer?"` / `"which schools require PREview?"`:**
-List all schools where `casper_required: true` / `preview_required: true`. Split: completed vs. still needed.
+List all entries where `casper_required: true` / `preview_required: true`. Split: completed vs. still needed.
 
 **`"what does [School] need for letters?"`:**
-Read LOE frontmatter. Report committee letter, letter packet, individual letters (preferred/accepted/not accepted), count range, and loe_notes.
+Read the entry's LOE fields. Report committee letter, letter packet, individual letters (preferred/accepted/not accepted), count range, and loe_notes.
 
 ---
 
@@ -607,6 +606,6 @@ Read LOE frontmatter. Report committee letter, letter packet, individual letters
 
 - Does not modify `msar-lookup.json` — regenerated only by running `extract_msar.py` on Mac
 - Does not run `extract_msar.py` or `import_csv.py`
-- Does not cross-reference rec letter files against school notes — `letters_sent` is a number the applicant sets
+- Does not cross-reference rec letters against school entries — `letters_sent` is a number the applicant sets
 - Does not suggest schools to apply to
 - Does not flag Recommended courses as missing — Required only
