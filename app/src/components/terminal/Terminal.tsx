@@ -25,18 +25,21 @@ export function Terminal({ onSessionDetect }: { onSessionDetect?: (active: boole
     fit.fit()
     _xterm = xterm
 
+    let disposed = false // set on unmount; stops reconnect from resurrecting a dead session
     function connect() {
+      if (disposed) return
       const ws = new WebSocket(`ws://${location.host}/pty`)
       _ws = ws
       ws.onopen = () => ws.send(JSON.stringify({ type: 'resize', cols: xterm.cols, rows: xterm.rows }))
       ws.onmessage = e => {
+        if (disposed) return
         xterm.write(e.data)
         if (onSessionDetect && typeof e.data === 'string') {
           // Detect active claude session by spinner chars or prompt
           onSessionDetect(e.data.includes('✻') || e.data.includes('⠋') || e.data.includes('⠙'))
         }
       }
-      ws.onclose = () => setTimeout(connect, 2000)
+      ws.onclose = () => { if (!disposed) setTimeout(connect, 2000) }
     }
     connect()
     xterm.onData(d => _ws?.send(JSON.stringify({ type: 'input', data: d })))
@@ -48,6 +51,7 @@ export function Terminal({ onSessionDetect }: { onSessionDetect?: (active: boole
     obs.observe(ref.current)
 
     return () => {
+      disposed = true
       obs.disconnect()
       _ws?.close()
       xterm.dispose()

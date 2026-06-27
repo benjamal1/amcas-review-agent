@@ -14,9 +14,24 @@ import { RecLettersList } from './RecLettersList'
 import { PrioritiesPanel } from './PrioritiesPanel'
 import { SchoolListPanel } from './SchoolListPanel'
 
-export function Dashboard({ registerReload }: { registerReload?: (fn: () => void) => void }) {
+export function Dashboard() {
   const { data, loading, error, reload } = useScores()
-  useEffect(() => { registerReload?.(reload) }, [registerReload, reload])
+  // Live-reload on score-file changes (chokidar → /watch). Self-contained so any
+  // page rendering the dashboard stays current without prop-drilling.
+  useEffect(() => {
+    let ws: WebSocket | null = null
+    let dead = false
+    function connect() {
+      if (dead) return
+      ws = new WebSocket(`ws://${location.host}/watch`)
+      ws.onmessage = e => {
+        try { const m = JSON.parse(e.data); if (m.type === 'file-changed' && m.isScore) reload() } catch {}
+      }
+      ws.onclose = () => { if (!dead) setTimeout(connect, 3000) }
+    }
+    connect()
+    return () => { dead = true; ws?.close() }
+  }, [reload])
   if (loading) return <div className="dashboard__loading">Loading dashboard…</div>
   if (error) return <div className="dashboard__error">Error loading data: {error}</div>
   if (!data) return <div className="dashboard__empty">No data. Set CONTENT_DIR to your vault folder and restart.</div>

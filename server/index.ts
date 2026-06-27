@@ -5,12 +5,15 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { existsSync, cpSync } from 'node:fs'
 import { registerFileRoutes } from './files.js'
+import { registerRubricRoutes } from './rubrics.js'
 import { registerPtyRoute } from './pty.js'
 import { registerWatchRoute } from './watch.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
 const CONTENT_DIR = path.resolve(process.env.CONTENT_DIR ?? './content')
+// resolved against cwd (= repo root in both `npm run dev:server` and `npm start`)
+const RUBRICS_DIR = path.resolve(process.env.RUBRICS_DIR ?? 'Agent/rubrics')
 const PORT = Number(process.env.PORT ?? 3001)
 const HOST = '127.0.0.1'
 
@@ -39,6 +42,7 @@ app.get('/api/health', async () => ({ ok: true, contentDir: CONTENT_DIR }))
 
 // File routes (implemented in T3 — stub registered here)
 await registerFileRoutes(app, CONTENT_DIR)
+registerRubricRoutes(app, RUBRICS_DIR)
 
 registerPtyRoute(app, CONTENT_DIR)
 registerWatchRoute(app, CONTENT_DIR)

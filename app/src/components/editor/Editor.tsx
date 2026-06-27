@@ -4,10 +4,11 @@ import { markdown } from '@codemirror/lang-markdown'
 import { oneDark } from '@codemirror/theme-one-dark'
 import { EditorState } from '@codemirror/state'
 
+// match lowercase live paths under content/documents/
 const LIMITS: Record<string, { label: string; limit: number }> = {
-  'Personal Statement': { label: 'Personal Statement', limit: 5300 },
-  'Activities': { label: 'Activity', limit: 700 },
-  'Impactful Experience': { label: 'Impactful Experience', limit: 5300 },
+  'personal-statement':   { label: 'Personal Statement', limit: 5300 },
+  'activities':           { label: 'Activity', limit: 700 },
+  'impactful-experience': { label: 'Most Meaningful', limit: 1325 },
 }
 function detectLimit(path: string) {
   for (const [k, v] of Object.entries(LIMITS)) if (path.includes(k)) return v
@@ -84,7 +85,9 @@ export function Editor({ filePath, onSave }: { filePath: string | null; onSave?:
       <div className="editor-toolbar">
         {filePath ? (
           <>
-            <span className="editor-toolbar__path">{filePath}</span>
+            <span className="editor-toolbar__path" title={filePath}>
+              {(filePath.split('/').pop() ?? filePath).replace(/\.md$/, '')}
+            </span>
             <span className={`editor-toolbar__save editor-toolbar__save--${saveState}`}>
               {saveState === 'saving' ? 'saving…' : saveState === 'saved' ? '✓ saved' : saveState === 'error' ? '⚠ error' : ''}
             </span>

@@ -38,11 +38,24 @@ async function writeFilePreserving(fullPath: string, newContent: string, frontma
 }
 
 export async function registerFileRoutes(app: FastifyInstance, contentDir: string) {
-  app.get('/api/files', async (_req, reply) => {
-    const docsDir = path.join(contentDir, 'documents')
+  // ?dir= scopes the listing to a subtree (default 'documents'). Sandboxed.
+  // ?meta=1 returns [{ path, name }] where name = frontmatter experience_name/title.
+  app.get<{ Querystring: { dir?: string; meta?: string } }>('/api/files', async (req, reply) => {
+    const sub = req.query.dir ?? 'documents'
+    const safe = sandboxPath(contentDir, sub)
+    if (!safe) return reply.code(400).send({ error: 'invalid dir' })
     try {
-      const files = await listMarkdown(docsDir)
-      return reply.send(files.map(f => 'documents/' + path.relative(docsDir, f)))
+      const files = await listMarkdown(safe)
+      const paths = files.map(f => sub + '/' + path.relative(safe, f))
+      if (req.query.meta !== '1') return reply.send(paths)
+      const withMeta = await Promise.all(files.map(async (full, i) => {
+        try {
+          const fm = (await readFileParsed(full)).frontmatter
+          const name = (fm.experience_name || fm.title || '') as string
+          return { path: paths[i], name }
+        } catch { return { path: paths[i], name: '' } }
+      }))
+      return reply.send(withMeta)
     } catch {
       return reply.send([])
     }

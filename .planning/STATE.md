@@ -1,33 +1,42 @@
 # STATE — amcas-review-agent
 
-last_updated: 2026-06-21
-current_phase: 01-app-foundation (PLANNED, not started)
-milestone: Local-app rebuild
-mode: planning complete → ready to implement
+last_updated: 2026-06-27
+current_phase: 06-data-model-refactor (DONE, verified)
+milestone: Local-app rebuild — COMPLETE & BOOT-VERIFIED
+mode: built → verified running → ready for live-data + backlog
 
 ## Milestone
-Rebuild Obsidian-vault folder → standalone local web app. Same repo, branch
-`local-app-rebuild`, history preserved. Spec:
-`.planning/specs/2026-06-21-local-app-migration-design.md`. Roadmap: `.planning/ROADMAP.md`.
+Rebuild Obsidian-vault folder → standalone local web app. Same repo (`main`),
+history preserved. Spec: `.planning/specs/2026-06-21-local-app-migration-design.md`.
+Roadmap: `.planning/ROADMAP.md`.
 
-## Position
-Pipeline planning run for Phase 01 done:
-- Step 1 discuss → covered by brainstorm spec (CONTEXT).
-- Step 3 search-first → `phases/01-app-foundation/01-RESEARCH.md` (assemble proven libs).
-- Step 4 AC → `phases/01-app-foundation/01-BRIEF.md` (AC1–AC13).
-- Step 5/6 plan → `phases/01-app-foundation/01-PLAN.md` (T1–T5).
+## Position — all phases shipped to `main`
+- Phase 01 app-foundation — Fastify + sandboxed file API (TDD) + 3-panel dark cockpit.
+- Phase 02 dashboard — Recharts radar/heatmap/tiles, reads `/api/data`.
+- Phase 03 editor — CodeMirror 6 + autosave.
+- Phase 04 terminal — xterm.js + node-pty + grade buttons + chokidar `/watch`.
+- Phase 05 cutover — gitignore + README + merge to main.
+- Phase 06 data-model refactor — dropped per-score md files; single `content/data.json`
+  + `content/documents/`. `/api/data` endpoint, `scores.ts` reads data.json.
 
-## Next — READY TO EXECUTE
-Full plan set written for all 5 phases. Orchestrator entry point: **`.planning/EXECUTION.md`**
-(read first — build order DAG, locked stack, full functionality-coverage map, conventions).
-UI locked: dark cockpit. Plans: `.planning/phases/0{1..5}-*/`. Start at Phase 01 T1
-(branch + scaffold). Intended flow: user compacts, switches to Sonnet, Sonnet orchestrates.
+## Boot verification (2026-06-27)
+`npm run dev` → server :3001, vite :5173. Verified end-to-end:
+- /api/health ✅ · /api/data ✅ (schema valid; data.json is empty stub, composite null)
+- page serves ✅ · /api proxy via 5173 ✅
+- terminal `/pty` ws ✅ (spawns real shell, direct + via proxy)
+- `/watch` ws ✅
+node-pty ESM fix (`createRequire`, commit 1056d97) confirmed working — no `[pty] unavailable`.
+Prior session's ECONNRESET was a stale socket, not a real fault.
+
+## Next
+1. Populate `content/data.json` with real applicant data (or point CONTENT_DIR at live source).
+2. Exercise a grade button → confirm terminal injects scoring phrase end-to-end in browser.
+3. Push to GitHub when ready.
+4. Backlog (ROADMAP.md): School List interactivity, Secondaries panel, generalize.
 
 ## Backlog / non-goals
-See ROADMAP.md (School List, Secondaries, generalize) and parked non-goals (SDK, headless,
-hosting).
+See ROADMAP.md. Parked non-goals: SDK, headless, hosting.
 
 ## Pipeline Skips
-- [2026-06-21] Phase 01, Step 2 (provision-project): skipped during planning — no app deps yet,
-  global ~/.claude skills apply. Backfill: run /provision-project --target ./.claude --type software
-  before/at implementation if project-local skills wanted.
+- [2026-06-21] Phase 01, Step 2 (provision-project): skipped — global ~/.claude skills apply.
+  Backfill if project-local skills wanted: /provision-project --target ./.claude --type software

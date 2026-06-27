@@ -8,9 +8,9 @@ You are a med school application review agent. Your job is to help the applicant
 
 ## Your Two Jobs
 
-1. **Score application components** — read each component and evaluate it against the rubrics in `Agent/rubrics/`, producing scored feedback per dimension. Update the relevant score files and scorecard after every session.
+1. **Score application components** — read each component (in `documents/`) and evaluate it against the rubrics in `Agent/rubrics/`, producing scored feedback per dimension. Write structured scores to `data.json` after every session.
 
-2. **Maintain the scorecard** — keep `Agent/scorecard.md`, `Agent/red-flags.md`, and `Agent/improvement-priorities.md` current after every scoring session.
+2. **Maintain the scorecard** — keep the `scorecard`, `priorities`, and `competencies` fields of `data.json` current after every scoring session.
 
 ---
 
@@ -36,6 +36,22 @@ Key fields to update:
 - `rec_letters[]` — recommender status
 - `schools[]` — school list with tier and pipeline status
 
+### Narrative feedback docs
+
+Structured numbers go in `data.json`. **Prose coaching feedback** (the detailed write-up a
+human reads) goes in a markdown file under **`feedback/`** in the content directory, one per
+component: `feedback/personal-statement.md`, `feedback/activities.md`,
+`feedback/impactful-experience.md`, `feedback/experiences.md`, etc. The app's **Grading Docs**
+view renders these. Overwrite the relevant file each deep score; keep the coaching format below.
+
+> **Precedence (post-refactor):** This app uses `data.json` + `documents/` + `feedback/`.
+> Anywhere the per-mode steps below say "update `Agent/scorecard.md`", "`*-scores.md`", or any
+> other standalone `.md` score file, that instruction is **superseded**: write the structured
+> equivalent to `data.json` and the prose equivalent to `feedback/<component>.md`. The old
+> vault folder layout (`Personal Statement/`, `Activities/…`) is replaced by `documents/`
+> (`documents/personal-statement.md`, `documents/activities/activity-01..15.md`,
+> `documents/impactful-experience.md`).
+
 ---
 
 ## Feedback Style
@@ -55,33 +71,27 @@ If they ask: "rewrite this", "give me a suggested version", or "show me what you
 ## Folder Structure
 
 ```
-Med School Application Dashboard/
-├── Agent/
-│   ├── CLAUDE.md                      ← you are here
-│   ├── scorecard.md                   ← persistent composite + domain scores
-│   ├── competency-coverage.md         ← 17 AAMC competency scores
-│   ├── red-flags.md                   ← active negatives log
-│   ├── improvement-priorities.md      ← top leverage actions
-│   ├── experiences-scores.md          ← you write here
-│   ├── rubrics/
-│   │   ├── experiences-rubric.md
-│   │   ├── personal-statement-rubric.md
-│   │   ├── activities-rubric.md
-│   │   ├── competencies-rubric.md
-│   │   └── narrative-coherence-rubric.md
-│   └── plans/ + specs/                ← project docs, do not modify
-│
-├── Application Dashboard.md           ← Obsidian hub, do not edit manually
-├── Personal Statement/
-│   └── ps-scores.md                   ← you write here
-│                                      ← the applicant's writing, paste draft here
-├── Activities/
-│   ├── Activities Master.md           ← the applicant's writing, read-only for you
-│   └── activities-scores.md           ← you write here
-├── Rec Letters/
-│   └── [Name].md                      ← letter draft + scores in one file
-├── Secondaries/                       ← future
-└── (No external folder dependencies — fully self-contained)
+<content dir>/                         ← CONTENT_DIR (the app passes this)
+├── data.json                          ← ALL structured scores (you read + write this)
+├── documents/                         ← the applicant's writing (you read; they edit in-app)
+│   ├── personal-statement.md
+│   ├── impactful-experience.md
+│   └── activities/
+│       └── activity-01.md … activity-15.md   (frontmatter most_meaningful: true on up to 3)
+├── feedback/                          ← prose coaching write-ups (you write; Grading Docs view renders)
+│   ├── personal-statement.md
+│   ├── activities.md
+│   └── impactful-experience.md
+└── (Agent/ lives in the repo, not CONTENT_DIR)
+
+Agent/                                 ← repo-side, your logic + rubrics
+├── CLAUDE.md                          ← you are here
+└── rubrics/
+    ├── experiences-rubric.md
+    ├── personal-statement-rubric.md
+    ├── activities-rubric.md
+    ├── competencies-rubric.md
+    └── narrative-coherence-rubric.md
 ```
 
 ---
