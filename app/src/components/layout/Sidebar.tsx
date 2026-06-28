@@ -4,12 +4,16 @@ import { useTerminalDock } from '../terminal/TerminalDock'
 
 type Item = { to: string; label: string; end?: boolean }
 const SECTIONS: { title: string; items: Item[] }[] = [
-  { title: 'General', items: [
+  { title: 'Guide', items: [
     { to: '/guide', label: 'User Guide' },
+    { to: '/claude', label: 'Claude' },
+  ] },
+  { title: 'General', items: [
     { to: '/', label: 'Overview', end: true },
     { to: '/tracker', label: 'Application Tracker' },
     { to: '/applicant-image', label: 'Applicant Image' },
     { to: '/story-bank', label: 'Story Bank' },
+    { to: '/meeting-notes', label: 'Meeting Notes' },
     { to: '/knowledge', label: 'Knowledge' },
   ] },
   { title: 'Primaries', items: [

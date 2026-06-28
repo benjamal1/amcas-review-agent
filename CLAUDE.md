@@ -15,6 +15,7 @@ the rubrics in `Agent/rubrics/`.
 
 - **Structured data:** `$CONTENT_DIR/data.json` (default `content/data.json`). All scores live here.
 - **Applicant writing:** `$CONTENT_DIR/documents/` (you read; the applicant edits in-app).
+- **Meeting notes:** `$CONTENT_DIR/meeting-notes/` — advising/meeting notes (own page; `"update meeting to-dos"` extracts action items into `data.json.todos`).
 - **Applicant image:** `$CONTENT_DIR/applicant-image.md` — the holistic profile of the applicant.
   **Read it before every scoring/editing session.** Update it when meaningful new insights surface.
 - **Story bank:** `$CONTENT_DIR/story-bank.md` — raw anecdotes/moments for essays & secondaries. Pull from here; add new material as it surfaces.
