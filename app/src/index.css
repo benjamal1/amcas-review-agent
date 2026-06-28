@@ -340,6 +340,13 @@ body {
 .knowledge__toolbar button { font-size: 12px; padding: 4px 12px; border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); background: var(--color-bg); color: var(--color-muted); cursor: pointer; }
 .knowledge__btn--on { background: var(--color-accent) !important; color: var(--color-bg) !important; border-color: var(--color-accent) !important; }
 
+/* claude config */
+.claude__group { margin-top: 8px; }
+.claude__group-title { font-size: 9px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--color-muted); padding: 6px 8px 2px; }
+.claude__save { margin-left: auto; font-size: 12px; padding: 4px 14px; border: none; border-radius: var(--radius-sm); background: var(--color-accent); color: var(--color-bg); cursor: pointer; font-weight: 700; }
+.claude__save:disabled { background: var(--color-raised); color: var(--color-muted); cursor: default; }
+.claude__editor { width: 100%; height: calc(100% - 44px); resize: none; background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); padding: 14px 16px; font-family: var(--font-mono); font-size: 13px; line-height: 1.6; }
+
 /* user guide */
 .guide { max-width: 780px; }
 .guide__title { font-size: 22px; color: var(--color-text); margin-bottom: 8px; }

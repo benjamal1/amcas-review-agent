@@ -2,6 +2,7 @@ import { HashRouter, Routes, Route, Outlet } from 'react-router-dom'
 import { Sidebar } from './components/layout/Sidebar'
 import { TerminalDock, TerminalDockProvider } from './components/terminal/TerminalDock'
 import { UserGuidePage } from './pages/UserGuidePage'
+import { ClaudePage } from './pages/ClaudePage'
 import { OverviewPage } from './pages/OverviewPage'
 import { ApplicationTrackerPage } from './pages/ApplicationTrackerPage'
 import { SecondariesPage } from './pages/SecondariesPage'
@@ -35,6 +36,7 @@ export default function App() {
         <Route element={<Layout />}>
           <Route index element={<OverviewPage />} />
           <Route path="guide" element={<UserGuidePage />} />
+          <Route path="claude" element={<ClaudePage />} />
           <Route path="tracker" element={<ApplicationTrackerPage />} />
           <Route path="secondaries" element={<SecondariesPage />} />
           <Route path="coursework" element={<CourseworkPage />} />
