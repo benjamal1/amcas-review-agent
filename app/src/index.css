@@ -421,3 +421,10 @@ body {
 .docpage__toc-item--l3 { padding-left: 18px; font-size: 11px; }
 .docpage__content { flex: 1; overflow-y: auto; padding: 24px 36px; min-width: 0; }
 .docpage__content h2, .docpage__content h3 { scroll-margin-top: 12px; }
+.docpage__intro { flex: 1; }
+/* story bank — used tracking */
+.story__counter { font-size: 12px; font-weight: 700; color: var(--color-accent); white-space: nowrap; }
+.story-bank ul { list-style: none; padding-left: 0; }
+.story-bank li { display: flex; align-items: flex-start; gap: 9px; margin: 5px 0; }
+.story-bank input[type="checkbox"] { margin-top: 3px; width: 15px; height: 15px; flex-shrink: 0; cursor: pointer; accent-color: var(--color-accent); }
+.story-bank .story--used { opacity: .45; text-decoration: line-through; }
