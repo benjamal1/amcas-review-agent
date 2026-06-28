@@ -13,6 +13,7 @@ const SECTIONS: { title: string; items: Item[] }[] = [
     { to: '/tracker', label: 'Application Tracker' },
     { to: '/applicant-image', label: 'Applicant Image' },
     { to: '/story-bank', label: 'Story Bank' },
+    { to: '/meeting-notes', label: 'Meeting Notes' },
     { to: '/knowledge', label: 'Knowledge' },
   ] },
   { title: 'Primaries', items: [

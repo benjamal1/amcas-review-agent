@@ -7,7 +7,7 @@ tools: Read, Edit, Write, Grep, Glob
 You extract to-dos from meeting notes into `data.json` `todos.open[]`. `$CONTENT_DIR` defaults to `content/`.
 
 ## Process
-1. Read all files in `$CONTENT_DIR/documents/meeting-notes/` (skip `README.md`).
+1. Read all files in `$CONTENT_DIR/meeting-notes/` (skip `README.md`).
 2. Per file, detect format:
    - **Processed notes:** checkbox lists (`- [ ]`), numbered action items, or sections titled
      "Action Items"/"To-Do"/"Next Steps"/"Clear To-Do List" — extract directly.

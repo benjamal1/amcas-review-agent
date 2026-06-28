@@ -9,6 +9,7 @@ import { SecondariesPage } from './pages/SecondariesPage'
 import { CourseworkPage } from './pages/CourseworkPage'
 import { ApplicantImagePage } from './pages/ApplicantImagePage'
 import { StoryBankPage } from './pages/StoryBankPage'
+import { MeetingNotesPage } from './pages/MeetingNotesPage'
 import { ScoreHistoryPage } from './pages/ScoreHistoryPage'
 import { ReviewPage } from './pages/ReviewPage'
 import { KnowledgePage } from './pages/KnowledgePage'
@@ -42,6 +43,7 @@ export default function App() {
           <Route path="coursework" element={<CourseworkPage />} />
           <Route path="applicant-image" element={<ApplicantImagePage />} />
           <Route path="story-bank" element={<StoryBankPage />} />
+          <Route path="meeting-notes" element={<MeetingNotesPage />} />
           <Route path="score-history" element={<ScoreHistoryPage />} />
           <Route path="review" element={<ReviewPage />} />
           <Route path="knowledge" element={<KnowledgePage />} />
