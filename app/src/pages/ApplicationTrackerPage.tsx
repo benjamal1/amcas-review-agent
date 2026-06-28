@@ -172,14 +172,14 @@ export function ApplicationTrackerPage() {
             <thead>
               <tr>
                 <th aria-label="reorder"></th>
-                <th>School</th><th>Tier</th><th>Rank</th><th>Location</th><th>Status</th>
+                <th>School</th><th>Tier</th><th>Rank</th><th>Location</th><th>Avg GPA</th><th>Avg MCAT</th><th>Status</th>
                 <th>Sec. received</th><th>Sec. deadline</th><th>Target</th><th>Sec. submitted</th>
                 <th>CASPer</th><th>PREview</th><th>Interview</th>
               </tr>
             </thead>
             <tbody>
               {draft.schools.length === 0 && (
-                <tr><td colSpan={13} className="tracker__empty">No schools yet — add one above.</td></tr>
+                <tr><td colSpan={15} className="tracker__empty">No schools yet — add one above.</td></tr>
               )}
               {draft.schools.map((s, i) => {
                 const overdue = s.secondary_deadline && s.secondary_deadline < today()
@@ -194,6 +194,8 @@ export function ApplicationTrackerPage() {
                     <td><input className="tracker__sm" value={s.tier ?? ''} placeholder="reach/target/safety" onChange={e => setSchool(i, { tier: e.target.value })} /></td>
                     <td><input className="tracker__xs" type="number" value={s.rank ?? ''} onChange={e => setSchool(i, { rank: e.target.value === '' ? undefined : Number(e.target.value) })} /></td>
                     <td><input className="tracker__sm" value={s.location ?? ''} onChange={e => setSchool(i, { location: e.target.value })} /></td>
+                    <td><input className="tracker__xs" type="number" step="0.01" value={(s.avg_gpa as number | undefined) ?? ''} onChange={e => setSchool(i, { avg_gpa: e.target.value === '' ? undefined : Number(e.target.value) })} /></td>
+                    <td><input className="tracker__xs" type="number" value={(s.avg_mcat as number | undefined) ?? ''} onChange={e => setSchool(i, { avg_mcat: e.target.value === '' ? undefined : Number(e.target.value) })} /></td>
                     <td>
                       <select value={s.status ?? 'pre-secondary'} data-status={s.status} onChange={e => setSchool(i, { status: e.target.value as SchoolStatus })}>
                         {SCHOOL_STATUS.map(st => <option key={st} value={st}>{S_LABEL[st]}</option>)}

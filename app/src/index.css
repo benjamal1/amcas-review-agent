@@ -137,7 +137,7 @@ body {
 /* ── Generic page wrapper ── */
 .page { height: 100%; overflow: hidden; min-height: 0; }
 .page--grading { overflow-y: auto; background: var(--color-panel); }
-.page--single { overflow-y: auto; background: var(--color-panel); padding: 16px; }
+.page--single { overflow-y: auto; background: var(--color-panel); padding: 16px 16px 48px; }
 
 /* ── Application Tracker ── */
 .tracker { display: flex; flex-direction: column; gap: 18px; }
@@ -190,7 +190,7 @@ body {
 .tracker__add { display: flex; gap: 6px; }
 .tracker__add input { background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); padding: 5px 9px; font-size: 13px; }
 .tracker__add button { background: var(--color-accent); color: var(--color-bg); border: none; border-radius: var(--radius-sm); padding: 5px 12px; font-weight: 600; cursor: pointer; }
-.tracker__scroll { overflow-x: auto; border: 1px solid var(--color-hairline); border-radius: var(--radius-md); }
+.tracker__scroll { overflow-x: auto; border: 1px solid var(--color-hairline); border-radius: var(--radius-md); padding-bottom: 10px; }
 .tracker__table { border-collapse: collapse; width: 100%; font-size: 12px; white-space: nowrap; }
 .tracker__table th { text-align: left; padding: 8px 10px; background: var(--color-raised); color: var(--color-muted); font-size: 10px; text-transform: uppercase; letter-spacing: .05em; position: sticky; top: 0; }
 .tracker__table td { padding: 4px 8px; border-top: 1px solid var(--color-hairline); }
