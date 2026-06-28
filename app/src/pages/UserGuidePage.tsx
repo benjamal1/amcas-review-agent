@@ -33,6 +33,20 @@ export function UserGuidePage() {
       </section>
 
       <section className="guide__section">
+        <h2>Getting your data in</h2>
+        <p>You don’t have to enter everything by hand. If you already have documents — a printed
+        AMCAS report (PDF), a transcript, a school list — just drop them somewhere on your machine,
+        open the <b>Terminal</b>, and ask Claude to ingest them: e.g. <i>“read my AMCAS PDF at
+        ~/Downloads/AMCAS.pdf and fill in my bio, MCAT, activities, coursework, and school list.”</i>
+        It scans the document and writes the structured fields into <code>data.json</code> + your
+        essays into <code>documents/</code>.</p>
+        <p><b>Always check correctness and formatting afterward.</b> Scanning is reliable on
+        text-based PDFs but not infallible — verify the values (and note that an <i>unprocessed</i>
+        AMCAS report has no verified GPA, so that field can’t be scanned). Treat it as a fast first
+        pass you confirm, not a black box.</p>
+      </section>
+
+      <section className="guide__section">
         <h2>Grading with the agent</h2>
         <p>The buttons and terminal drive a Claude session rooted in this repo. It scores against the rubrics, writes structured results into <code>data.json</code> (surfaced in Overview / Score History / Review), and drops prose into <code>content/feedback/</code>. Essay feedback is coaching-first: it quotes the text, names the issue, points a direction — it won’t rewrite your voice unless you ask.</p>
       </section>
