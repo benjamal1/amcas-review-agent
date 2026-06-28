@@ -78,6 +78,18 @@ export function ApplicationTrackerPage() {
     setNewName('')
   }
 
+  // Schools render in array order; ↑/↓ reorder, Sort by rank reorders by the rank column.
+  const moveSchool = (i: number, dir: -1 | 1) => edit(d => {
+    const j = i + dir
+    if (j < 0 || j >= d.schools.length) return d
+    const arr = [...d.schools]
+    ;[arr[i], arr[j]] = [arr[j], arr[i]]
+    return { ...d, schools: arr }
+  })
+  const sortByRank = () => edit(d => ({
+    ...d, schools: [...d.schools].sort((a, b) => (a.rank ?? Infinity) - (b.rank ?? Infinity)),
+  }))
+
   async function save() {
     const t = today()
     await mutate(d => {
@@ -150,6 +162,7 @@ export function ApplicationTrackerPage() {
         <div className="tracker__schools-head">
           <h2 className="tracker__h">Schools ({draft.schools.length})</h2>
           <div className="tracker__add">
+            <button className="tracker__rank-sort" onClick={sortByRank} title="Order by the rank column (lowest first)">⇅ Sort by rank</button>
             <input value={newName} placeholder="Add a school…" onChange={e => setNewName(e.target.value)} onKeyDown={e => e.key === 'Enter' && addSchool()} />
             <button onClick={addSchool}>+ Add</button>
           </div>
@@ -158,6 +171,7 @@ export function ApplicationTrackerPage() {
           <table className="tracker__table">
             <thead>
               <tr>
+                <th aria-label="reorder"></th>
                 <th>School</th><th>Tier</th><th>Rank</th><th>Location</th><th>Status</th>
                 <th>Sec. received</th><th>Sec. deadline</th><th>Target</th><th>Sec. submitted</th>
                 <th>CASPer</th><th>PREview</th><th>Interview</th>
@@ -165,13 +179,17 @@ export function ApplicationTrackerPage() {
             </thead>
             <tbody>
               {draft.schools.length === 0 && (
-                <tr><td colSpan={12} className="tracker__empty">No schools yet — add one above.</td></tr>
+                <tr><td colSpan={13} className="tracker__empty">No schools yet — add one above.</td></tr>
               )}
               {draft.schools.map((s, i) => {
                 const overdue = s.secondary_deadline && s.secondary_deadline < today()
                   && !['secondary-submitted', 'interview-invited', 'interviewed', 'waitlisted', 'accepted', 'rejected', 'withdrawn'].includes(s.status ?? '')
                 return (
                   <tr key={s.name}>
+                    <td className="tracker__reorder">
+                      <button onClick={() => moveSchool(i, -1)} disabled={i === 0} title="Move up">▲</button>
+                      <button onClick={() => moveSchool(i, 1)} disabled={i === draft.schools.length - 1} title="Move down">▼</button>
+                    </td>
                     <td className="tracker__name">{s.name}</td>
                     <td><input className="tracker__sm" value={s.tier ?? ''} placeholder="reach/target/safety" onChange={e => setSchool(i, { tier: e.target.value })} /></td>
                     <td><input className="tracker__xs" type="number" value={s.rank ?? ''} onChange={e => setSchool(i, { rank: e.target.value === '' ? undefined : Number(e.target.value) })} /></td>
@@ -196,7 +214,7 @@ export function ApplicationTrackerPage() {
             </tbody>
           </table>
         </div>
-        <p className="tracker__hint">Secondary deadline auto-fills to 2 weeks after received (editable). Per-school notes & secondary essays live in the Secondaries detail (coming soon).</p>
+        <p className="tracker__hint">Reorder rows with ▲▼, or fill the Rank column and hit “Sort by rank”. Secondary deadline auto-fills to 2 weeks after received (editable). Order is saved with the rest.</p>
       </section>
     </div>
   )
