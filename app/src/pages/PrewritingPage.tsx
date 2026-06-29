@@ -21,6 +21,12 @@ const sortBank = (bank: BankEssay[], count: (a: string) => number) =>
     return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi)
   })
 
+const plusDays = (iso: string, n: number): string => {
+  const d = new Date(iso)
+  d.setDate(d.getDate() + n)
+  return d.toISOString().slice(0, 10)
+}
+
 // Prewriting (Shemmassian step 1): brainstorm + draft a master essay per prompt category, reused
 // per school. Each category carries its guiding questions + a freewrite draft.
 export function PrewritingPage() {
@@ -82,6 +88,7 @@ export function PrewritingPage() {
           <h2 className="tracker__h">Prewriting</h2>
           <p className="tracker__hint">One master draft per category, reused across schools. Ordered by how many schools need it.</p>
           <AgentButton className="agent-btn agent-btn--wide" phrase="find my secondary story gaps" label="✦ Find my story gaps" />
+          <AgentButton className="agent-btn agent-btn--wide" phrase="cluster my secondary prompts" label="✦ Cluster my prompts" />
         </div>
         <ul className="sec-bank__items">
           {bank.map(b => {
@@ -122,6 +129,29 @@ export function PrewritingPage() {
               </div>
             </div>
             {active.pre_writable === false && <p className="tracker__hint prewrite__note">School-specific — write the anchor here, then layer specifics per school.</p>}
+            {(() => {
+              const mapped = (data.schools ?? []).filter(sc => (sc.secondary?.essays ?? []).some(e => e.maps_to === active.archetype))
+              if (mapped.length === 0) return (
+                <p className="tracker__hint prewrite__note" style={{ marginBottom: 4 }}>No prompts mapped here yet — run Cluster my prompts.</p>
+              )
+              return (
+                <div className="prewrite__schools">
+                  <span className="prewrite__schools-label">{mapped.length} school{mapped.length === 1 ? '' : 's'} use this</span>
+                  <ul>
+                    {mapped.map(sc => (
+                      <li key={sc.name}>
+                        <span>{sc.name}</span>
+                        <span className="muted">
+                          {sc.secondary_received_date
+                            ? `received ${sc.secondary_received_date} · due ${plusDays(sc.secondary_received_date, 14)}`
+                            : 'not received yet'}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            })()}
             <GuidingQuestions
               key={active.archetype}
               questions={active.guiding_questions ?? []}

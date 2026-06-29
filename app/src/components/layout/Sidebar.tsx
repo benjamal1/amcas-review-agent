@@ -27,6 +27,7 @@ const SECTIONS: { title: string; items: Item[] }[] = [
   { title: 'Secondaries', items: [
     { to: '/secondaries/prewriting', label: 'Prewriting' },
     { to: '/secondaries', label: 'Schools', end: true },
+    { to: '/secondaries/prioritization', label: 'Essay Prioritization' },
     { to: '/secondaries/workspace', label: 'General Editor' },
   ] },
 ]

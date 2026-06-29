@@ -21,6 +21,7 @@ import { KnowledgePage } from './pages/KnowledgePage'
 import { RubricsPage } from './pages/RubricsPage'
 import { EditorPage } from './pages/EditorPage'
 import { GradingPage } from './pages/GradingPage'
+import { EssayPrioritizationPage } from './pages/EssayPrioritizationPage'
 
 function Layout() {
   return (
@@ -51,6 +52,7 @@ export default function App() {
           <Route path="secondaries/workspace" element={<SecondaryWorkspacePage />} />
           <Route path="secondaries/brainstorm" element={<Navigate to="/secondaries/prewriting" replace />} />
           <Route path="secondaries/bank" element={<Navigate to="/secondaries/prewriting" replace />} />
+          <Route path="secondaries/prioritization" element={<EssayPrioritizationPage />} />
           <Route path="secondaries/editor" element={<SecondariesEditorPage />} />
           <Route path="secondaries/:school" element={<SchoolDetailPage />}>
             <Route index element={<Navigate to="research" replace />} />
