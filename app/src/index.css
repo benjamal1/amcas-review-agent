@@ -248,7 +248,7 @@ body {
 .tracker__table--ep th:nth-child(7), .tracker__table--ep td:nth-child(7) { width: 80px; }
 .tracker__table--ep th:nth-child(8), .tracker__table--ep td:nth-child(8) { width: 90px; }
 .tracker__table--ep th:nth-child(9), .tracker__table--ep td:nth-child(9) { width: 64px; }
-.tracker__table--ep th:nth-child(10), .tracker__table--ep td:nth-child(10) { width: 64px; }
+.tracker__table--ep th:nth-child(10), .tracker__table--ep td:nth-child(10) { width: 78px; }
 /* admit.org recurrence-likelihood tiers for the Chance column */
 .ep-chance { font-family: var(--font-mono); font-size: 12px; font-weight: 600; }
 .ep-chance--t1 { color: var(--color-pos); }     /* >= 90% */
