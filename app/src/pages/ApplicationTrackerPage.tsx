@@ -48,7 +48,15 @@ const today = () => new Date().toISOString().slice(0, 10)
 const plusDays = (iso: string, n: number) => { const d = new Date(iso); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10) }
 const lastChanged = (h?: StatusEvent[]) => (h && h.length ? h[h.length - 1].date : '—')
 
-type Draft = { pc: Record<string, PrimaryComponent>; schools: SchoolEntry[] }
+// Macro secondaries pipeline (per-school work is tracked separately, in the nested Schools list).
+const SEC_STAGES: { key: string; label: string }[] = [
+  { key: 'brainstorming', label: 'Brainstorming' },
+  { key: 'prewriting', label: 'Pre-writing (essay bank)' },
+  { key: 'casper_preview', label: 'CASPer / PREview' },
+]
+const stageDone = (s: ComponentStatus) => s === 'ready' || s === 'submitted' || s === 'not-applicable'
+
+type Draft = { pc: Record<string, PrimaryComponent>; schools: SchoolEntry[]; sec: Record<string, ComponentStatus> }
 
 export function ApplicationTrackerPage() {
   const { data, loading, mutate } = useData()
@@ -57,13 +65,14 @@ export function ApplicationTrackerPage() {
   const [newName, setNewName] = useState('')
   const [openPrimary, setOpenPrimary] = useState(true)
   const [openSecondary, setOpenSecondary] = useState(true)
+  const [openSecSchools, setOpenSecSchools] = useState(false)
 
   // Initialise / re-sync the local draft from persisted data.
   const initDraft = useCallback(() => {
     if (!data) return
     const pc: Record<string, PrimaryComponent> = {}
     for (const c of COMPONENTS) pc[c.key] = data.primary_components?.[c.key] ?? { status: 'not-started' }
-    setDraft({ pc, schools: structuredClone(data.schools ?? []) })
+    setDraft({ pc, schools: structuredClone(data.schools ?? []), sec: { ...(data.secondaries?.stages ?? {}) } })
     setDirty(false)
   }, [data])
   useEffect(() => { if (data && !draft) initDraft() }, [data, draft, initDraft])
@@ -73,6 +82,8 @@ export function ApplicationTrackerPage() {
   const edit = (fn: (d: Draft) => Draft) => { setDraft(d => (d ? fn(d) : d)); setDirty(true) }
   const setComp = (key: string, status: ComponentStatus) =>
     edit(d => ({ ...d, pc: { ...d.pc, [key]: { ...d.pc[key], status } } }))
+  const setSecStage = (key: string, status: ComponentStatus) =>
+    edit(d => ({ ...d, sec: { ...d.sec, [key]: status } }))
   const setSchool = (i: number, patch: Partial<SchoolEntry>) =>
     edit(d => ({ ...d, schools: d.schools.map((s, idx) => (idx === i ? { ...s, ...patch } : s)) }))
   const setReceived = (i: number, val: string) =>
@@ -124,7 +135,8 @@ export function ApplicationTrackerPage() {
         const changed = s.status && s.status !== prev?.status
         return { ...s, status_history: changed ? [...hist, { status: s.status!, date: t }] : hist }
       })
-      return { ...d, primary_components: pc, schools }
+      const secondaries = { ...(d.secondaries ?? { essay_bank: [] }), stages: draft!.sec }
+      return { ...d, primary_components: pc, schools, secondaries }
     })
     // mutate resolves after the PUT settles — re-sync the draft from the final persisted
     // state (the written data on success, or the rolled-back base on failure).
@@ -143,6 +155,14 @@ export function ApplicationTrackerPage() {
   const pct = tracked.length ? Math.round((readyCount / tracked.length) * 100) : 0
   const secSubmitted = draft.schools.filter(s => secStage(s).key === 'submitted').length
   const secPct = draft.schools.length ? Math.round((secSubmitted / draft.schools.length) * 100) : 0
+  const secStatus = (k: string) => draft.sec[k] ?? 'not-started'
+  // Current macro stage = first incomplete step (per-school work sits between pre-writing and CASPer).
+  const currentStage =
+    !stageDone(secStatus('brainstorming')) ? 'Brainstorming'
+    : !stageDone(secStatus('prewriting')) ? 'Pre-writing'
+    : draft.schools.length > 0 && secSubmitted < draft.schools.length ? 'Per-school essays'
+    : !stageDone(secStatus('casper_preview')) ? 'CASPer / PREview'
+    : 'Complete'
 
   return (
     <div className="page page--single tracker">
@@ -181,28 +201,49 @@ export function ApplicationTrackerPage() {
         </>}
       </section>
 
-      {/* ── Secondaries progress board (per-school, read-only summary) ── */}
+      {/* ── Secondaries: macro stage tracker + nested per-school progress ── */}
       <section className="tracker__primary">
         <button className="tracker__primary-head tracker__fold" onClick={() => setOpenSecondary(o => !o)} aria-expanded={openSecondary}>
           <h2 className="tracker__h"><span className="sidebar__chevron">{openSecondary ? '▾' : '▸'}</span> Secondaries</h2>
-          <span className="tracker__ready">{secSubmitted}/{draft.schools.length} submitted</span>
+          <span className="tracker__ready">Stage: {currentStage}</span>
         </button>
         {openSecondary && <>
-        <div className="tracker__bar"><span className="tracker__bar-fill" style={{ width: `${secPct}%` }} /></div>
-        <ul className="tracker__components">
-          {draft.schools.length === 0 && <li className="tracker__hint">No schools yet.</li>}
-          {draft.schools.map(s => {
-            const { done, total } = schoolEssayProgress(s)
-            const stage = secStage(s)
-            return (
-              <li key={s.name} className="tracker__comp tracker__sec-row">
-                <Link className="tracker__sec-link" to={`/secondaries/${schoolSlug(s.name)}`}>{s.name}</Link>
-                <span className="tracker__sec-essays">{done}/{total} essays</span>
-                <span className="tracker__pill" data-status={stage.key}>{stage.label}</span>
+          <ul className="tracker__components">
+            {SEC_STAGES.map(st => (
+              <li key={st.key} className="tracker__comp">
+                <span className="tracker__comp-name">{st.label}</span>
+                <select className="tracker__pill" data-status={secStatus(st.key)} value={secStatus(st.key)} onChange={e => setSecStage(st.key, e.target.value as ComponentStatus)}>
+                  {C_STATUS.map(s => <option key={s.v} value={s.v}>{s.label}</option>)}
+                </select>
+                <span className="tracker__comp-date" />
               </li>
-            )
-          })}
-        </ul>
+            ))}
+          </ul>
+          {/* nested: per-school secondary progress */}
+          <div className="tracker__nested">
+            <button className="tracker__fold tracker__nested-head" onClick={() => setOpenSecSchools(o => !o)} aria-expanded={openSecSchools}>
+              <span className="sidebar__chevron">{openSecSchools ? '▾' : '▸'}</span> Schools ({draft.schools.length}) · {secSubmitted} submitted
+            </button>
+            {openSecSchools && (
+              <>
+                <div className="tracker__bar"><span className="tracker__bar-fill" style={{ width: `${secPct}%` }} /></div>
+                <ul className="tracker__components">
+                  {draft.schools.length === 0 && <li className="tracker__hint">No schools yet.</li>}
+                  {draft.schools.map(s => {
+                    const { done, total } = schoolEssayProgress(s)
+                    const stage = secStage(s)
+                    return (
+                      <li key={s.name} className="tracker__comp tracker__sec-row">
+                        <Link className="tracker__sec-link" to={`/secondaries/${schoolSlug(s.name)}`}>{s.name}</Link>
+                        <span className="tracker__sec-essays">{done}/{total} essays</span>
+                        <span className="tracker__pill" data-status={stage.key}>{stage.label}</span>
+                      </li>
+                    )
+                  })}
+                </ul>
+              </>
+            )}
+          </div>
         </>}
       </section>
 

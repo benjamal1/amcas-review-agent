@@ -65,6 +65,7 @@ export interface BankEssay {
 export interface Secondaries {
   brainstorm_path?: string    // content/documents/secondaries/_brainstorm.md
   essay_bank: BankEssay[]
+  stages?: Record<string, ComponentStatus>  // macro pipeline: brainstorming, prewriting, casper_preview
 }
 // Top-level primary-application checklist.
 export interface ApplicationChecklist {
