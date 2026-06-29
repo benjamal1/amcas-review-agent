@@ -1,6 +1,6 @@
 import { createContext, useContext, useState, useRef, useCallback, useEffect } from 'react'
 import type { ReactNode } from 'react'
-import { TerminalPanel } from './TerminalPanel'
+import { Terminal } from './Terminal'
 
 // One app-level terminal, mounted once and toggled from anywhere. Staying mounted keeps the
 // claude session (pty) alive across page navigation. Avoids multiple Terminal singletons.
@@ -49,7 +49,7 @@ export function TerminalDock() {
         <span className="term-dock__title">TERMINAL</span>
         <button className="term-dock__close" onClick={() => setOpen(false)} title="Close terminal">✕</button>
       </div>
-      <div className="term-dock__body"><TerminalPanel /></div>
+      <div className="term-dock__body"><div className="terminal-panel"><div className="terminal-panel__term"><Terminal /></div></div></div>
     </div>
   )
 }
