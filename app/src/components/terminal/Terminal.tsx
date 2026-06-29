@@ -1,27 +1,23 @@
 import { useEffect, useRef } from 'react'
 import { Terminal as XTerm } from '@xterm/xterm'
 import { FitAddon } from '@xterm/addon-fit'
+import { WebglAddon } from '@xterm/addon-webgl'
 import '@xterm/xterm/css/xterm.css'
 import '../../styles/terminal.css'
 
-// Shared refs so GradeButtons can inject into the running session
+// Shared refs so buttons can inject into the running session
 let _ws: WebSocket | null = null
 let _xterm: XTerm | null = null
-let _sessionActive = false
 export function getSharedTerminal() { return { ws: _ws, xterm: _xterm } }
 
-// Inject a trigger phrase into the shared terminal; starts `claude` first if no session is detected.
+// Inject a trigger phrase into the shared terminal. Claude is auto-started on connect (see connect()),
+// so this only types the phrase — no fragile "is a session running?" detection / relaunch.
 export function injectPhrase(phrase: string) {
   if (!_ws || _ws.readyState !== WebSocket.OPEN) { alert('Terminal not connected. Open the terminal panel.'); return }
-  if (!_sessionActive) {
-    _ws.send(JSON.stringify({ type: 'input', data: 'claude\n' }))
-    setTimeout(() => { if (_ws && _ws.readyState === WebSocket.OPEN) _ws.send(JSON.stringify({ type: 'input', data: phrase + '\n' })) }, 3000)
-    return
-  }
   _ws.send(JSON.stringify({ type: 'input', data: phrase + '\n' }))
 }
 
-export function Terminal({ onSessionDetect }: { onSessionDetect?: (active: boolean) => void }) {
+export function Terminal() {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -34,25 +30,30 @@ export function Terminal({ onSessionDetect }: { onSessionDetect?: (active: boole
     const fit = new FitAddon()
     xterm.loadAddon(fit)
     xterm.open(ref.current)
+    // GPU-render the terminal so scrolling/output stays smooth. Falls back to the DOM renderer
+    // if WebGL is unavailable or the context is lost.
+    try {
+      const webgl = new WebglAddon()
+      webgl.onContextLoss(() => webgl.dispose())
+      xterm.loadAddon(webgl)
+    } catch { /* no WebGL — xterm keeps its default renderer */ }
     fit.fit()
     _xterm = xterm
 
     let disposed = false // set on unmount; stops reconnect from resurrecting a dead session
+    let claudeLaunched = false // auto-start claude once per shell; server spawns a fresh shell each connect
     function connect() {
       if (disposed) return
       const ws = new WebSocket(`ws://${location.host}/pty`)
       _ws = ws
-      ws.onopen = () => ws.send(JSON.stringify({ type: 'resize', cols: xterm.cols, rows: xterm.rows }))
-      ws.onmessage = e => {
-        if (disposed) return
-        xterm.write(e.data)
-        if (typeof e.data === 'string') {
-          // Detect active claude session by spinner chars or prompt
-          _sessionActive = e.data.includes('✻') || e.data.includes('⠋') || e.data.includes('⠙')
-          onSessionDetect?.(_sessionActive)
-        }
+      ws.onopen = () => {
+        ws.send(JSON.stringify({ type: 'resize', cols: xterm.cols, rows: xterm.rows }))
+        // Keep claude always open in the dock: launch it on connect (and again after a reconnect,
+        // since the pty server gives a brand-new shell each time). Buttons then only type the phrase.
+        if (!claudeLaunched) { claudeLaunched = true; ws.send(JSON.stringify({ type: 'input', data: 'claude\n' })) }
       }
-      ws.onclose = () => { if (!disposed) setTimeout(connect, 2000) }
+      ws.onmessage = e => { if (!disposed) xterm.write(e.data) }
+      ws.onclose = () => { if (!disposed) { claudeLaunched = false; setTimeout(connect, 2000) } }
     }
     connect()
     xterm.onData(d => _ws?.send(JSON.stringify({ type: 'input', data: d })))
@@ -70,7 +71,7 @@ export function Terminal({ onSessionDetect }: { onSessionDetect?: (active: boole
       xterm.dispose()
       _ws = null; _xterm = null
     }
-  }, [onSessionDetect])
+  }, [])
 
   return <div ref={ref} className="terminal-container" />
 }
