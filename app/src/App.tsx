@@ -7,6 +7,7 @@ import { OverviewPage } from './pages/OverviewPage'
 import { ApplicationTrackerPage } from './pages/ApplicationTrackerPage'
 import { SecondariesPage } from './pages/SecondariesPage'
 import { PrewritingPage } from './pages/PrewritingPage'
+import { SecondaryWorkspacePage } from './pages/SecondaryWorkspacePage'
 import { SecondariesEditorPage } from './pages/SecondariesEditorPage'
 import { SchoolDetailPage, SchoolResearchTab, SchoolEditorTab, SchoolGradingTab } from './pages/SchoolDetailPage'
 import { Navigate } from 'react-router-dom'
@@ -47,6 +48,7 @@ export default function App() {
           <Route path="grading" element={<GradingPage />} />
           <Route path="secondaries" element={<SecondariesPage />} />
           <Route path="secondaries/prewriting" element={<PrewritingPage />} />
+          <Route path="secondaries/workspace" element={<SecondaryWorkspacePage />} />
           <Route path="secondaries/brainstorm" element={<Navigate to="/secondaries/prewriting" replace />} />
           <Route path="secondaries/bank" element={<Navigate to="/secondaries/prewriting" replace />} />
           <Route path="secondaries/editor" element={<SecondariesEditorPage />} />
