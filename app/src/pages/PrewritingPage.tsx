@@ -12,9 +12,11 @@ const STATUSES: { v: ComponentStatus; label: string }[] = [
   { v: 'ready', label: 'Ready' }, { v: 'submitted', label: 'Used' },
 ]
 
-// order: core 6 first (Shemmassian), then any added extras
-const sortBank = (bank: BankEssay[]) =>
+// Prioritize by leverage: categories serving the most schools first, core order as tiebreak.
+const sortBank = (bank: BankEssay[], count: (a: string) => number) =>
   [...bank].sort((a, b) => {
+    const byCount = count(b.archetype) - count(a.archetype)
+    if (byCount) return byCount
     const ai = CORE_ARCHETYPES.indexOf(a.archetype), bi = CORE_ARCHETYPES.indexOf(b.archetype)
     return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi)
   })
@@ -51,7 +53,10 @@ export function PrewritingPage() {
 
   if (loading || !data) return <div className="dashboard__loading">Loading…</div>
 
-  const bank = sortBank(data.secondaries?.essay_bank ?? [])
+  // How many schools have a prompt mapped to each category → where prewriting has most leverage.
+  const schools = data.schools ?? []
+  const schoolCount = (archetype: string) => schools.filter(sc => (sc.secondary?.essays ?? []).some(e => e.maps_to === archetype)).length
+  const bank = sortBank(data.secondaries?.essay_bank ?? [], schoolCount)
   const present = new Set(bank.map(b => b.archetype))
   const addable = ARCHETYPE_CATALOG.filter(a => !present.has(a.archetype))
   const active = bank.find(b => b.doc_path === selected) ?? bank[0]
@@ -77,18 +82,22 @@ export function PrewritingPage() {
           <h2 className="tracker__h">Prewriting</h2>
           <p className="tracker__hint">Start right after submitting primaries. Per category: answer the guiding questions, set a 15-min timer, freewrite without editing — then underline anything interesting, funny, unusual, or personal.</p>
           <AgentButton className="agent-btn agent-btn--wide" phrase="find my secondary story gaps" label="✦ Find my story gaps" />
+          <p className="tracker__hint prewrite__priority-note">Ordered by # schools with a related prompt — write top-down for the most leverage.</p>
         </div>
         <ul className="sec-bank__items">
-          {bank.map(b => (
+          {bank.map(b => {
+            const n = schoolCount(b.archetype)
+            return (
             <li key={b.archetype} className={`sec-bank__item${active?.doc_path === b.doc_path ? ' sec-bank__item--active' : ''}`}>
               <button className="sec-bank__name" onClick={() => setSelected(b.doc_path)}>
                 {b.label}{b.pre_writable === false && <span className="sec-bank__tag">per-school</span>}
+                <span className="sec-bank__count" title="Schools with a prompt mapped here">{n} school{n === 1 ? '' : 's'}</span>
               </button>
               <select className="tracker__pill" data-status={b.status} value={b.status} onChange={e => patch(b.archetype, { status: e.target.value as ComponentStatus })}>
                 {STATUSES.map(s => <option key={s.v} value={s.v}>{s.label}</option>)}
               </select>
             </li>
-          ))}
+          )})}
           {bank.length === 0 && <li className="tracker__hint">Seeding the 6 core categories…</li>}
         </ul>
         {addable.length > 0 && (

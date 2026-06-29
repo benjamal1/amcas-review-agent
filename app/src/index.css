@@ -243,6 +243,10 @@ body {
 .sec-editor__prewrite-toggle { background: none; border: none; color: var(--color-muted); font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; padding: 0; }
 .sec-editor__prewrite-toggle:hover { color: var(--color-accent); }
 .sec-editor__prewrite-body { margin-top: 8px; max-height: 220px; overflow: auto; font-size: 13px; padding: 8px 10px; background: var(--color-bg); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); }
+/* prewriting prioritization */
+.prewrite__priority-note { margin-top: 8px; }
+.sec-bank__name { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.sec-bank__count { font-size: 10px; font-family: var(--font-mono); color: var(--color-muted); background: color-mix(in oklch, var(--color-muted) 12%, transparent); padding: 1px 6px; border-radius: 999px; }
 /* in-app agent trigger buttons (brainstorm / research / map) */
 .agent-btn { background: color-mix(in oklch, var(--color-accent) 14%, transparent); color: var(--color-accent); border: 1px solid var(--color-accent); border-radius: var(--radius-sm); padding: 4px 10px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
 .agent-btn:hover { background: var(--color-accent); color: var(--color-bg); }
