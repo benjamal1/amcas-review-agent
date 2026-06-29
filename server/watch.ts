@@ -2,7 +2,8 @@ import type { FastifyInstance } from 'fastify'
 import chokidar from 'chokidar'
 import path from 'node:path'
 
-const SCORE_RE = /\/(scorecard|.*-scores|competency-coverage|improvement-priorities|meeting-todos)\.md$|data\.json$/i
+// All scores live in data.json now; the legacy *-scores.md / scorecard.md targets are retired.
+const SCORE_RE = /data\.json$/i
 
 export function registerWatchRoute(app: FastifyInstance, contentDir: string) {
   const clients = new Set<import('ws').WebSocket>()
