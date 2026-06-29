@@ -15,6 +15,7 @@ const SECTIONS: { title: string; items: Item[] }[] = [
     { to: '/story-bank', label: 'Story Bank' },
     { to: '/meeting-notes', label: 'Meeting Notes' },
     { to: '/knowledge', label: 'Knowledge' },
+    { to: '/log', label: 'Activity Log' },
   ] },
   { title: 'Primaries', items: [
     { to: '/grading', label: 'Grading' },

@@ -22,6 +22,7 @@ import { RubricsPage } from './pages/RubricsPage'
 import { EditorPage } from './pages/EditorPage'
 import { GradingPage } from './pages/GradingPage'
 import { EssayPrioritizationPage } from './pages/EssayPrioritizationPage'
+import { ActivityLogPage } from './pages/ActivityLogPage'
 
 function Layout() {
   return (
@@ -67,6 +68,7 @@ export default function App() {
           <Route path="score-history" element={<ScoreHistoryPage />} />
           <Route path="review" element={<ReviewPage />} />
           <Route path="knowledge" element={<KnowledgePage />} />
+          <Route path="log" element={<ActivityLogPage />} />
           <Route path="rubrics" element={<RubricsPage />} />
           <Route path="editor" element={<EditorPage />} />
         </Route>

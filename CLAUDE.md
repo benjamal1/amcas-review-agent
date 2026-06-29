@@ -42,6 +42,18 @@ touch `data.json`, not only on a full grade.
 
 ---
 
+## Activity log (running memory)
+
+`data.json.activity_log[]` (`{ date, summary }`) is your running manager-memory — a short trail of
+what's been done so the applicant doesn't have to keep the terminal open to remember.
+
+- **Read it at the start of every session** to recall recent conclusions before acting.
+- **After finishing any task** that changes `data.json` or reaches a conclusion, append ONE entry:
+  `{ "date": "<today YYYY-MM-DD>", "summary": "<=1 sentence recap" }` (Read → merge → write). Keep it
+  short — e.g. "Clustered Harvard's prompts → Diversity + Why-Us." Newest is shown first in the app.
+
+---
+
 ## Dispatch table
 
 Route the request to the matching subagent (these phrases are the app's Grade Buttons):

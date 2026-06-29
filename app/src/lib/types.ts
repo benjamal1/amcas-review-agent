@@ -102,4 +102,5 @@ export interface AppData {
   primary_components?: Record<string, PrimaryComponent>
   red_flags?: RedFlag[]
   secondaries?: Secondaries
+  activity_log?: { date: string; summary: string }[]
 }
