@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { useData } from '../hooks/useData'
 import { Editor } from '../components/editor/Editor'
+import { AgentButton } from '../components/terminal/AgentButton'
 import { ARCHETYPE_CATALOG, CORE_ARCHETYPES, newBankEssay } from '../lib/secondaries'
 import type { BankEssay, ComponentStatus, Secondaries } from '../lib/types'
 
@@ -65,6 +66,7 @@ export function PrewritingPage() {
         <div className="sec-page__intro">
           <h2 className="tracker__h">Prewriting</h2>
           <p className="tracker__hint">Start right after submitting primaries. Per category: answer the guiding question, set a 15-min timer, freewrite without editing — then underline anything interesting, funny, unusual, or personal.</p>
+          <AgentButton className="agent-btn agent-btn--wide" phrase="find my secondary story gaps" label="✦ Find my story gaps" />
         </div>
         <ul className="sec-bank__items">
           {bank.map(b => (
@@ -93,7 +95,10 @@ export function PrewritingPage() {
         {active && (
           <>
             <div className="sec-page__intro prewrite__head">
-              <h2 className="tracker__h">{active.label}</h2>
+              <div className="prewrite__head-row">
+                <h2 className="tracker__h">{active.label}</h2>
+                <AgentButton phrase={`brainstorm secondary ideas for ${active.label}`} label="✦ Brainstorm ideas" />
+              </div>
               {active.pre_writable === false && <p className="tracker__hint">School-specific — write the anchor here, then layer specifics per school.</p>}
             </div>
             <GuidingQuestions

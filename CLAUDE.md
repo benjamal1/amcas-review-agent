@@ -57,6 +57,9 @@ Route the request to the matching subagent (these phrases are the app's Grade Bu
 | "update meeting to-dos", "extract to-dos", "sync meeting feedback" | `meeting-todo-extractor` |
 | "review my transcript", "read my transcript" | `coursework-mapper` |
 | "regrade secondaries for &lt;school&gt;", "regrade &lt;school&gt;", "score this school's secondaries" | `secondary-regrader` |
+| "brainstorm secondary ideas for &lt;category&gt;", "find my secondary story gaps", "where can I dig for a story" | `secondary-brainstormer` |
+| "research fit for &lt;school&gt;", "research &lt;school&gt; for secondaries", "find why-us material for &lt;school&gt;" | `school-fit-researcher` |
+| "map secondary prompts for &lt;school&gt;", "sort &lt;school&gt;'s prompts", "match prompts to my prewriting" | `prompt-mapper` |
 | "grade my full application", "full application grade", "score everything" | **all scorers — see below** |
 
 For "help me edit / coach me on X / give feedback as I go" → stay in this session and **coach**

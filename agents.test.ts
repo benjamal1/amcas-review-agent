@@ -10,11 +10,11 @@ const router = readFileSync(path.join(root, 'CLAUDE.md'), 'utf8')
 const agentsMd = readFileSync(path.join(root, 'AGENTS.md'), 'utf8')
 
 describe('agent wiring', () => {
-  it('has the 9 expected subagents', () => {
+  it('has the 12 expected subagents', () => {
     expect(agentNames.sort()).toEqual([
       'activities-scorer', 'competency-assessor', 'coursework-mapper', 'essay-scorer',
-      'experiences-scorer', 'meeting-todo-extractor', 'metrics-advisor', 'rec-letter-reviewer',
-      'secondary-regrader',
+      'experiences-scorer', 'meeting-todo-extractor', 'metrics-advisor', 'prompt-mapper',
+      'rec-letter-reviewer', 'school-fit-researcher', 'secondary-brainstormer', 'secondary-regrader',
     ])
   })
 

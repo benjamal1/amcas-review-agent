@@ -204,6 +204,12 @@ body {
 .prewrite__q { display: flex; gap: 6px; align-items: flex-start; margin-bottom: 6px; }
 .prewrite__q-input { flex: 1; resize: vertical; background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); padding: 6px 8px; font: inherit; font-size: 13px; line-height: 1.4; }
 .prewrite__doc { min-height: 360px; }
+.prewrite__head-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+/* in-app agent trigger buttons (brainstorm / research / map) */
+.agent-btn { background: color-mix(in oklch, var(--color-accent) 14%, transparent); color: var(--color-accent); border: 1px solid var(--color-accent); border-radius: var(--radius-sm); padding: 4px 10px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.agent-btn:hover { background: var(--color-accent); color: var(--color-bg); }
+.agent-btn--wide { display: block; width: 100%; margin-top: 8px; }
+.sec-research__actions { display: flex; gap: 6px; align-items: center; }
 /* per-school add-your-own-link */
 .sec-research__addlink { display: flex; gap: 6px; margin-top: 10px; }
 .sec-research__addlink input { background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); padding: 5px 8px; font-size: 12px; }

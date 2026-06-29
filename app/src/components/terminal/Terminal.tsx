@@ -7,7 +7,19 @@ import '../../styles/terminal.css'
 // Shared refs so GradeButtons can inject into the running session
 let _ws: WebSocket | null = null
 let _xterm: XTerm | null = null
+let _sessionActive = false
 export function getSharedTerminal() { return { ws: _ws, xterm: _xterm } }
+
+// Inject a trigger phrase into the shared terminal; starts `claude` first if no session is detected.
+export function injectPhrase(phrase: string) {
+  if (!_ws || _ws.readyState !== WebSocket.OPEN) { alert('Terminal not connected. Open the terminal panel.'); return }
+  if (!_sessionActive) {
+    _ws.send(JSON.stringify({ type: 'input', data: 'claude\n' }))
+    setTimeout(() => { if (_ws && _ws.readyState === WebSocket.OPEN) _ws.send(JSON.stringify({ type: 'input', data: phrase + '\n' })) }, 3000)
+    return
+  }
+  _ws.send(JSON.stringify({ type: 'input', data: phrase + '\n' }))
+}
 
 export function Terminal({ onSessionDetect }: { onSessionDetect?: (active: boolean) => void }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -34,9 +46,10 @@ export function Terminal({ onSessionDetect }: { onSessionDetect?: (active: boole
       ws.onmessage = e => {
         if (disposed) return
         xterm.write(e.data)
-        if (onSessionDetect && typeof e.data === 'string') {
+        if (typeof e.data === 'string') {
           // Detect active claude session by spinner chars or prompt
-          onSessionDetect(e.data.includes('✻') || e.data.includes('⠋') || e.data.includes('⠙'))
+          _sessionActive = e.data.includes('✻') || e.data.includes('⠋') || e.data.includes('⠙')
+          onSessionDetect?.(_sessionActive)
         }
       }
       ws.onclose = () => { if (!disposed) setTimeout(connect, 2000) }

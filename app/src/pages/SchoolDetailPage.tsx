@@ -5,7 +5,8 @@ import { useFiles } from '../hooks/useFiles'
 import { Editor } from '../components/editor/Editor'
 import { FileTree } from '../components/editor/FileTree'
 import { ScorecardSummary } from '../components/dashboard/ScorecardSummary'
-import { getSharedTerminal } from '../components/terminal/Terminal'
+import { injectPhrase } from '../components/terminal/Terminal'
+import { AgentButton } from '../components/terminal/AgentButton'
 import { schoolSlug, findSchoolBySlug } from '../lib/secondaries'
 import type { AppData, ComponentStatus, SchoolEntry, SchoolSecondary, SecondaryEssay } from '../lib/types'
 
@@ -80,7 +81,11 @@ export function SchoolResearchTab() {
       <section className="sec-research__prompts">
         <div className="tracker__schools-head">
           <h3 className="tracker__h">Prompts</h3>
-          <button onClick={addEssay}>+ Prompt</button>
+          <div className="sec-research__actions">
+            <AgentButton phrase={`research fit for ${school.name}`} label="✦ Research fit" />
+            <AgentButton phrase={`map secondary prompts for ${school.name}`} label="✦ Map prompts" />
+            <button onClick={addEssay}>+ Prompt</button>
+          </div>
         </div>
         <table className="tracker__table">
           <thead><tr><th>Prompt</th><th>Words</th><th>Maps to</th><th>Status</th><th></th></tr></thead>
@@ -164,13 +169,7 @@ export function SchoolGradingTab() {
   if (!school) return null
   const sc = school.secondary?.scorecard ?? null
 
-  function regrade(s: SchoolEntry) {
-    const { ws } = getSharedTerminal()
-    const phrase = `regrade secondaries for ${s.name}`
-    if (!ws || ws.readyState !== WebSocket.OPEN) { alert('Terminal not connected — open the terminal dock.'); return }
-    ws.send(JSON.stringify({ type: 'input', data: 'claude\n' }))
-    setTimeout(() => ws.send(JSON.stringify({ type: 'input', data: phrase + '\n' })), 1500)
-  }
+  const regrade = (s: SchoolEntry) => injectPhrase(`regrade secondaries for ${s.name}`)
 
   return (
     <div className="sec-school__body">
