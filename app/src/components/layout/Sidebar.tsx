@@ -35,8 +35,14 @@ const SECTIONS: { title: string; items: Item[] }[] = [
 
 export function Sidebar() {
   const { open, toggle } = useTerminalDock()
-  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({})
-  const flip = (t: string) => setCollapsed(c => ({ ...c, [t]: !c[t] }))
+  const [collapsed, setCollapsed] = useState<Record<string, boolean>>(() => {
+    try { return JSON.parse(localStorage.getItem('sidebar-collapsed') ?? '{}') } catch { return {} }
+  })
+  const flip = (t: string) => setCollapsed(c => {
+    const next = { ...c, [t]: !c[t] }
+    localStorage.setItem('sidebar-collapsed', JSON.stringify(next))
+    return next
+  })
   return (
     <nav className="sidebar" aria-label="Primary">
       <div className="sidebar__logo">AMCAS</div>
