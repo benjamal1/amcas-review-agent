@@ -117,6 +117,12 @@ export function ApplicationTrackerPage() {
     setDraft(null); setDirty(false)
   }
 
+  // Applicant's own metrics — school avg cells go green when the applicant is at/above.
+  const myGpa = data.scorecard?.hard_metrics?.gpa_cumulative
+  const myMcat = data.scorecard?.hard_metrics?.mcat_total
+  const atOrAbove = (mine?: number, school?: unknown) =>
+    typeof mine === 'number' && typeof school === 'number' && mine >= school
+
   // N/A components drop out of the denominator entirely.
   const tracked = COMPONENTS.filter(c => (draft.pc[c.key]?.status ?? 'not-started') !== 'not-applicable')
   const readyCount = tracked.filter(c => DONE.includes(draft.pc[c.key]?.status ?? 'not-started')).length
@@ -194,8 +200,8 @@ export function ApplicationTrackerPage() {
                     <td><input className="tracker__sm" value={s.tier ?? ''} placeholder="reach/target/safety" onChange={e => setSchool(i, { tier: e.target.value })} /></td>
                     <td><input className="tracker__xs" type="number" value={s.rank ?? ''} onChange={e => setSchool(i, { rank: e.target.value === '' ? undefined : Number(e.target.value) })} /></td>
                     <td><input className="tracker__sm" value={s.location ?? ''} onChange={e => setSchool(i, { location: e.target.value })} /></td>
-                    <td><input className="tracker__xs" type="number" step="0.01" value={(s.avg_gpa as number | undefined) ?? ''} onChange={e => setSchool(i, { avg_gpa: e.target.value === '' ? undefined : Number(e.target.value) })} /></td>
-                    <td><input className="tracker__xs" type="number" value={(s.avg_mcat as number | undefined) ?? ''} onChange={e => setSchool(i, { avg_mcat: e.target.value === '' ? undefined : Number(e.target.value) })} /></td>
+                    <td><input className={`tracker__xs${atOrAbove(myGpa, s.avg_gpa) ? ' tracker__above' : ''}`} type="number" step="0.01" value={(s.avg_gpa as number | undefined) ?? ''} onChange={e => setSchool(i, { avg_gpa: e.target.value === '' ? undefined : Number(e.target.value) })} /></td>
+                    <td><input className={`tracker__xs${atOrAbove(myMcat, s.avg_mcat) ? ' tracker__above' : ''}`} type="number" value={(s.avg_mcat as number | undefined) ?? ''} onChange={e => setSchool(i, { avg_mcat: e.target.value === '' ? undefined : Number(e.target.value) })} /></td>
                     <td>
                       <select value={s.status ?? 'pre-secondary'} data-status={s.status} onChange={e => setSchool(i, { status: e.target.value as SchoolStatus })}>
                         {SCHOOL_STATUS.map(st => <option key={st} value={st}>{S_LABEL[st]}</option>)}
