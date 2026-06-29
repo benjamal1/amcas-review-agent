@@ -1,6 +1,18 @@
 import { useState, useEffect, useCallback } from 'react'
+import { Link } from 'react-router-dom'
 import { useData } from '../hooks/useData'
+import { schoolSlug, schoolEssayProgress } from '../lib/secondaries'
 import type { SchoolEntry, SchoolStatus, ComponentStatus, PrimaryComponent, StatusEvent } from '../lib/types'
+
+const SUBMITTED_STAGES = ['secondary-submitted', 'interview-invited', 'interviewed', 'waitlisted', 'accepted', 'rejected', 'withdrawn']
+// Derive a school's secondary stage for the at-a-glance board.
+function secStage(s: SchoolEntry): { label: string; key: string } {
+  if (SUBMITTED_STAGES.includes(s.status ?? '')) return { label: 'Submitted', key: 'submitted' }
+  const { done, total } = schoolEssayProgress(s)
+  if (total > 0 && done === total) return { label: 'Ready', key: 'ready' }
+  if (total > 0 || s.secondary_received_date) return { label: 'In progress', key: 'drafting' }
+  return { label: 'Not started', key: 'not-started' }
+}
 
 // ── Primary application components ──
 const COMPONENTS: { key: string; label: string }[] = [
@@ -43,6 +55,8 @@ export function ApplicationTrackerPage() {
   const [draft, setDraft] = useState<Draft | null>(null)
   const [dirty, setDirty] = useState(false)
   const [newName, setNewName] = useState('')
+  const [openPrimary, setOpenPrimary] = useState(true)
+  const [openSecondary, setOpenSecondary] = useState(true)
 
   // Initialise / re-sync the local draft from persisted data.
   const initDraft = useCallback(() => {
@@ -127,6 +141,8 @@ export function ApplicationTrackerPage() {
   const tracked = COMPONENTS.filter(c => (draft.pc[c.key]?.status ?? 'not-started') !== 'not-applicable')
   const readyCount = tracked.filter(c => DONE.includes(draft.pc[c.key]?.status ?? 'not-started')).length
   const pct = tracked.length ? Math.round((readyCount / tracked.length) * 100) : 0
+  const secSubmitted = draft.schools.filter(s => secStage(s).key === 'submitted').length
+  const secPct = draft.schools.length ? Math.round((secSubmitted / draft.schools.length) * 100) : 0
 
   return (
     <div className="page page--single tracker">
@@ -142,10 +158,11 @@ export function ApplicationTrackerPage() {
 
       {/* ── Primary component board ── */}
       <section className="tracker__primary">
-        <div className="tracker__primary-head">
-          <h2 className="tracker__h">Primary Application</h2>
+        <button className="tracker__primary-head tracker__fold" onClick={() => setOpenPrimary(o => !o)} aria-expanded={openPrimary}>
+          <h2 className="tracker__h"><span className="sidebar__chevron">{openPrimary ? '▾' : '▸'}</span> Primary Application</h2>
           <span className="tracker__ready">{readyCount}/{tracked.length} ready</span>
-        </div>
+        </button>
+        {openPrimary && <>
         <div className="tracker__bar"><span className="tracker__bar-fill" style={{ width: `${pct}%` }} /></div>
         <ul className="tracker__components">
           {COMPONENTS.map(c => {
@@ -161,6 +178,32 @@ export function ApplicationTrackerPage() {
             )
           })}
         </ul>
+        </>}
+      </section>
+
+      {/* ── Secondaries progress board (per-school, read-only summary) ── */}
+      <section className="tracker__primary">
+        <button className="tracker__primary-head tracker__fold" onClick={() => setOpenSecondary(o => !o)} aria-expanded={openSecondary}>
+          <h2 className="tracker__h"><span className="sidebar__chevron">{openSecondary ? '▾' : '▸'}</span> Secondaries</h2>
+          <span className="tracker__ready">{secSubmitted}/{draft.schools.length} submitted</span>
+        </button>
+        {openSecondary && <>
+        <div className="tracker__bar"><span className="tracker__bar-fill" style={{ width: `${secPct}%` }} /></div>
+        <ul className="tracker__components">
+          {draft.schools.length === 0 && <li className="tracker__hint">No schools yet.</li>}
+          {draft.schools.map(s => {
+            const { done, total } = schoolEssayProgress(s)
+            const stage = secStage(s)
+            return (
+              <li key={s.name} className="tracker__comp tracker__sec-row">
+                <Link className="tracker__sec-link" to={`/secondaries/${schoolSlug(s.name)}`}>{s.name}</Link>
+                <span className="tracker__sec-essays">{done}/{total} essays</span>
+                <span className="tracker__pill" data-status={stage.key}>{stage.label}</span>
+              </li>
+            )
+          })}
+        </ul>
+        </>}
       </section>
 
       {/* ── Per-school grid ── */}

@@ -182,6 +182,22 @@ body {
 .tracker__reorder button:disabled { opacity: .25; cursor: default; }
 .tracker__rank-sort { background: var(--color-raised); color: var(--color-text); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); padding: 5px 12px; font-size: 12px; cursor: pointer; }
 .tracker__rank-sort:hover { border-color: var(--color-accent); color: var(--color-accent); }
+/* collapsible board headers */
+.tracker__fold { background: none; border: none; cursor: pointer; padding: 0; width: 100%; }
+.tracker__fold:hover .tracker__h { color: var(--color-accent); }
+/* secondaries per-school progress rows */
+.tracker__sec-row { grid-template-columns: 1fr 90px 110px; }
+.tracker__sec-link { font-size: 13px; color: var(--color-text); text-decoration: none; }
+.tracker__sec-link:hover { color: var(--color-accent); text-decoration: underline; }
+.tracker__sec-essays { font-size: 11px; color: var(--color-muted); font-family: var(--font-mono); }
+.tracker__sec-row .tracker__pill { justify-self: start; }
+/* per-school add-your-own-link */
+.sec-research__addlink { display: flex; gap: 6px; margin-top: 10px; }
+.sec-research__addlink input { background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); padding: 5px 8px; font-size: 12px; }
+.sec-research__addlink input:first-of-type { max-width: 150px; }
+.sec-research__addlink input:last-of-type { flex: 1; }
+.sec-research__addlink button { background: var(--color-accent); color: var(--color-bg); border: none; border-radius: var(--radius-sm); padding: 5px 12px; font-weight: 600; cursor: pointer; }
+.sec-research__links li { display: flex; align-items: center; gap: 8px; }
 .tracker__h { font-size: 13px; font-weight: 700; color: var(--color-text); margin-bottom: 10px; }
 .tracker__checklist { background: var(--color-raised); border: 1px solid var(--color-hairline); border-radius: var(--radius-md); padding: 14px 16px; }
 .tracker__cl-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px 18px; }

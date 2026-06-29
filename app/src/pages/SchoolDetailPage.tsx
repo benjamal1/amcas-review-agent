@@ -55,9 +55,20 @@ const RESOURCES = [
 // ── Research tab: why-us notes doc + prompts table + resource links ──
 export function SchoolResearchTab() {
   const { slug, school, editSecondary } = useSchool()
+  const [linkLabel, setLinkLabel] = useState('')
+  const [linkUrl, setLinkUrl] = useState('')
   if (!school) return null
   const sec = school.secondary ?? { essays: [] as SecondaryEssay[] }
   const notesPath = sec.research_notes_path ?? `documents/secondaries/${slug}/_research.md`
+  const admitSlug = school.admit_slug as string | undefined
+  const links = sec.links ?? []
+  const addLink = () => {
+    const url = linkUrl.trim()
+    if (!url) return
+    editSecondary(s => ({ ...s, links: [...(s.links ?? []), { label: linkLabel.trim() || url, url }] }))
+    setLinkLabel(''); setLinkUrl('')
+  }
+  const removeLink = (i: number) => editSecondary(s => ({ ...s, links: (s.links ?? []).filter((_, idx) => idx !== i) }))
 
   const setEssay = (i: number, patch: Partial<SecondaryEssay>) =>
     editSecondary(s => ({ ...s, essays: s.essays.map((e, idx) => idx === i ? { ...e, ...patch } : e) }))
@@ -90,10 +101,23 @@ export function SchoolResearchTab() {
             ))}
           </tbody>
         </table>
-        <p className="tracker__hint">Prior-year prompts strongly predict this year's — pull from the databases below.</p>
+        <p className="tracker__hint">Prior-year prompts strongly predict this year's — pull from the links below.</p>
         <ul className="sec-research__links">
+          {admitSlug && <li><a href={`https://med.admit.org/secondary-essays/${admitSlug}`} target="_blank" rel="noreferrer">admit.org — secondary prompts ↗</a></li>}
+          {admitSlug && <li><a href={`https://med.admit.org/school-rankings/${admitSlug}`} target="_blank" rel="noreferrer">admit.org — school page ↗</a></li>}
           {RESOURCES.map(r => <li key={r.url}><a href={r.url} target="_blank" rel="noreferrer">{r.label} ↗</a></li>)}
+          {links.map((l, i) => (
+            <li key={`c${i}`}>
+              <a href={l.url} target="_blank" rel="noreferrer">{l.label} ↗</a>
+              <button className="sec-research__del" onClick={() => removeLink(i)} title="Remove link">✕</button>
+            </li>
+          ))}
         </ul>
+        <div className="sec-research__addlink">
+          <input value={linkLabel} placeholder="Label (optional)" onChange={e => setLinkLabel(e.target.value)} />
+          <input value={linkUrl} placeholder="https://…" onChange={e => setLinkUrl(e.target.value)} onKeyDown={e => e.key === 'Enter' && addLink()} />
+          <button onClick={addLink}>+ Link</button>
+        </div>
       </section>
       <section className="sec-research__notes">
         <h3 className="tracker__h">Why-us notes</h3>

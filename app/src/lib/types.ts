@@ -50,6 +50,7 @@ export interface SchoolSecondary {
   research_notes_path?: string  // …/<school-slug>/_research.md
   prompt_source_year?: string   // e.g. "2025-2026 (prior-year)"
   essays: SecondaryEssay[]
+  links?: { label: string; url: string }[]  // user-added reference links for this school
   scorecard?: Scorecard         // full per-school recompute (primary baseline + these secondaries)
   last_regraded?: string
 }
