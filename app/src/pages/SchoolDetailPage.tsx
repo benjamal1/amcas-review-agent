@@ -88,13 +88,13 @@ export function SchoolResearchTab() {
           </div>
         </div>
         <table className="tracker__table">
-          <thead><tr><th>Prompt</th><th>Words</th><th>Maps to</th><th>Status</th><th></th></tr></thead>
+          <thead><tr><th>Prompt</th><th>Chars</th><th>Maps to</th><th>Status</th><th></th></tr></thead>
           <tbody>
             {sec.essays.length === 0 && <tr><td colSpan={5} className="tracker__empty">No prompts yet.</td></tr>}
             {sec.essays.map((e, i) => (
               <tr key={i}>
                 <td><input className="sec-research__prompt" value={e.prompt} placeholder="Prompt text…" onChange={ev => setEssay(i, { prompt: ev.target.value })} /></td>
-                <td><input className="tracker__xs" type="number" value={e.word_limit ?? ''} onChange={ev => setEssay(i, { word_limit: ev.target.value === '' ? undefined : Number(ev.target.value) })} /></td>
+                <td><input className="tracker__xs" type="number" value={e.char_limit ?? ''} onChange={ev => setEssay(i, { char_limit: ev.target.value === '' ? undefined : Number(ev.target.value) })} /></td>
                 <td>
                   <select className="tracker__sm" value={e.maps_to ?? ''} onChange={ev => setEssay(i, { maps_to: ev.target.value })}>
                     <option value="">—</option>

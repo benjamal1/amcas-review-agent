@@ -40,7 +40,7 @@ export interface SchoolEntry {
 // ── Secondaries ──
 // One school's secondary prompt + the draft answering it (maps to a bank archetype).
 export interface SecondaryEssay {
-  prompt: string; word_limit?: number
+  prompt: string; char_limit?: number
   maps_to?: string            // archetype key from the essay bank
   doc_path?: string           // content/documents/secondaries/<school-slug>/<n>.md
   status: ComponentStatus

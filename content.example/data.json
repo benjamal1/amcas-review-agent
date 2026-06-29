@@ -3,11 +3,31 @@
     "composite": null,
     "red_flag_count": 0,
     "domains": {
-      "personal_narrative":   { "avg": null, "trend": "→", "last_updated": "" },
-      "clinical_experience":  { "avg": null, "trend": "→", "last_updated": "" },
-      "research_academics":   { "avg": null, "trend": "→", "last_updated": "" },
-      "extracurriculars":     { "avg": null, "trend": "→", "last_updated": "" },
-      "service_community":    { "avg": null, "trend": "→", "last_updated": "" }
+      "personal_narrative": {
+        "avg": null,
+        "trend": "→",
+        "last_updated": ""
+      },
+      "clinical_experience": {
+        "avg": null,
+        "trend": "→",
+        "last_updated": ""
+      },
+      "research_academics": {
+        "avg": null,
+        "trend": "→",
+        "last_updated": ""
+      },
+      "extracurriculars": {
+        "avg": null,
+        "trend": "→",
+        "last_updated": ""
+      },
+      "service_community": {
+        "avg": null,
+        "trend": "→",
+        "last_updated": ""
+      }
     },
     "hard_metrics": {
       "gpa_cumulative": null,
@@ -20,30 +40,127 @@
     }
   },
   "competencies": [
-    { "name": "Service Orientation",          "score": null, "tier": null, "supported_by": [] },
-    { "name": "Social Skills",                "score": null, "tier": null, "supported_by": [] },
-    { "name": "Cultural Competence",          "score": null, "tier": null, "supported_by": [] },
-    { "name": "Teamwork",                     "score": null, "tier": null, "supported_by": [] },
-    { "name": "Oral Communication",           "score": null, "tier": null, "supported_by": [] },
-    { "name": "Ethical Responsibility",       "score": null, "tier": null, "supported_by": [] },
-    { "name": "Reliability and Dependability","score": null, "tier": null, "supported_by": [] },
-    { "name": "Resilience and Adaptability",  "score": null, "tier": null, "supported_by": [] },
-    { "name": "Capacity for Improvement",     "score": null, "tier": null, "supported_by": [] },
-    { "name": "Critical Thinking",            "score": null, "tier": null, "supported_by": [] },
-    { "name": "Quantitative Reasoning",       "score": null, "tier": null, "supported_by": [] },
-    { "name": "Scientific Inquiry",           "score": null, "tier": null, "supported_by": [] },
-    { "name": "Written Communication",        "score": null, "tier": null, "supported_by": [] },
-    { "name": "Living and Working with Others","score": null,"tier": null, "supported_by": [] },
-    { "name": "Empathy and Compassion",       "score": null, "tier": null, "supported_by": [] },
-    { "name": "Human Behavior",               "score": null, "tier": null, "supported_by": [] },
-    { "name": "Medical Knowledge",            "score": null, "tier": null, "supported_by": [] }
+    {
+      "name": "Service Orientation",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Social Skills",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Cultural Competence",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Teamwork",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Oral Communication",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Ethical Responsibility",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Reliability and Dependability",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Resilience and Adaptability",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Capacity for Improvement",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Critical Thinking",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Quantitative Reasoning",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Scientific Inquiry",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Written Communication",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Living and Working with Others",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Empathy and Compassion",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Human Behavior",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    },
+    {
+      "name": "Medical Knowledge",
+      "score": null,
+      "tier": null,
+      "supported_by": []
+    }
   ],
   "priorities": [],
-  "todos": { "open": [], "done": [] },
+  "todos": {
+    "open": [],
+    "done": []
+  },
   "component_scores": {
-    "personal_statement":   { "score": null, "last_scored": "" },
-    "activities":           { "score": null, "last_scored": "" },
-    "impactful_experience": { "score": null, "last_scored": "" }
+    "personal_statement": {
+      "score": null,
+      "last_scored": ""
+    },
+    "activities": {
+      "score": null,
+      "last_scored": ""
+    },
+    "impactful_experience": {
+      "score": null,
+      "last_scored": ""
+    }
   },
   "activity_entries": [],
   "rec_letters": [
@@ -72,24 +189,74 @@
         "research_notes_path": "documents/secondaries/school-name/_research.md",
         "prompt_source_year": "2025-2026 (prior-year)",
         "essays": [
-          { "prompt": "Why do you want to attend our school?", "word_limit": 300, "maps_to": "why-us", "status": "not-started" }
+          {
+            "prompt": "Why do you want to attend our school?",
+            "maps_to": "why-us",
+            "status": "not-started",
+            "char_limit": 300
+          }
         ]
       }
     }
   ],
   "coursework": [
-    { "name": "Organic Chemistry I", "subject": "Chemistry" }
+    {
+      "name": "Organic Chemistry I",
+      "subject": "Chemistry"
+    }
   ],
   "secondaries": {
     "brainstorm_path": "documents/secondaries/_brainstorm.md",
     "essay_bank": [
-      { "archetype": "adversity",  "label": "Adversity / Challenge / Failure", "doc_path": "documents/secondaries/_bank/adversity.md",  "status": "not-started", "pre_writable": true },
-      { "archetype": "leadership", "label": "Leadership",                       "doc_path": "documents/secondaries/_bank/leadership.md", "status": "not-started", "pre_writable": true },
-      { "archetype": "diversity",  "label": "Diversity / Contribution",         "doc_path": "documents/secondaries/_bank/diversity.md",  "status": "not-started", "pre_writable": true },
-      { "archetype": "service",    "label": "Community Service",                "doc_path": "documents/secondaries/_bank/service.md",    "status": "not-started", "pre_writable": true },
-      { "archetype": "research",   "label": "Research",                         "doc_path": "documents/secondaries/_bank/research.md",   "status": "not-started", "pre_writable": true },
-      { "archetype": "additional", "label": "Additional Info / Anything else",  "doc_path": "documents/secondaries/_bank/additional.md", "status": "not-started", "pre_writable": true },
-      { "archetype": "why-us",     "label": "Why Us",                           "doc_path": "documents/secondaries/_bank/why-us.md",     "status": "not-started", "pre_writable": false }
+      {
+        "archetype": "adversity",
+        "label": "Adversity / Challenge / Failure",
+        "doc_path": "documents/secondaries/_bank/adversity.md",
+        "status": "not-started",
+        "pre_writable": true
+      },
+      {
+        "archetype": "leadership",
+        "label": "Leadership",
+        "doc_path": "documents/secondaries/_bank/leadership.md",
+        "status": "not-started",
+        "pre_writable": true
+      },
+      {
+        "archetype": "diversity",
+        "label": "Diversity / Contribution",
+        "doc_path": "documents/secondaries/_bank/diversity.md",
+        "status": "not-started",
+        "pre_writable": true
+      },
+      {
+        "archetype": "service",
+        "label": "Community Service",
+        "doc_path": "documents/secondaries/_bank/service.md",
+        "status": "not-started",
+        "pre_writable": true
+      },
+      {
+        "archetype": "research",
+        "label": "Research",
+        "doc_path": "documents/secondaries/_bank/research.md",
+        "status": "not-started",
+        "pre_writable": true
+      },
+      {
+        "archetype": "additional",
+        "label": "Additional Info / Anything else",
+        "doc_path": "documents/secondaries/_bank/additional.md",
+        "status": "not-started",
+        "pre_writable": true
+      },
+      {
+        "archetype": "why-us",
+        "label": "Why Us",
+        "doc_path": "documents/secondaries/_bank/why-us.md",
+        "status": "not-started",
+        "pre_writable": false
+      }
     ]
   }
 }

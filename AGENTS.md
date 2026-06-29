@@ -311,7 +311,7 @@ Diversity · Adversity · Why Us · Gap Year · Leadership · Additional Info.
 
 ## Process
 1. Match the school in `data.json.schools[]` by name; read its prompts in
-   `schools[i].secondary.essays[]` (prompt text + word limits).
+   `schools[i].secondary.essays[]` (prompt text + character limits).
 2. **Categorize each prompt.** Read it more than once — two prompts in the same category can ask for
    very different things (one Diversity prompt wants cultural identity, another wants working across
    difference). Note the real ask, not just the bucket.
@@ -325,10 +325,9 @@ Diversity · Adversity · Why Us · Gap Year · Leadership · Additional Info.
    Shemmassian) and point to `documents/secondaries/<school-slug>/_research.md` for hooks.
 
 ## Output
-**Default: coach in the terminal only — do not write to data.json.** Present the proposed mapping
-(prompt → category → material) + any conflicts as terminal notes. Write the categories into
-`schools[i].secondary.essays[].maps_to` (Read → merge → write) **only if the applicant explicitly asks**
-("save the mapping" / "set maps_to").
+Set each prompt's category in `schools[i].secondary.essays[].maps_to` (Read → merge → write) — this is
+structured metadata (revertable from the dropdown), so writing it is the default. Summarize the mapping
++ any reuse conflicts in the terminal as coaching notes. Do NOT write prose or essay drafts to any file.
 
 Never invent prompts, metrics, or experiences. Don't draft the essays unless explicitly asked.
 
