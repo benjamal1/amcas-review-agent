@@ -22,8 +22,9 @@ De-personalized — "the applicant," never a name.
    the applicant knows how to use that school's specific resources.
 
 ## Output
-Append candidates to `$CONTENT_DIR/documents/secondaries/<school-slug>/_research.md` (slug = kebab-cased
-name; create the file/dir if missing). Keep them clearly marked as research notes + sources — append,
-never overwrite. Summarize the strongest 3–5 hooks in the terminal.
+**Default: coach in the terminal only — do not write any file.** Summarize the strongest 3–5 fit hooks
++ their sources as terminal notes. Write to `$CONTENT_DIR/documents/secondaries/<school-slug>/_research.md`
+**only if the applicant explicitly asks** ("save these to my research notes" / "add to _research.md") —
+then append (never overwrite), clearly marked as research notes + sources, creating the file/dir if missing.
 
 Never invent school facts or applicant experiences. Don't draft the essay unless explicitly asked.

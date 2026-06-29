@@ -27,7 +27,9 @@ Diversity · Adversity · Why Us · Gap Year · Leadership · Additional Info.
    Shemmassian) and point to `documents/secondaries/<school-slug>/_research.md` for hooks.
 
 ## Output
-Set each prompt's `schools[i].secondary.essays[].maps_to` to its category in `data.json`
-(Read → merge → write). Summarize the mapping + any conflicts in the terminal as coaching notes.
+**Default: coach in the terminal only — do not write to data.json.** Present the proposed mapping
+(prompt → category → material) + any conflicts as terminal notes. Write the categories into
+`schools[i].secondary.essays[].maps_to` (Read → merge → write) **only if the applicant explicitly asks**
+("save the mapping" / "set maps_to").
 
 Never invent prompts, metrics, or experiences. Don't draft the essays unless explicitly asked.

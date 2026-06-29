@@ -325,8 +325,10 @@ Diversity · Adversity · Why Us · Gap Year · Leadership · Additional Info.
    Shemmassian) and point to `documents/secondaries/<school-slug>/_research.md` for hooks.
 
 ## Output
-Set each prompt's `schools[i].secondary.essays[].maps_to` to its category in `data.json`
-(Read → merge → write). Summarize the mapping + any conflicts in the terminal as coaching notes.
+**Default: coach in the terminal only — do not write to data.json.** Present the proposed mapping
+(prompt → category → material) + any conflicts as terminal notes. Write the categories into
+`schools[i].secondary.essays[].maps_to` (Read → merge → write) **only if the applicant explicitly asks**
+("save the mapping" / "set maps_to").
 
 Never invent prompts, metrics, or experiences. Don't draft the essays unless explicitly asked.
 
@@ -377,9 +379,10 @@ De-personalized — "the applicant," never a name.
    the applicant knows how to use that school's specific resources.
 
 ## Output
-Append candidates to `$CONTENT_DIR/documents/secondaries/<school-slug>/_research.md` (slug = kebab-cased
-name; create the file/dir if missing). Keep them clearly marked as research notes + sources — append,
-never overwrite. Summarize the strongest 3–5 hooks in the terminal.
+**Default: coach in the terminal only — do not write any file.** Summarize the strongest 3–5 fit hooks
++ their sources as terminal notes. Write to `$CONTENT_DIR/documents/secondaries/<school-slug>/_research.md`
+**only if the applicant explicitly asks** ("save these to my research notes" / "add to _research.md") —
+then append (never overwrite), clearly marked as research notes + sources, creating the file/dir if missing.
 
 Never invent school facts or applicant experiences. Don't draft the essay unless explicitly asked.
 
