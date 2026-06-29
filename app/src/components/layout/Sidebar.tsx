@@ -26,8 +26,7 @@ const SECTIONS: { title: string; items: Item[] }[] = [
   ] },
   { title: 'Secondaries', items: [
     { to: '/secondaries', label: 'Overview', end: true },
-    { to: '/secondaries/brainstorm', label: 'Brainstorming' },
-    { to: '/secondaries/bank', label: 'Essay Bank' },
+    { to: '/secondaries/prewriting', label: 'Prewriting' },
   ] },
 ]
 

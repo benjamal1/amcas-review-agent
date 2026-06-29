@@ -195,6 +195,15 @@ body {
 .tracker__nested-head { display: flex; align-items: center; gap: 6px; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--color-muted); }
 .tracker__nested-head:hover { color: var(--color-accent); }
 .tracker__nested .tracker__components { margin-top: 8px; padding-left: 6px; }
+/* prewriting detail pane */
+.prewrite__head { margin-bottom: 8px; }
+.prewrite__qs { border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 12px; }
+.prewrite__qs-head { display: flex; justify-content: space-between; align-items: center; font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 8px; }
+.prewrite__qs-head button { background: none; border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); color: var(--color-text); padding: 2px 8px; font-size: 11px; cursor: pointer; }
+.prewrite__qs-head button:hover { border-color: var(--color-accent); color: var(--color-accent); }
+.prewrite__q { display: flex; gap: 6px; align-items: flex-start; margin-bottom: 6px; }
+.prewrite__q-input { flex: 1; resize: vertical; background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); padding: 6px 8px; font: inherit; font-size: 13px; line-height: 1.4; }
+.prewrite__doc { min-height: 360px; }
 /* per-school add-your-own-link */
 .sec-research__addlink { display: flex; gap: 6px; margin-top: 10px; }
 .sec-research__addlink input { background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); padding: 5px 8px; font-size: 12px; }

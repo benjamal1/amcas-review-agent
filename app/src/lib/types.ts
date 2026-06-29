@@ -61,6 +61,7 @@ export interface BankEssay {
   doc_path: string            // content/documents/secondaries/_bank/<archetype>.md
   status: ComponentStatus
   pre_writable?: boolean      // false for "why us" (anchor + per-school only)
+  guiding_questions?: string[] // Shemmassian brainstorm prompts for this category (editable)
 }
 export interface Secondaries {
   brainstorm_path?: string    // content/documents/secondaries/_brainstorm.md

@@ -27,10 +27,24 @@ export const ARCHETYPE_CATALOG: { archetype: string; label: string; pre_writable
   { archetype: 'anti-racism', label: 'Anti-racism / Advocacy',           pre_writable: true },
 ]
 
+// Shemmassian's 6 prompt categories — seeded by default; the rest of the catalog stays addable.
+export const CORE_ARCHETYPES = ['diversity', 'adversity', 'why-us', 'gap-year', 'leadership', 'additional']
+
+// Default brainstorm question(s) per category (each freewrite answers its category's question).
+export const GUIDING_QUESTIONS: Record<string, string[]> = {
+  diversity: ['What elements of my upbringing shaped my identity, and how have I interacted with people from different backgrounds?'],
+  adversity: ["What are the most difficult challenges I've faced, how did I overcome them, and how did they shape me?"],
+  'why-us': ['Why am I applying to medical school? (Layer school-specific reasons in per school.)'],
+  'gap-year': ['Why did I take a gap year, and how did I grow during that time?'],
+  leadership: ['What is my leadership style, and where have I demonstrated it?'],
+  additional: ["What significant experiences, skills, or interests haven't I written about yet?"],
+}
+
 export const newBankEssay = (archetype: string, label: string, pre_writable: boolean): BankEssay => ({
   archetype, label, pre_writable,
   doc_path: `documents/secondaries/_bank/${archetype}.md`,
   status: 'not-started',
+  guiding_questions: GUIDING_QUESTIONS[archetype] ?? [],
 })
 
 // ── Essay-status rollups (progress dashboards) ──
