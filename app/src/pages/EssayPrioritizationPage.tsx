@@ -10,6 +10,9 @@ interface EssayRow {
   reuse: number
 }
 
+// admit.org recurrence-likelihood tiers (used for the Chance column colour).
+const chanceTier = (c: number) => (c >= 90 ? 't1' : c >= 60 ? 't2' : c >= 49 ? 't3' : 't4')
+
 export function EssayPrioritizationPage() {
   const { data, loading } = useData()
 
@@ -24,23 +27,26 @@ export function EssayPrioritizationPage() {
     }
   }
 
-  // Reuse = distinct school count per maps_to theme
-  const themeSchools = new Map<string, Set<string>>()
+  // Expected reuse per theme = Σ over distinct schools of (that school's prompt chance / 100).
+  // Unknown chance is treated as full weight (100) so a missing scrape doesn't bury a theme;
+  // confirmed prompts carry 100. So a theme covering 5 schools at ~99% outranks 6 at ~30%.
+  const themeChance = new Map<string, Map<string, number>>() // theme -> school -> best chance (0–100)
   for (const school of data.schools) {
     if (!school.secondary?.essays?.length) continue
     for (const essay of school.secondary.essays) {
       if (!essay.maps_to) continue
-      if (!themeSchools.has(essay.maps_to)) themeSchools.set(essay.maps_to, new Set())
-      themeSchools.get(essay.maps_to)!.add(school.name)
+      const w = themeChance.get(essay.maps_to) ?? new Map<string, number>()
+      themeChance.set(essay.maps_to, w)
+      const c = essay.chance ?? 100
+      w.set(school.name, Math.max(w.get(school.name) ?? 0, c))
     }
   }
+  const expectedReuse = (theme?: string) =>
+    theme ? [...(themeChance.get(theme)?.values() ?? [])].reduce((s, c) => s + c / 100, 0) : 0
 
-  const rows: EssayRow[] = rawRows.map(r => ({
-    ...r,
-    reuse: r.essay.maps_to ? (themeSchools.get(r.essay.maps_to)?.size ?? 0) : 0,
-  }))
+  const rows: EssayRow[] = rawRows.map(r => ({ ...r, reuse: expectedReuse(r.essay.maps_to) }))
 
-  // Sort: reuse DESC, then theme label; unmapped (reuse 0) naturally last
+  // Sort: expected-reuse DESC, then theme label; unmapped (reuse 0) naturally last
   rows.sort((a, b) => {
     if (b.reuse !== a.reuse) return b.reuse - a.reuse
     return mapsLabel(a.essay.maps_to).localeCompare(mapsLabel(b.essay.maps_to))
@@ -62,13 +68,14 @@ export function EssayPrioritizationPage() {
               <th>Received</th>
               <th>Due</th>
               <th>Status</th>
-              <th>Reuse</th>
+              <th title="Expected reuse = sum of each covered school's recurrence chance">Reuse</th>
+              <th>Chance</th>
             </tr>
           </thead>
           <tbody>
             {rows.length === 0 && (
               <tr>
-                <td colSpan={9} className="tracker__empty">
+                <td colSpan={10} className="tracker__empty">
                   No essays yet — add prompts via a school's detail page.
                 </td>
               </tr>
@@ -87,7 +94,10 @@ export function EssayPrioritizationPage() {
                 <td>{r.received ? `Yes · ${r.received}` : '—'}</td>
                 <td>{r.received ? plusDays(r.received, 14) : '—'}</td>
                 <td>{r.essay.status}</td>
-                <td>{r.reuse}</td>
+                <td>{r.reuse.toFixed(1)}</td>
+                <td>{r.essay.chance != null
+                  ? <span className={`ep-chance ep-chance--${chanceTier(r.essay.chance)}`}>{r.essay.chance}%</span>
+                  : '—'}</td>
               </tr>
             ))}
           </tbody>

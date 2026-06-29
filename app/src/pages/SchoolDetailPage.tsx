@@ -8,6 +8,7 @@ import { ScorecardSummary } from '../components/dashboard/ScorecardSummary'
 import { injectPhrase } from '../components/terminal/Terminal'
 import { AgentButton } from '../components/terminal/AgentButton'
 import { schoolSlug, findSchoolBySlug, ARCHETYPE_CATALOG, archetypeLabel as mapsLabel } from '../lib/secondaries'
+import { plusDays } from '../lib/format'
 import type { AppData, ComponentStatus, SchoolEntry, SchoolSecondary, SecondaryEssay } from '../lib/types'
 
 const STATUSES: ComponentStatus[] = ['not-started', 'drafting', 'under-review', 'final-edits', 'ready', 'submitted']
@@ -243,7 +244,7 @@ export function SchoolEditorTab() {
       <main className="editor-view__main">
         {active ? (
           <>
-            <PromptHeader essay={active} />
+            <PromptHeader essay={active} received={school?.secondary_received_date} />
             <div className="editor-view__doc"><Editor filePath={docPath} /></div>
           </>
         ) : <p className="tracker__hint">Select a prompt to write.</p>}
@@ -253,7 +254,7 @@ export function SchoolEditorTab() {
 }
 
 // Prompt text + meta above the editor, with the mapped category's prewriting available inline.
-function PromptHeader({ essay }: { essay: SecondaryEssay }) {
+function PromptHeader({ essay, received }: { essay: SecondaryEssay; received?: string }) {
   const [showPrewrite, setShowPrewrite] = useState(false)
   const bankPath = essay.maps_to ? `documents/secondaries/_bank/${essay.maps_to}.md` : null
   return (
@@ -263,6 +264,7 @@ function PromptHeader({ essay }: { essay: SecondaryEssay }) {
         <div className="sec-editor__prompt-meta">
           <span className={`prompt-type prompt-type--${essay.confirmed ? 'confirmed' : 'anticipated'}`}>{essay.confirmed ? 'Confirmed' : 'Anticipated'}</span>
           {essay.char_limit ? <span className="sec-editor__chars">{essay.char_limit} chars</span> : null}
+          {received ? <span className="sec-editor__chars">due {plusDays(received, 14)}</span> : null}
         </div>
       </div>
       {bankPath && (

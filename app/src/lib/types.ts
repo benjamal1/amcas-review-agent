@@ -45,6 +45,7 @@ export interface SecondaryEssay {
   doc_path?: string           // content/documents/secondaries/<school-slug>/<n>.md
   status: ComponentStatus
   confirmed?: boolean         // true = this year's confirmed prompt; false/undefined = anticipated (prior-year)
+  chance?: number             // admit.org % likelihood this prompt recurs this cycle (confirmed = 100)
 }
 // Per-school secondary block: research notes, prompts/essays, and the school-specific regrade.
 export interface SchoolSecondary {
