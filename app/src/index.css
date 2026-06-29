@@ -104,7 +104,7 @@ body {
   color: var(--color-accent);
   padding: 4px 8px 14px;
 }
-.sidebar__sections { display: flex; flex-direction: column; gap: 8px; overflow-y: auto; }
+.sidebar__sections { display: flex; flex-direction: column; gap: 8px; flex: 1 1 auto; min-height: 0; overflow-y: auto; }
 .sidebar__section-title { display: flex; align-items: center; gap: 6px; width: 100%; background: none; border: none; cursor: pointer; text-align: left; font-size: 9px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--color-muted); padding: 4px 10px; }
 .sidebar__section-title:hover { color: var(--color-text); }
 .sidebar__chevron { font-size: 8px; width: 8px; display: inline-block; }
