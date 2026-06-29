@@ -44,6 +44,7 @@ export interface SecondaryEssay {
   maps_to?: string            // archetype key from the essay bank
   doc_path?: string           // content/documents/secondaries/<school-slug>/<n>.md
   status: ComponentStatus
+  confirmed?: boolean         // true = this year's confirmed prompt; false/undefined = anticipated (prior-year)
 }
 // Per-school secondary block: research notes, prompts/essays, and the school-specific regrade.
 export interface SchoolSecondary {

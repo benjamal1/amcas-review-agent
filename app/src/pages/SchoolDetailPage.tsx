@@ -97,14 +97,15 @@ function PromptsTable({ essays, onSave }: { essays: SecondaryEssay[]; onSave: (e
         <div className="sec-research__bar">
           <button onClick={start}>✎ Edit prompts</button>
         </div>
-        <table className="tracker__table">
-          <thead><tr><th>Prompt</th><th>Chars</th><th>Maps to</th><th>Status</th></tr></thead>
+        <table className="tracker__table tracker__table--prompts">
+          <thead><tr><th>Prompt</th><th>Chars</th><th>Type</th><th>Maps to</th><th>Status</th></tr></thead>
           <tbody>
-            {essays.length === 0 && <tr><td colSpan={4} className="tracker__empty">No prompts yet — Edit to add.</td></tr>}
+            {essays.length === 0 && <tr><td colSpan={5} className="tracker__empty">No prompts yet — Edit to add.</td></tr>}
             {essays.map((e, i) => (
               <tr key={i} onClick={start} title="Click to edit">
                 <td>{e.prompt || <span className="tracker__empty">—</span>}</td>
                 <td>{e.char_limit ?? '—'}</td>
+                <td><span className={`prompt-type prompt-type--${e.confirmed ? 'confirmed' : 'anticipated'}`}>{e.confirmed ? 'Confirmed' : 'Anticipated'}</span></td>
                 <td>{mapsLabel(e.maps_to)}</td>
                 <td><span className="tracker__pill" data-status={e.status}>{e.status}</span></td>
               </tr>
@@ -122,13 +123,19 @@ function PromptsTable({ essays, onSave }: { essays: SecondaryEssay[]; onSave: (e
         <button onClick={cancel}>Cancel</button>
         <button className="prewrite__save" onClick={save}>Save</button>
       </div>
-      <table className="tracker__table">
-        <thead><tr><th>Prompt</th><th>Chars</th><th>Maps to</th><th>Status</th><th></th></tr></thead>
+      <table className="tracker__table tracker__table--prompts">
+        <thead><tr><th>Prompt</th><th>Chars</th><th>Type</th><th>Maps to</th><th>Status</th><th></th></tr></thead>
         <tbody>
           {draft.map((e, i) => (
             <tr key={i}>
-              <td><input className="sec-research__prompt" value={e.prompt} placeholder="Prompt text…" onChange={ev => setE(i, { prompt: ev.target.value })} /></td>
+              <td><textarea className="sec-research__prompt" rows={2} value={e.prompt} placeholder="Prompt text…" onChange={ev => setE(i, { prompt: ev.target.value })} /></td>
               <td><input className="tracker__xs" type="number" value={e.char_limit ?? ''} onChange={ev => setE(i, { char_limit: ev.target.value === '' ? undefined : Number(ev.target.value) })} /></td>
+              <td>
+                <select className="tracker__sm" value={e.confirmed ? 'confirmed' : 'anticipated'} onChange={ev => setE(i, { confirmed: ev.target.value === 'confirmed' })}>
+                  <option value="anticipated">Anticipated</option>
+                  <option value="confirmed">Confirmed</option>
+                </select>
+              </td>
               <td>
                 <select className="tracker__sm" value={e.maps_to ?? ''} onChange={ev => setE(i, { maps_to: ev.target.value })}>
                   <option value="">—</option>

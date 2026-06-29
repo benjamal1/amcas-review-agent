@@ -220,6 +220,19 @@ body {
 .sec-research__bar .prewrite__save:hover { color: var(--color-bg); }
 .sec-research__prompts .tracker__table tbody tr[title] { cursor: pointer; }
 .sec-research__prompts .tracker__table tbody tr[title]:hover { background: color-mix(in oklch, var(--color-accent) 8%, transparent); }
+/* prompts table: fixed layout so long prompt text wraps instead of pushing the page wide */
+.tracker__table--prompts { table-layout: fixed; width: 100%; }
+.tracker__table--prompts td, .tracker__table--prompts th { overflow: hidden; text-overflow: ellipsis; }
+.tracker__table--prompts td:first-child, .tracker__table--prompts th:first-child { white-space: normal; word-break: break-word; }
+.tracker__table--prompts th:nth-child(2), .tracker__table--prompts td:nth-child(2) { width: 56px; }
+.tracker__table--prompts th:nth-child(3), .tracker__table--prompts td:nth-child(3) { width: 104px; }
+.tracker__table--prompts th:nth-child(4), .tracker__table--prompts td:nth-child(4) { width: 116px; }
+.tracker__table--prompts th:nth-child(5), .tracker__table--prompts td:nth-child(5) { width: 116px; }
+.tracker__table--prompts th:nth-child(6), .tracker__table--prompts td:nth-child(6) { width: 30px; }
+.sec-research__prompt { width: 100%; resize: vertical; background: var(--color-bg); color: var(--color-text); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); padding: 5px 7px; font: inherit; font-size: 12px; line-height: 1.4; }
+.prompt-type { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
+.prompt-type--confirmed { color: var(--color-pos); background: color-mix(in oklch, var(--color-pos) 14%, transparent); }
+.prompt-type--anticipated { color: var(--color-muted); background: color-mix(in oklch, var(--color-muted) 14%, transparent); }
 /* in-app agent trigger buttons (brainstorm / research / map) */
 .agent-btn { background: color-mix(in oklch, var(--color-accent) 14%, transparent); color: var(--color-accent); border: 1px solid var(--color-accent); border-radius: var(--radius-sm); padding: 4px 10px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
 .agent-btn:hover { background: var(--color-accent); color: var(--color-bg); }
