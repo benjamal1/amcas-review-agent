@@ -30,14 +30,49 @@ export const ARCHETYPE_CATALOG: { archetype: string; label: string; pre_writable
 // Shemmassian's 6 prompt categories — seeded by default; the rest of the catalog stays addable.
 export const CORE_ARCHETYPES = ['diversity', 'adversity', 'why-us', 'gap-year', 'leadership', 'additional']
 
-// Default brainstorm question(s) per category (each freewrite answers its category's question).
+// Default brainstorm questions per category, pulled from the Shemmassian secondary-essay videos.
+// Freewrite against each — 10–15 min, no self-editing.
 export const GUIDING_QUESTIONS: Record<string, string[]> = {
-  diversity: ['What elements of my upbringing shaped my identity, and how have I interacted with people from different backgrounds?'],
-  adversity: ["What are the most difficult challenges I've faced, how did I overcome them, and how did they shape me?"],
-  'why-us': ['Why am I applying to medical school? (Layer school-specific reasons in per school.)'],
-  'gap-year': ['Why did I take a gap year, and how did I grow during that time?'],
-  leadership: ['What is my leadership style, and where have I demonstrated it?'],
-  additional: ["What significant experiences, skills, or interests haven't I written about yet?"],
+  diversity: [
+    'List your identities — ethnic, cultural, religious, geographic, hobby-based. Where does your sense of identity come from?',
+    'How do you engage with the communities tied to those identities? What is rewarding or challenging? Give specific examples.',
+    'List quirks, unexpected traits, or characteristics that make you you. How do others perceive them?',
+    'Describe times you worked or communicated with someone whose worldview differed significantly. What approaches did you use, and what did you learn?',
+  ],
+  adversity: [
+    'List 3+ times you failed to complete a task or reach a goal.',
+    'List 3+ times you fell short of your own expectations.',
+    "List 3+ times you fell short of someone else's expectations.",
+    'List 3+ times you had to actively resolve a conflict or significant issue.',
+    'For each: what emotions did you feel? who did you go to for support? what actions did you take? what skills or insights did you gain, and how will they apply in med school and as a physician?',
+  ],
+  'why-us': [
+    'Why am I applying to medical school?',
+    'List 3+ courses or academic tracks you want to pursue at this school.',
+    'List 3+ faculty research projects that interest you.',
+    'List 3+ clinical or community-service programs you want to join.',
+    'How does each connect to your prior experiences and future goals — and what makes it unique vs. other schools?',
+    'Name 3 ways you could give back to the school community through those opportunities.',
+  ],
+  'gap-year': [
+    'Why did I take a gap year (or years), and how did I grow during that time?',
+    "What did I accomplish or learn that I couldn't have while in school?",
+    'How does that time strengthen my readiness for medical school and medicine?',
+  ],
+  leadership: [
+    'What is my leadership style, and where have I demonstrated it (formal and informal)?',
+    'For each experience: what were your responsibilities and your plan?',
+    'What obstacles arose, and how did you overcome them?',
+    'What was the outcome, and what did you learn?',
+    'How does it apply to medicine?',
+  ],
+  additional: [
+    "What significant experiences, skills, or interests haven't I written about yet?",
+    'Which 2–3 meaningful activities deserve more depth than the work/activities section allowed?',
+    'Are there academic or extracurricular gaps to explain — only if the impact was significant (illness, hardship, loss)?',
+    'Do non-medical experiences (growing up abroad, sports, arts, cultural work) connect explicitly to skills that make me a better physician?',
+    'Does anything I wrote for other schools apply here but hasn’t been shared yet?',
+  ],
 }
 
 export const newBankEssay = (archetype: string, label: string, pre_writable: boolean): BankEssay => ({

@@ -25,8 +25,8 @@ const SECTIONS: { title: string; items: Item[] }[] = [
     { to: '/score-history', label: 'Score History' },
   ] },
   { title: 'Secondaries', items: [
-    { to: '/secondaries', label: 'Overview', end: true },
     { to: '/secondaries/prewriting', label: 'Prewriting' },
+    { to: '/secondaries', label: 'Schools', end: true },
   ] },
 ]
 

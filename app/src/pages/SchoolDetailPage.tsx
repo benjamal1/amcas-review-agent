@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { NavLink, Outlet, useParams } from 'react-router-dom'
 import { useData } from '../hooks/useData'
 import { useFiles } from '../hooks/useFiles'
+import { useEditSave } from '../hooks/useEditSave'
 import { Editor } from '../components/editor/Editor'
 import { FileTree } from '../components/editor/FileTree'
 import { ScorecardSummary } from '../components/dashboard/ScorecardSummary'
@@ -54,27 +55,14 @@ const RESOURCES = [
 ]
 
 // ── Research tab: why-us notes doc + prompts table + resource links ──
+const mapsLabel = (key?: string) => ARCHETYPE_CATALOG.find(a => a.archetype === key)?.label ?? key ?? '—'
+
 export function SchoolResearchTab() {
   const { slug, school, editSecondary } = useSchool()
-  const [linkLabel, setLinkLabel] = useState('')
-  const [linkUrl, setLinkUrl] = useState('')
   if (!school) return null
   const sec = school.secondary ?? { essays: [] as SecondaryEssay[] }
   const notesPath = sec.research_notes_path ?? `documents/secondaries/${slug}/_research.md`
   const admitSlug = school.admit_slug as string | undefined
-  const links = sec.links ?? []
-  const addLink = () => {
-    const url = linkUrl.trim()
-    if (!url) return
-    editSecondary(s => ({ ...s, links: [...(s.links ?? []), { label: linkLabel.trim() || url, url }] }))
-    setLinkLabel(''); setLinkUrl('')
-  }
-  const removeLink = (i: number) => editSecondary(s => ({ ...s, links: (s.links ?? []).filter((_, idx) => idx !== i) }))
-
-  const setEssay = (i: number, patch: Partial<SecondaryEssay>) =>
-    editSecondary(s => ({ ...s, essays: s.essays.map((e, idx) => idx === i ? { ...e, ...patch } : e) }))
-  const addEssay = () => editSecondary(s => ({ ...s, essays: [...s.essays, { prompt: '', status: 'not-started' }] }))
-  const removeEssay = (i: number) => editSecondary(s => ({ ...s, essays: s.essays.filter((_, idx) => idx !== i) }))
 
   return (
     <div className="sec-school__body sec-research">
@@ -84,56 +72,126 @@ export function SchoolResearchTab() {
           <div className="sec-research__actions">
             <AgentButton phrase={`research fit for ${school.name}`} label="✦ Research fit" />
             <AgentButton phrase={`map secondary prompts for ${school.name}`} label="✦ Map prompts" />
-            <button onClick={addEssay}>+ Prompt</button>
           </div>
         </div>
-        <table className="tracker__table">
-          <thead><tr><th>Prompt</th><th>Chars</th><th>Maps to</th><th>Status</th><th></th></tr></thead>
-          <tbody>
-            {sec.essays.length === 0 && <tr><td colSpan={5} className="tracker__empty">No prompts yet.</td></tr>}
-            {sec.essays.map((e, i) => (
-              <tr key={i}>
-                <td><input className="sec-research__prompt" value={e.prompt} placeholder="Prompt text…" onChange={ev => setEssay(i, { prompt: ev.target.value })} /></td>
-                <td><input className="tracker__xs" type="number" value={e.char_limit ?? ''} onChange={ev => setEssay(i, { char_limit: ev.target.value === '' ? undefined : Number(ev.target.value) })} /></td>
-                <td>
-                  <select className="tracker__sm" value={e.maps_to ?? ''} onChange={ev => setEssay(i, { maps_to: ev.target.value })}>
-                    <option value="">—</option>
-                    {ARCHETYPE_CATALOG.map(a => <option key={a.archetype} value={a.archetype}>{a.label}</option>)}
-                  </select>
-                </td>
-                <td>
-                  <select data-status={e.status} value={e.status} onChange={ev => setEssay(i, { status: ev.target.value as ComponentStatus })}>
-                    {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
-                  </select>
-                </td>
-                <td><button className="sec-research__del" onClick={() => removeEssay(i)} title="Remove">✕</button></td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+        <PromptsTable essays={sec.essays} onSave={essays => editSecondary(s => ({ ...s, essays }))} />
         <p className="tracker__hint">Prior-year prompts strongly predict this year's — pull from the links below.</p>
-        <ul className="sec-research__links">
-          {admitSlug && <li><a href={`https://med.admit.org/secondary-essays/${admitSlug}`} target="_blank" rel="noreferrer">admit.org — secondary prompts ↗</a></li>}
-          {admitSlug && <li><a href={`https://med.admit.org/school-rankings/${admitSlug}`} target="_blank" rel="noreferrer">admit.org — school page ↗</a></li>}
-          {RESOURCES.map(r => <li key={r.url}><a href={r.url} target="_blank" rel="noreferrer">{r.label} ↗</a></li>)}
-          {links.map((l, i) => (
-            <li key={`c${i}`}>
-              <a href={l.url} target="_blank" rel="noreferrer">{l.label} ↗</a>
-              <button className="sec-research__del" onClick={() => removeLink(i)} title="Remove link">✕</button>
-            </li>
-          ))}
-        </ul>
-        <div className="sec-research__addlink">
-          <input value={linkLabel} placeholder="Label (optional)" onChange={e => setLinkLabel(e.target.value)} />
-          <input value={linkUrl} placeholder="https://…" onChange={e => setLinkUrl(e.target.value)} onKeyDown={e => e.key === 'Enter' && addLink()} />
-          <button onClick={addLink}>+ Link</button>
-        </div>
+        <ResearchLinks admitSlug={admitSlug} links={sec.links ?? []} onSave={ls => editSecondary(s => ({ ...s, links: ls }))} />
       </section>
       <section className="sec-research__notes">
         <h3 className="tracker__h">Why-us notes</h3>
         <div className="editor-view__doc"><Editor filePath={notesPath} /></div>
       </section>
     </div>
+  )
+}
+
+// Prompts: clean read-only table; "Edit" to revise rows + Save/Cancel.
+function PromptsTable({ essays, onSave }: { essays: SecondaryEssay[]; onSave: (e: SecondaryEssay[]) => void }) {
+  const { editing, draft, setDraft, start, cancel, save } = useEditSave(essays, onSave)
+  const setE = (i: number, p: Partial<SecondaryEssay>) => setDraft(draft.map((e, idx) => idx === i ? { ...e, ...p } : e))
+
+  if (!editing) {
+    return (
+      <>
+        <div className="sec-research__bar">
+          <button onClick={start}>✎ Edit prompts</button>
+        </div>
+        <table className="tracker__table">
+          <thead><tr><th>Prompt</th><th>Chars</th><th>Maps to</th><th>Status</th></tr></thead>
+          <tbody>
+            {essays.length === 0 && <tr><td colSpan={4} className="tracker__empty">No prompts yet — Edit to add.</td></tr>}
+            {essays.map((e, i) => (
+              <tr key={i} onClick={start} title="Click to edit">
+                <td>{e.prompt || <span className="tracker__empty">—</span>}</td>
+                <td>{e.char_limit ?? '—'}</td>
+                <td>{mapsLabel(e.maps_to)}</td>
+                <td><span className="tracker__pill" data-status={e.status}>{e.status}</span></td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </>
+    )
+  }
+
+  return (
+    <>
+      <div className="sec-research__bar">
+        <button onClick={() => setDraft([...draft, { prompt: '', status: 'not-started' }])}>+ Prompt</button>
+        <button onClick={cancel}>Cancel</button>
+        <button className="prewrite__save" onClick={save}>Save</button>
+      </div>
+      <table className="tracker__table">
+        <thead><tr><th>Prompt</th><th>Chars</th><th>Maps to</th><th>Status</th><th></th></tr></thead>
+        <tbody>
+          {draft.map((e, i) => (
+            <tr key={i}>
+              <td><input className="sec-research__prompt" value={e.prompt} placeholder="Prompt text…" onChange={ev => setE(i, { prompt: ev.target.value })} /></td>
+              <td><input className="tracker__xs" type="number" value={e.char_limit ?? ''} onChange={ev => setE(i, { char_limit: ev.target.value === '' ? undefined : Number(ev.target.value) })} /></td>
+              <td>
+                <select className="tracker__sm" value={e.maps_to ?? ''} onChange={ev => setE(i, { maps_to: ev.target.value })}>
+                  <option value="">—</option>
+                  {ARCHETYPE_CATALOG.map(a => <option key={a.archetype} value={a.archetype}>{a.label}</option>)}
+                </select>
+              </td>
+              <td>
+                <select data-status={e.status} value={e.status} onChange={ev => setE(i, { status: ev.target.value as ComponentStatus })}>
+                  {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
+                </select>
+              </td>
+              <td><button className="sec-research__del" onClick={() => setDraft(draft.filter((_, idx) => idx !== i))} title="Remove">✕</button></td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </>
+  )
+}
+
+// Reference links: static prompt-DBs always shown; user links managed behind "Edit".
+function ResearchLinks({ admitSlug, links, onSave }: { admitSlug?: string; links: { label: string; url: string }[]; onSave: (l: { label: string; url: string }[]) => void }) {
+  const { editing, draft, setDraft, start, cancel, save } = useEditSave(links, onSave)
+  const [linkLabel, setLinkLabel] = useState('')
+  const [linkUrl, setLinkUrl] = useState('')
+  const addLink = () => {
+    const url = linkUrl.trim()
+    if (!url) return
+    setDraft([...draft, { label: linkLabel.trim() || url, url }])
+    setLinkLabel(''); setLinkUrl('')
+  }
+
+  return (
+    <>
+      <ul className="sec-research__links">
+        {admitSlug && <li><a href={`https://med.admit.org/secondary-essays/${admitSlug}`} target="_blank" rel="noreferrer">admit.org — secondary prompts ↗</a></li>}
+        {admitSlug && <li><a href={`https://med.admit.org/school-rankings/${admitSlug}`} target="_blank" rel="noreferrer">admit.org — school page ↗</a></li>}
+        {RESOURCES.map(r => <li key={r.url}><a href={r.url} target="_blank" rel="noreferrer">{r.label} ↗</a></li>)}
+        {!editing && links.map((l, i) => (
+          <li key={`c${i}`}><a href={l.url} target="_blank" rel="noreferrer">{l.label} ↗</a></li>
+        ))}
+        {editing && draft.map((l, i) => (
+          <li key={`c${i}`}>
+            <a href={l.url} target="_blank" rel="noreferrer">{l.label} ↗</a>
+            <button className="sec-research__del" onClick={() => setDraft(draft.filter((_, idx) => idx !== i))} title="Remove link">✕</button>
+          </li>
+        ))}
+      </ul>
+      {!editing && <div className="sec-research__bar"><button onClick={start}>✎ Edit links</button></div>}
+      {editing && (
+        <>
+          <div className="sec-research__addlink">
+            <input value={linkLabel} placeholder="Label (optional)" onChange={e => setLinkLabel(e.target.value)} />
+            <input value={linkUrl} placeholder="https://…" onChange={e => setLinkUrl(e.target.value)} onKeyDown={e => e.key === 'Enter' && addLink()} />
+            <button onClick={addLink}>+ Link</button>
+          </div>
+          <div className="sec-research__bar">
+            <button onClick={cancel}>Cancel</button>
+            <button className="prewrite__save" onClick={save}>Save</button>
+          </div>
+        </>
+      )}
+    </>
   )
 }
 
