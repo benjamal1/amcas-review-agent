@@ -95,6 +95,8 @@ body {
   background: var(--color-panel);
   border-right: 1px solid var(--color-hairline);
   padding: 14px 10px;
+  height: 100vh;   /* bound to viewport so .sidebar__sections can scroll internally */
+  overflow: hidden;
 }
 .sidebar__logo {
   font-size: 13px;

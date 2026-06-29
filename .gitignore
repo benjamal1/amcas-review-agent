@@ -38,3 +38,7 @@ dist/
 
 # Local overrides
 *.local
+
+# Playwright MCP screenshot/snapshot artifacts
+.playwright-mcp/
+*.png
