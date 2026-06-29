@@ -4,6 +4,7 @@ import { useEditSave } from '../hooks/useEditSave'
 import { Editor } from '../components/editor/Editor'
 import { AgentButton } from '../components/terminal/AgentButton'
 import { ARCHETYPE_CATALOG, CORE_ARCHETYPES, GUIDING_QUESTIONS, newBankEssay } from '../lib/secondaries'
+import { plusDays } from '../lib/format'
 import type { BankEssay, ComponentStatus, Secondaries } from '../lib/types'
 
 const STATUSES: { v: ComponentStatus; label: string }[] = [
@@ -20,12 +21,6 @@ const sortBank = (bank: BankEssay[], count: (a: string) => number) =>
     const ai = CORE_ARCHETYPES.indexOf(a.archetype), bi = CORE_ARCHETYPES.indexOf(b.archetype)
     return (ai === -1 ? 99 : ai) - (bi === -1 ? 99 : bi)
   })
-
-const plusDays = (iso: string, n: number): string => {
-  const d = new Date(iso)
-  d.setDate(d.getDate() + n)
-  return d.toISOString().slice(0, 10)
-}
 
 // Prewriting (Shemmassian step 1): brainstorm + draft a master essay per prompt category, reused
 // per school. Each category carries its guiding questions + a freewrite draft.

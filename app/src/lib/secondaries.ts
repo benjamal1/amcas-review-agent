@@ -75,6 +75,9 @@ export const GUIDING_QUESTIONS: Record<string, string[]> = {
   ],
 }
 
+export const archetypeLabel = (k?: string) =>
+  ARCHETYPE_CATALOG.find(a => a.archetype === k)?.label ?? k ?? '—'
+
 export const newBankEssay = (archetype: string, label: string, pre_writable: boolean): BankEssay => ({
   archetype, label, pre_writable,
   doc_path: `documents/secondaries/_bank/${archetype}.md`,

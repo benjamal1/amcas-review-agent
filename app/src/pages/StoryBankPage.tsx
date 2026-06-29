@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef } from 'react'
 import { marked } from 'marked'
 import { Editor } from '../components/editor/Editor'
+import { headingSlug as slug } from '../lib/format'
 
 const PATH = 'story-bank.md'
-const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 const TASK = /^(\s*[-*] )\[[ xX]\]/
 type Heading = { id: string; text: string; level: number }
 

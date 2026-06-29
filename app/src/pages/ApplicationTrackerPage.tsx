@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { useData } from '../hooks/useData'
 import { schoolSlug, schoolEssayProgress } from '../lib/secondaries'
+import { today, plusDays } from '../lib/format'
 import type { SchoolEntry, SchoolStatus, ComponentStatus, PrimaryComponent, StatusEvent } from '../lib/types'
 
 const SUBMITTED_STAGES = ['secondary-submitted', 'interview-invited', 'interviewed', 'waitlisted', 'accepted', 'rejected', 'withdrawn']
@@ -45,8 +46,6 @@ const S_LABEL: Record<SchoolStatus, string> = {
   'interviewed': 'Interviewed', 'waitlisted': 'Waitlisted', 'accepted': 'Accepted',
   'rejected': 'Rejected', 'withdrawn': 'Withdrawn',
 }
-const today = () => new Date().toISOString().slice(0, 10)
-const plusDays = (iso: string, n: number) => { const d = new Date(iso); d.setDate(d.getDate() + n); return d.toISOString().slice(0, 10) }
 const lastChanged = (h?: StatusEvent[]) => (h && h.length ? h[h.length - 1].date : '—')
 
 // Macro secondaries pipeline (per-school work is tracked separately, in the nested Schools list).
@@ -260,6 +259,7 @@ export function ApplicationTrackerPage() {
             <button onClick={addSchool}>+ Add</button>
           </div>
         </div>
+        <div className="tracker__scroll-wrap">
         <div className="tracker__scroll">
           <table className="tracker__table">
             <thead>
@@ -308,6 +308,7 @@ export function ApplicationTrackerPage() {
               })}
             </tbody>
           </table>
+        </div>
         </div>
         <p className="tracker__hint">Reorder rows with ▲▼, or fill the Rank column and hit “Sort by rank”. Secondary deadline auto-fills to 2 weeks after received (editable). Order is saved with the rest.</p>
       </section>

@@ -3,8 +3,9 @@ import { marked } from 'marked'
 import { useData } from '../hooks/useData'
 import type { ScoreSnapshot } from '../lib/types'
 
+import { pretty } from '../lib/format'
+
 type Doc = { path: string; html: string; title: string }
-const pretty = (k: string) => k.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
 const latestDims = (h?: ScoreSnapshot[]) => {
   if (!h?.length) return [] as [string, number][]
   const r = h[h.length - 1]

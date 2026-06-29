@@ -1,4 +1,5 @@
 import { useData } from '../hooks/useData'
+import { pretty } from '../lib/format'
 import type { ScoreSnapshot } from '../lib/types'
 
 // Dimension keys to surface as columns (everything except these meta keys).
@@ -8,8 +9,6 @@ function dimCols(rows: ScoreSnapshot[]): string[] {
   for (const r of rows) for (const k of Object.keys(r)) if (!META.has(k)) keys.add(k)
   return [...keys]
 }
-const pretty = (k: string) => k.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase())
-
 function HistoryTable({ rows, scoreKey }: { rows: ScoreSnapshot[]; scoreKey: 'avg' | 'composite' }) {
   if (!rows?.length) return <p className="hist__empty">No history yet.</p>
   const dims = dimCols(rows)

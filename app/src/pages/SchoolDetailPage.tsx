@@ -7,7 +7,7 @@ import { Editor } from '../components/editor/Editor'
 import { ScorecardSummary } from '../components/dashboard/ScorecardSummary'
 import { injectPhrase } from '../components/terminal/Terminal'
 import { AgentButton } from '../components/terminal/AgentButton'
-import { schoolSlug, findSchoolBySlug, ARCHETYPE_CATALOG } from '../lib/secondaries'
+import { schoolSlug, findSchoolBySlug, ARCHETYPE_CATALOG, archetypeLabel as mapsLabel } from '../lib/secondaries'
 import type { AppData, ComponentStatus, SchoolEntry, SchoolSecondary, SecondaryEssay } from '../lib/types'
 
 const STATUSES: ComponentStatus[] = ['not-started', 'drafting', 'under-review', 'final-edits', 'ready', 'submitted']
@@ -54,8 +54,6 @@ const RESOURCES = [
 ]
 
 // ── Research tab: why-us notes doc + prompts table + resource links ──
-const mapsLabel = (key?: string) => ARCHETYPE_CATALOG.find(a => a.archetype === key)?.label ?? key ?? '—'
-
 export function SchoolResearchTab() {
   const { slug, school, editSecondary } = useSchool()
   if (!school) return null
@@ -207,8 +205,14 @@ const truncate = (s: string, n = 46) => (s.length > n ? s.slice(0, n).trimEnd() 
 export function SchoolEditorTab() {
   const { slug, school, editSecondary } = useSchool()
   const [sel, setSel] = useState<number | null>(null)
+  const essays = school?.secondary?.essays ?? []
+
+  // Auto-select first essay so the editor is populated immediately on open.
+  useEffect(() => {
+    if (sel === null && essays.length > 0) setSel(0)
+  }, [essays.length, sel])
+
   if (!school) return null
-  const essays = school.secondary?.essays ?? []
   const active = sel !== null ? essays[sel] : undefined
   const docPath = active ? (active.doc_path ?? `documents/secondaries/${slug}/${sel! + 1}.md`) : null
 

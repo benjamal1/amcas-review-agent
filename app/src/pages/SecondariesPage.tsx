@@ -2,8 +2,7 @@ import { Link } from 'react-router-dom'
 import { useData } from '../hooks/useData'
 import { ScorecardSummary } from '../components/dashboard/ScorecardSummary'
 import { schoolSlug, schoolEssayProgress, averageSecondaryScorecard, regradedCount } from '../lib/secondaries'
-
-const today = () => new Date().toISOString().slice(0, 10)
+import { today } from '../lib/format'
 
 // Secondaries Overview: progress across schools (essay completion + deadlines) and the grading
 // average (mean of per-school regrades). Each school links to its routed detail.

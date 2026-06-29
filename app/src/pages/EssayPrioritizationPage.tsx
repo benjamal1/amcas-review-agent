@@ -1,15 +1,7 @@
 import { useData } from '../hooks/useData'
-import { ARCHETYPE_CATALOG } from '../lib/secondaries'
+import { archetypeLabel as mapsLabel } from '../lib/secondaries'
+import { plusDays } from '../lib/format'
 import type { SecondaryEssay } from '../lib/types'
-
-const mapsLabel = (k: string | undefined) =>
-  ARCHETYPE_CATALOG.find(a => a.archetype === k)?.label ?? k ?? '—'
-
-const plusDays = (iso: string, n: number) => {
-  const d = new Date(iso)
-  d.setDate(d.getDate() + n)
-  return d.toISOString().slice(0, 10)
-}
 
 interface EssayRow {
   school: string
