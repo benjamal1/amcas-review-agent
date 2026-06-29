@@ -233,6 +233,16 @@ body {
 .prompt-type { font-size: 11px; font-weight: 600; padding: 1px 7px; border-radius: 999px; white-space: nowrap; }
 .prompt-type--confirmed { color: var(--color-pos); background: color-mix(in oklch, var(--color-pos) 14%, transparent); }
 .prompt-type--anticipated { color: var(--color-muted); background: color-mix(in oklch, var(--color-muted) 14%, transparent); }
+/* per-school Editor: prompt shown above the essay */
+.sec-editor__prompt { border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); padding: 10px 12px; margin-bottom: 10px; }
+.sec-editor__prompt-row { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.sec-editor__prompt-text { margin: 0; font-size: 13px; line-height: 1.5; }
+.sec-editor__prompt-meta { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.sec-editor__chars { font-size: 11px; color: var(--color-muted); font-family: var(--font-mono); white-space: nowrap; }
+.sec-editor__prewrite { margin-top: 8px; border-top: 1px solid var(--color-hairline); padding-top: 8px; }
+.sec-editor__prewrite-toggle { background: none; border: none; color: var(--color-muted); font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; cursor: pointer; padding: 0; }
+.sec-editor__prewrite-toggle:hover { color: var(--color-accent); }
+.sec-editor__prewrite-body { margin-top: 8px; max-height: 220px; overflow: auto; font-size: 13px; padding: 8px 10px; background: var(--color-bg); border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); }
 /* in-app agent trigger buttons (brainstorm / research / map) */
 .agent-btn { background: color-mix(in oklch, var(--color-accent) 14%, transparent); color: var(--color-accent); border: 1px solid var(--color-accent); border-radius: var(--radius-sm); padding: 4px 10px; font-size: 12px; font-weight: 600; cursor: pointer; white-space: nowrap; }
 .agent-btn:hover { background: var(--color-accent); color: var(--color-bg); }

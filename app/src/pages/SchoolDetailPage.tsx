@@ -1,10 +1,9 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { NavLink, Outlet, useParams } from 'react-router-dom'
+import { marked } from 'marked'
 import { useData } from '../hooks/useData'
-import { useFiles } from '../hooks/useFiles'
 import { useEditSave } from '../hooks/useEditSave'
 import { Editor } from '../components/editor/Editor'
-import { FileTree } from '../components/editor/FileTree'
 import { ScorecardSummary } from '../components/dashboard/ScorecardSummary'
 import { injectPhrase } from '../components/terminal/Terminal'
 import { AgentButton } from '../components/terminal/AgentButton'
@@ -202,35 +201,92 @@ function ResearchLinks({ admitSlug, links, onSave }: { admitSlug?: string; links
   )
 }
 
-// ── Editor tab: this school's secondary essay files ──
-export function SchoolEditorTab() {
-  const { slug } = useSchool()
-  const { files } = useFiles()
-  const [created, setCreated] = useState<string[]>([])
-  const [selected, setSelected] = useState<string | null>(null)
-  const prefix = `documents/secondaries/${slug}/`
-  const mine = Array.from(new Set([...files.filter(f => f.startsWith(prefix) && !f.endsWith('_research.md')), ...created]))
+const truncate = (s: string, n = 46) => (s.length > n ? s.slice(0, n).trimEnd() + '…' : s)
 
-  async function newEssay() {
-    const n = mine.length + 1
-    const path = `${prefix}${n}.md`
-    await fetch(`/api/file?path=${encodeURIComponent(path)}`, {
-      method: 'PUT', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ content: '', frontmatter: {} }),
-    })
-    setCreated(c => [...c, path]); setSelected(path)
+// ── Editor tab: one essay doc per prompt; prompt + relevant prewriting shown above the editor ──
+export function SchoolEditorTab() {
+  const { slug, school, editSecondary } = useSchool()
+  const [sel, setSel] = useState<number | null>(null)
+  if (!school) return null
+  const essays = school.secondary?.essays ?? []
+  const active = sel !== null ? essays[sel] : undefined
+  const docPath = active ? (active.doc_path ?? `documents/secondaries/${slug}/${sel! + 1}.md`) : null
+
+  // On first open, persist a stable doc_path on the prompt so the essay sticks to it.
+  const openEssay = (i: number) => {
+    if (!essays[i].doc_path) {
+      editSecondary(s => ({ ...s, essays: s.essays.map((e, idx) => idx === i ? { ...e, doc_path: `documents/secondaries/${slug}/${idx + 1}.md` } : e) }))
+    }
+    setSel(i)
   }
 
   return (
     <div className="sec-school__body page--editor-view">
       <aside className="editor-view__tree">
-        <button className="sec-bank__add" onClick={newEssay}>+ New essay</button>
-        <FileTree files={mine} selected={selected} onSelect={setSelected} />
-        {mine.length === 0 && <p className="tracker__hint">No essays yet — “New essay” to start.</p>}
+        {essays.length === 0
+          ? <p className="tracker__hint">No prompts yet — add them on the Research tab.</p>
+          : <ul className="sec-bank__items">
+              {essays.map((e, i) => (
+                <li key={i} className={`sec-bank__item${sel === i ? ' sec-bank__item--active' : ''}`}>
+                  <button className="sec-bank__name" onClick={() => openEssay(i)}>
+                    {e.prompt ? truncate(e.prompt) : `Prompt ${i + 1}`}
+                    {e.char_limit ? <span className="sec-bank__tag">{e.char_limit}ch</span> : null}
+                  </button>
+                </li>
+              ))}
+            </ul>}
       </aside>
-      <main className="editor-view__main"><div className="editor-view__doc"><Editor filePath={selected} /></div></main>
+      <main className="editor-view__main">
+        {active ? (
+          <>
+            <PromptHeader essay={active} />
+            <div className="editor-view__doc"><Editor filePath={docPath} /></div>
+          </>
+        ) : <p className="tracker__hint">Select a prompt to write.</p>}
+      </main>
     </div>
   )
+}
+
+// Prompt text + meta above the editor, with the mapped category's prewriting available inline.
+function PromptHeader({ essay }: { essay: SecondaryEssay }) {
+  const [showPrewrite, setShowPrewrite] = useState(false)
+  const bankPath = essay.maps_to ? `documents/secondaries/_bank/${essay.maps_to}.md` : null
+  return (
+    <div className="sec-editor__prompt">
+      <div className="sec-editor__prompt-row">
+        <p className="sec-editor__prompt-text">{essay.prompt || <span className="tracker__hint">No prompt text — add it on the Research tab.</span>}</p>
+        <div className="sec-editor__prompt-meta">
+          <span className={`prompt-type prompt-type--${essay.confirmed ? 'confirmed' : 'anticipated'}`}>{essay.confirmed ? 'Confirmed' : 'Anticipated'}</span>
+          {essay.char_limit ? <span className="sec-editor__chars">{essay.char_limit} chars</span> : null}
+        </div>
+      </div>
+      {bankPath && (
+        <div className="sec-editor__prewrite">
+          <button className="sec-editor__prewrite-toggle" onClick={() => setShowPrewrite(v => !v)}>
+            {showPrewrite ? '▾' : '▸'} Relevant prewriting — {mapsLabel(essay.maps_to)}
+          </button>
+          {showPrewrite && <ReadonlyDoc path={bankPath} />}
+        </div>
+      )}
+    </div>
+  )
+}
+
+// Read-only render of a markdown doc (the mapped prewriting freewrite).
+function ReadonlyDoc({ path }: { path: string }) {
+  const [content, setContent] = useState<string | null>(null)
+  useEffect(() => {
+    let dead = false
+    fetch(`/api/file?path=${encodeURIComponent(path)}`)
+      .then(r => (r.ok ? r.json() : { content: '' }))
+      .then(d => { if (!dead) setContent(d.content ?? '') })
+      .catch(() => { if (!dead) setContent('') })
+    return () => { dead = true }
+  }, [path])
+  if (content === null) return <p className="tracker__hint">Loading…</p>
+  if (!content.trim()) return <p className="tracker__hint">No prewriting drafted for this category yet — start it under Prewriting.</p>
+  return <div className="sec-editor__prewrite-body markdown-body" dangerouslySetInnerHTML={{ __html: marked.parse(content) as string }} />
 }
 
 // ── Grading tab: per-school regrade scorecard + run-regrade action ──

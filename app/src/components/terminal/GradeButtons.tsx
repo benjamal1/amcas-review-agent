@@ -1,5 +1,5 @@
-
-import { getSharedTerminal } from './Terminal'
+import { injectPhrase } from './Terminal'
+import { useTerminalDock } from './TerminalDock'
 
 // Trigger phrases from Agent/CLAUDE.md
 const COMMANDS = [
@@ -18,35 +18,18 @@ const COMMANDS = [
   { label: 'Review Transcript', phrase: 'review my transcript' },
 ]
 
-export function GradeButtons({ sessionActive }: { sessionActive: boolean }) {
-  function inject(phrase: string) {
-    const { ws } = getSharedTerminal()
-    if (!ws || ws.readyState !== WebSocket.OPEN) {
-      alert('Terminal not connected. Check the terminal panel.')
-      return
-    }
-    if (!sessionActive) {
-      // Start claude first, then send phrase after a moment. Re-fetch the socket inside the
-      // timeout — the original may have closed/reconnected during the 3s wait.
-      ws.send(JSON.stringify({ type: 'input', data: 'claude\n' }))
-      setTimeout(() => {
-        const { ws: live } = getSharedTerminal()
-        if (live && live.readyState === WebSocket.OPEN) live.send(JSON.stringify({ type: 'input', data: phrase + '\n' }))
-      }, 3000)
-      return
-    }
-    ws.send(JSON.stringify({ type: 'input', data: phrase + '\n' }))
-  }
-
+// Primary-application grade buttons. Mounted on the Grading page only (not in the global terminal).
+export function GradeButtons() {
+  const { setOpen } = useTerminalDock()
+  const run = (phrase: string) => { setOpen(true); injectPhrase(phrase) }
   return (
     <div className="grade-buttons">
       <div className="grade-buttons__label">GRADE BUTTONS</div>
-      {!sessionActive && <div className="grade-buttons__hint">No active session — will start claude first</div>}
-      <button className="grade-btn grade-btn--full" onClick={() => inject('grade my full application')}>
+      <button className="grade-btn grade-btn--full" onClick={() => run('grade my full application')}>
         ★ Full Application Grading
       </button>
       <div className="grade-buttons__grid">
-        {COMMANDS.map(c => <button key={c.label} className="grade-btn" onClick={() => inject(c.phrase)}>{c.label}</button>)}
+        {COMMANDS.map(c => <button key={c.label} className="grade-btn" onClick={() => run(c.phrase)}>{c.label}</button>)}
       </div>
     </div>
   )
