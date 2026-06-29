@@ -80,24 +80,23 @@ export function PrewritingPage() {
       <aside className="editor-view__tree sec-bank__list">
         <div className="sec-page__intro">
           <h2 className="tracker__h">Prewriting</h2>
-          <p className="tracker__hint">Start right after submitting primaries. Per category: answer the guiding questions, set a 15-min timer, freewrite without editing — then underline anything interesting, funny, unusual, or personal.</p>
+          <p className="tracker__hint">One master draft per category, reused across schools. Ordered by how many schools need it.</p>
           <AgentButton className="agent-btn agent-btn--wide" phrase="find my secondary story gaps" label="✦ Find my story gaps" />
-          <p className="tracker__hint prewrite__priority-note">Ordered by # schools with a related prompt — write top-down for the most leverage.</p>
         </div>
         <ul className="sec-bank__items">
           {bank.map(b => {
             const n = schoolCount(b.archetype)
             return (
-            <li key={b.archetype} className={`sec-bank__item${active?.doc_path === b.doc_path ? ' sec-bank__item--active' : ''}`}>
-              <button className="sec-bank__name" onClick={() => setSelected(b.doc_path)}>
-                {b.label}{b.pre_writable === false && <span className="sec-bank__tag">per-school</span>}
-                <span className="sec-bank__count" title="Schools with a prompt mapped here">{n} school{n === 1 ? '' : 's'}</span>
-              </button>
-              <select className="tracker__pill" data-status={b.status} value={b.status} onChange={e => patch(b.archetype, { status: e.target.value as ComponentStatus })}>
-                {STATUSES.map(s => <option key={s.v} value={s.v}>{s.label}</option>)}
-              </select>
-            </li>
-          )})}
+              <li key={b.archetype} className={`sec-bank__item${active?.doc_path === b.doc_path ? ' sec-bank__item--active' : ''}`}>
+                <button className="sec-bank__name" onClick={() => setSelected(b.doc_path)}>
+                  <span className="sec-bank__dot" data-status={b.status} title={b.status} />
+                  <span className="sec-bank__label">{b.label}</span>
+                  {b.pre_writable === false && <span className="sec-bank__tag">per-school</span>}
+                  <span className="sec-bank__count" title={`${n} school${n === 1 ? '' : 's'} with a mapped prompt`}>{n}</span>
+                </button>
+              </li>
+            )
+          })}
           {bank.length === 0 && <li className="tracker__hint">Seeding the 6 core categories…</li>}
         </ul>
         {addable.length > 0 && (
@@ -110,12 +109,17 @@ export function PrewritingPage() {
           </div>
         )}
       </aside>
-      <main className="editor-view__main sec-prewrite">
+      <main className="sec-prewrite">
         {active && (
           <>
             <div className="prewrite__head">
               <h2 className="tracker__h">{active.label}</h2>
-              <AgentButton phrase={`brainstorm secondary ideas for ${active.label}`} label="✦ Brainstorm ideas" />
+              <div className="prewrite__head-actions">
+                <select className="tracker__pill" data-status={active.status} value={active.status} onChange={e => patch(active.archetype, { status: e.target.value as ComponentStatus })}>
+                  {STATUSES.map(s => <option key={s.v} value={s.v}>{s.label}</option>)}
+                </select>
+                <AgentButton phrase={`brainstorm secondary ideas for ${active.label}`} label="✦ Brainstorm ideas" />
+              </div>
             </div>
             {active.pre_writable === false && <p className="tracker__hint prewrite__note">School-specific — write the anchor here, then layer specifics per school.</p>}
             <GuidingQuestions
