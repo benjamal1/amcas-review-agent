@@ -5,13 +5,14 @@ import { schoolSlug, schoolEssayProgress } from '../lib/secondaries'
 import type { SchoolEntry, SchoolStatus, ComponentStatus, PrimaryComponent, StatusEvent } from '../lib/types'
 
 const SUBMITTED_STAGES = ['secondary-submitted', 'interview-invited', 'interviewed', 'waitlisted', 'accepted', 'rejected', 'withdrawn']
-// Derive a school's secondary stage for the at-a-glance board.
+// Derive a school's secondary sub-step for the at-a-glance board:
+// Not received → Received → Drafting → Submitted.
 function secStage(s: SchoolEntry): { label: string; key: string } {
   if (SUBMITTED_STAGES.includes(s.status ?? '')) return { label: 'Submitted', key: 'submitted' }
-  const { done, total } = schoolEssayProgress(s)
-  if (total > 0 && done === total) return { label: 'Ready', key: 'ready' }
-  if (total > 0 || s.secondary_received_date) return { label: 'In progress', key: 'drafting' }
-  return { label: 'Not started', key: 'not-started' }
+  const { total } = schoolEssayProgress(s)
+  if (total > 0) return { label: 'Drafting', key: 'drafting' }            // prompts entered, work underway
+  if (s.secondary_received_date || s.status === 'secondary-received') return { label: 'Received', key: 'under-review' }
+  return { label: 'Not received', key: 'not-started' }
 }
 
 // ── Primary application components ──
@@ -53,6 +54,7 @@ const SEC_STAGES: { key: string; label: string }[] = [
   { key: 'brainstorming', label: 'Brainstorming' },
   { key: 'prewriting', label: 'Pre-writing (essay bank)' },
   { key: 'casper_preview', label: 'CASPer / PREview' },
+  { key: 'interviews', label: 'Interviews' },
 ]
 const stageDone = (s: ComponentStatus) => s === 'ready' || s === 'submitted' || s === 'not-applicable'
 
@@ -162,6 +164,7 @@ export function ApplicationTrackerPage() {
     : !stageDone(secStatus('prewriting')) ? 'Pre-writing'
     : draft.schools.length > 0 && secSubmitted < draft.schools.length ? 'Per-school essays'
     : !stageDone(secStatus('casper_preview')) ? 'CASPer / PREview'
+    : !stageDone(secStatus('interviews')) ? 'Interviews'
     : 'Complete'
 
   return (

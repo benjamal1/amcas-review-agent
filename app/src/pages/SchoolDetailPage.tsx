@@ -7,7 +7,7 @@ import { FileTree } from '../components/editor/FileTree'
 import { ScorecardSummary } from '../components/dashboard/ScorecardSummary'
 import { injectPhrase } from '../components/terminal/Terminal'
 import { AgentButton } from '../components/terminal/AgentButton'
-import { schoolSlug, findSchoolBySlug } from '../lib/secondaries'
+import { schoolSlug, findSchoolBySlug, ARCHETYPE_CATALOG } from '../lib/secondaries'
 import type { AppData, ComponentStatus, SchoolEntry, SchoolSecondary, SecondaryEssay } from '../lib/types'
 
 const STATUSES: ComponentStatus[] = ['not-started', 'drafting', 'under-review', 'final-edits', 'ready', 'submitted']
@@ -95,7 +95,12 @@ export function SchoolResearchTab() {
               <tr key={i}>
                 <td><input className="sec-research__prompt" value={e.prompt} placeholder="Prompt text…" onChange={ev => setEssay(i, { prompt: ev.target.value })} /></td>
                 <td><input className="tracker__xs" type="number" value={e.word_limit ?? ''} onChange={ev => setEssay(i, { word_limit: ev.target.value === '' ? undefined : Number(ev.target.value) })} /></td>
-                <td><input className="tracker__sm" value={e.maps_to ?? ''} placeholder="archetype" onChange={ev => setEssay(i, { maps_to: ev.target.value })} /></td>
+                <td>
+                  <select className="tracker__sm" value={e.maps_to ?? ''} onChange={ev => setEssay(i, { maps_to: ev.target.value })}>
+                    <option value="">—</option>
+                    {ARCHETYPE_CATALOG.map(a => <option key={a.archetype} value={a.archetype}>{a.label}</option>)}
+                  </select>
+                </td>
                 <td>
                   <select data-status={e.status} value={e.status} onChange={ev => setEssay(i, { status: ev.target.value as ComponentStatus })}>
                     {STATUSES.map(s => <option key={s} value={s}>{s}</option>)}
