@@ -3,6 +3,9 @@ import { EditorView, basicSetup } from 'codemirror'
 import { markdown } from '@codemirror/lang-markdown'
 import { oneDark } from '@codemirror/theme-one-dark'
 import { EditorState } from '@codemirror/state'
+import { marked } from 'marked'
+import { fetchDoc, fetchDocFull, saveDoc } from '../../lib/docs'
+import { IS_STATIC } from '../../lib/env'
 
 // match lowercase live paths under content/documents/
 const LIMITS: Record<string, { label: string; limit: number }> = {
@@ -15,7 +18,43 @@ function detectLimit(path: string) {
   return null
 }
 
-export function Editor({ filePath, onSave }: { filePath: string | null; onSave?: (ok: boolean) => void }) {
+type EditorProps = { filePath: string | null; onSave?: (ok: boolean) => void }
+
+// Static export is read-only → render the doc as nice markdown instead of a code editor.
+export function Editor(props: EditorProps) {
+  return IS_STATIC ? <StaticDocView filePath={props.filePath} /> : <EditorCM {...props} />
+}
+
+// Read-only rendered view of a markdown doc (used in the static export). ponytail: marked without
+// a sanitizer — these are the applicant's own local files, not third-party input.
+function StaticDocView({ filePath }: { filePath: string | null }) {
+  const [content, setContent] = useState('')
+  useEffect(() => {
+    if (!filePath) { setContent(''); return }
+    let dead = false
+    fetchDoc(filePath).then(c => { if (!dead) setContent(c) }).catch(() => { if (!dead) setContent('') })
+    return () => { dead = true }
+  }, [filePath])
+
+  const lim = filePath ? detectLimit(filePath) : null
+  const over = lim && content.length > lim.limit
+  return (
+    <div className="editor-wrap">
+      <div className="editor-toolbar">
+        {filePath ? (
+          <>
+            <span className="editor-toolbar__path" title={filePath}>{(filePath.split('/').pop() ?? filePath).replace(/\.md$/, '')}</span>
+            {lim && <span className={`editor-toolbar__chars${over ? ' editor-toolbar__chars--over' : ''}`}>{content.length}/{lim.limit} {lim.label}{over ? ' ⚠ over' : ''}</span>}
+          </>
+        ) : <span className="editor-toolbar__empty">Select a file to view</span>}
+      </div>
+      <article className="editor-cm editor-cm--rendered markdown-body"
+        dangerouslySetInnerHTML={{ __html: content ? (marked.parse(content) as string) : '' }} />
+    </div>
+  )
+}
+
+function EditorCM({ filePath, onSave }: EditorProps) {
   const ref = useRef<HTMLDivElement>(null)
   const viewRef = useRef<EditorView | null>(null)
   const debRef = useRef<ReturnType<typeof setTimeout> | null>(null)
@@ -24,14 +63,10 @@ export function Editor({ filePath, onSave }: { filePath: string | null; onSave?:
   const [charCount, setCharCount] = useState(0)
 
   const save = useCallback(async (content: string) => {
-    if (!filePath) return
+    if (!filePath || IS_STATIC) return // static export is read-only
     setSaveState('saving')
     try {
-      const res = await fetch(`/api/file?path=${encodeURIComponent(filePath)}`, {
-        method: 'PUT', headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({ content, frontmatter: fmRef.current }),
-      })
-      if (!res.ok) throw new Error('save failed')
+      await saveDoc(filePath, content, fmRef.current)
       setSaveState('saved'); onSave?.(true)
     } catch { setSaveState('error') }
   }, [filePath, onSave])
@@ -39,9 +74,8 @@ export function Editor({ filePath, onSave }: { filePath: string | null; onSave?:
   useEffect(() => {
     if (!filePath || !ref.current) return
     let dead = false
-    fetch(`/api/file?path=${encodeURIComponent(filePath)}`)
-      .then(r => (r.ok ? r.json() : { content: '', frontmatter: {} })) // missing file → start empty (new doc)
-      .then(({ content, frontmatter }: { content: string; frontmatter: Record<string, unknown> }) => {
+    fetchDocFull(filePath) // missing file → start empty (new doc)
+      .then(({ content, frontmatter }) => {
         if (dead) return
         fmRef.current = frontmatter
         viewRef.current?.destroy()
@@ -51,6 +85,7 @@ export function Editor({ filePath, onSave }: { filePath: string | null; onSave?:
             doc: content,
             extensions: [
               basicSetup, markdown(), oneDark,
+              EditorView.editable.of(!IS_STATIC), // static export: view-only, no phantom edits
               EditorView.lineWrapping, // essays are one long line per paragraph — wrap them
               EditorView.updateListener.of(u => {
                 if (!u.docChanged) return

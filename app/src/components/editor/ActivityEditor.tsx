@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState, useCallback } from 'react'
+import { fetchDocFull, saveDoc } from '../../lib/docs'
 
 // Official AMCAS Work/Activities experience types.
 const AMCAS_TYPES = [
@@ -52,11 +53,10 @@ export function ActivityEditor({ filePath }: { filePath: string }) {
   useEffect(() => {
     let dead = false
     loadedFor.current = null
-    fetch(`/api/file?path=${encodeURIComponent(filePath)}`)
-      .then(r => r.json())
-      .then(({ content, frontmatter }: { content: string; frontmatter: Meta }) => {
+    fetchDocFull(filePath)
+      .then(({ content, frontmatter }) => {
         if (dead) return
-        setMeta(frontmatter ?? {})
+        setMeta((frontmatter ?? {}) as Meta)
         setDesc(content.trim())
         loadedFor.current = filePath
         setSaveState('idle')
@@ -67,11 +67,8 @@ export function ActivityEditor({ filePath }: { filePath: string }) {
 
   const persist = useCallback((nextMeta: Meta, nextDesc: string) => {
     setSaveState('saving')
-    fetch(`/api/file?path=${encodeURIComponent(filePath)}`, {
-      method: 'PUT', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ content: nextDesc ? nextDesc + '\n' : '', frontmatter: nextMeta }),
-    })
-      .then(r => { if (!r.ok) throw new Error(); setSaveState('saved') })
+    saveDoc(filePath, nextDesc ? nextDesc + '\n' : '', nextMeta) // no-op in static export
+      .then(() => setSaveState('saved'))
       .catch(() => setSaveState('error'))
   }, [filePath])
 

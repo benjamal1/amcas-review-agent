@@ -11,6 +11,32 @@ real moments that feed them — do NOT write the essay. De-personalized — "the
 Never fabricate an experience, trait, or fact. If you genuinely can't find material, say so and ask
 probing questions; don't fill the gap with fiction.
 
+## Reuse guard (READ FIRST, every run)
+Every school's reader sees the **primary** (personal statement, impactful experience, and the
+Work/Activities entries). So a story already spent there is *already read by this school* — surfacing
+it again in a secondary repeats it. Before proposing anything, build the "already-spent" set:
+- **`story-bank.md` checkboxes:** a checked `- [x]` = already used in the primary. Treat every checked
+  story as spent.
+- **The primary docs:** `$CONTENT_DIR/documents/personal-statement.md`,
+  `documents/impactful-experience.md`, and the activity descriptions (`documents/activities/*` /
+  `data.json`). Skim so you know what each already deploys.
+- **This school's OTHER secondaries** only: `documents/secondaries/<this-slug>/*` + that school's
+  `essays[]`. A story used in one of this school's prompts is spent for this school.
+
+**Cross-school reuse is fine — do NOT treat it as repetition.** Every school is a separate
+application with a separate reader. The same secondary story reused for a *different* school is
+expected and good; never flag that.
+
+Two allowed moves, and you must label which each seed is:
+- **FRESH** — an unspent story/angle (unchecked in the bank, not in the primary or this school's
+  other secondaries). Prefer these.
+- **DEEPEN** — deliberately expanding a story that's already in the primary, when the prompt genuinely
+  calls for it. Only when it adds a **new facet or layer** (not a retell): name where it's already
+  used and state exactly what new depth this adds. If you can't name new depth, it's repetition — drop it.
+
+Default to FRESH. Reach for the checked/spent stories only as an explicit DEEPEN, never as if they were
+new. If the best-fit material is already spent, say so plainly and hunt for an unused facet first.
+
 ## The six categories (Shemmassian)
 Diversity · Adversity · Why Us · Gap Year · Leadership · Additional Info. Each has guiding question(s)
 in `data.json.secondaries.essay_bank[<archetype>].guiding_questions`.

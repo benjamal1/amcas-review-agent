@@ -1,5 +1,7 @@
 .terminal-container { width: 100%; height: 100%; background: #0F1419; }
-.terminal-panel { display: grid; grid-template-columns: 1fr 200px; height: 100%; overflow: hidden; }
+.terminal-container--static { display: flex; align-items: center; justify-content: center; text-align: center; padding: 20px; color: #8b98a5; font-size: 12px; }
+/* Dock renders only the terminal (grade buttons live elsewhere) — single column, full width. */
+.terminal-panel { display: grid; grid-template-columns: 1fr; height: 100%; overflow: hidden; }
 .terminal-panel__term { overflow: hidden; background: #0F1419; }
 .terminal-panel__buttons { border-left: 1px solid var(--color-hairline); overflow-y: auto; background: var(--color-panel); }
 .grade-buttons { padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; }

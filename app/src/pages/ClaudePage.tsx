@@ -1,11 +1,32 @@
 import { useEffect, useState, useCallback } from 'react'
 import { marked } from 'marked'
+import { IS_STATIC } from '../lib/env'
 
 type Item = { id: string; name: string; group: string }
+
+// The agent config + terminal need a running server; a static export has neither.
+function StaticNotice() {
+  return (
+    <div className="page page--single">
+      <div className="placeholder">
+        <h2 className="placeholder__title">Not available in the shared export</h2>
+        <p className="placeholder__body">
+          This is a read-only export for review. The Claude agent, terminal, and editing run only in the
+          full local app — the scores, essays, and application data on the other pages are all viewable here.
+        </p>
+      </div>
+    </div>
+  )
+}
 
 // View + edit the agent's own instructions (router CLAUDE.md + .claude/agents/*.md).
 // Separate API from content files; edits write straight back to the repo.
 export function ClaudePage() {
+  if (IS_STATIC) return <StaticNotice />
+  return <ClaudeConfigEditor />
+}
+
+function ClaudeConfigEditor() {
   const [items, setItems] = useState<Item[]>([])
   const [sel, setSel] = useState<string | null>(null)
   const [content, setContent] = useState('')   // saved content

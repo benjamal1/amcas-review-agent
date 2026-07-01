@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react'
-
-type FileMeta = { path: string; name: string }
+import { fetchFiles, type FileMeta } from '../lib/docs'
 
 // Lists document paths plus a path→display-name map (experience_name/title from
 // frontmatter), so the tree can show e.g. an activity's name instead of activity-01.md.
@@ -11,23 +10,17 @@ export function useFiles() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    const controller = new AbortController()
-    fetch('/api/files?meta=1', { signal: controller.signal })
-      .then(r => {
-        if (!r.ok) throw new Error(`HTTP ${r.status}`)
-        return r.json() as Promise<FileMeta[]>
-      })
+    let dead = false
+    fetchFiles('documents', true)
       .then(data => {
-        setFiles(data.map(d => d.path))
-        setLabels(Object.fromEntries(data.filter(d => d.name).map(d => [d.path, d.name])))
+        if (dead) return
+        const metas = data as FileMeta[]
+        setFiles(metas.map(d => d.path))
+        setLabels(Object.fromEntries(metas.filter(d => d.name).map(d => [d.path, d.name])))
         setLoading(false)
       })
-      .catch(e => {
-        if (e instanceof Error && e.name === 'AbortError') return
-        setError(String(e))
-        setLoading(false)
-      })
-    return () => controller.abort()
+      .catch(e => { if (!dead) { setError(String(e)); setLoading(false) } })
+    return () => { dead = true }
   }, [])
 
   return { files, labels, loading, error }

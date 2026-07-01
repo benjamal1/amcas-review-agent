@@ -81,7 +81,17 @@ export type ComponentStatus =
   | 'not-started' | 'drafting' | 'under-review' | 'final-edits' | 'ready' | 'submitted' | 'not-applicable'
 export interface StatusEvent { status: ComponentStatus | SchoolStatus; date: string }
 export interface PrimaryComponent { status: ComponentStatus; status_history?: StatusEvent[] }
-export interface CourseEntry { name: string; subject?: string }
+// Mirrors the AMCAS Academic Record row. `subject` = AMCAS course classification (BIOL, CHEM, MATH…).
+export interface CourseEntry {
+  name: string
+  subject?: string      // AMCAS course classification (Course Class)
+  course_no?: string    // e.g. "BIOL 0200"
+  year?: string         // e.g. "2023-2024"
+  level?: string        // FR | SO | JR | SR
+  term?: string         // S1 | S2
+  type?: string         // AMCAS course type: AP | PF | CC | '' (regular)
+  grade?: string        // AMCAS/OT grade: A, T, S, S*, …
+}
 export type Mutate = (fn: (d: AppData) => AppData) => void
 export interface AppData {
   scorecard: Scorecard

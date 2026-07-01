@@ -2,6 +2,15 @@
 
 Standalone local web app for AMCAS application review. One browser window replaces Obsidian + Claude terminal.
 
+> **Local-only tool.** The server spawns a real shell (Terminal panel) and reads/writes files on disk
+> with no auth. Run it on `localhost` only — never expose it to a network or the internet.
+
+## Requirements
+
+- Node 20+ (`.nvmrc` pins `20`)
+- [Claude Code CLI](https://docs.claude.com/en/docs/claude-code) — the Terminal panel's Grade Buttons launch `claude`
+  with the router agent. Codex users: type `codex` instead — it reads the generated `AGENTS.md` (see [Agent](#agent)).
+
 ## Quick start
 
 ```bash
@@ -11,7 +20,20 @@ npm install
 npm run dev
 ```
 
-Open **http://localhost:5173**. First run copies `content.example/` → `content/` (gitignored).
+Open **http://localhost:5173**. First run copies `content.example/` → `content/` (gitignored). That's it — no database, no accounts, no config.
+
+## Resource usage
+
+Lightweight — no database, no background workers. Idle dev instance:
+
+| Resource | Usage |
+|---|---|
+| RAM | ~175MB across all processes (server + vite + esbuild) |
+| Disk | ~260MB (`node_modules`) + 24MB source |
+| CPU | ~0% at rest |
+| Ports | `5173` (frontend), `3001` (API/WebSocket) |
+
+Runs fine on a laptop alongside everything else.
 
 ## Point at your existing vault
 
@@ -58,3 +80,7 @@ editing `CLAUDE.md` or `.claude/agents/`, regenerate: `node Agent/build-agents-m
 
 Data entry (GPA/MCAT, school pipeline, rec-letter status, todos, coursework) is done in the website,
 not the terminal — the agent reads those records and focuses on scoring/coaching.
+
+## License
+
+MIT — see [LICENSE](LICENSE).

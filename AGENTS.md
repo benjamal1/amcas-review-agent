@@ -390,8 +390,17 @@ Diversity · Adversity · Why Us · Gap Year · Leadership · Additional Info.
    (`documents/secondaries/_bank/<archetype>.md` + `essay_bank[].guiding_questions`) → `story-bank.md`
    → `applicant-image.md`. Suggest which prewrite/anecdote each prompt should pull from, and how the
    emphasis must shift for this specific prompt.
-4. **Flag conflicts:** never the same anecdote twice within one school. If two prompts would reuse the
-   same moment, call it out and propose an alternative for one.
+4. **Flag conflicts (within this school + vs the primary):**
+   - **Within the school:** never the same anecdote twice across this school's prompts. If two prompts
+     would reuse the same moment, call it out and propose an alternative for one.
+   - **Vs the primary:** every school's reader also reads the primary (personal statement, impactful
+     experience, Work/Activities). A story already spent there is *already read by this school*, so
+     pointing a secondary at it repeats it. Check `story-bank.md` (a checked `- [x]` = used in the
+     primary) + the primary docs. If a prompt's best match is a spent story, flag it and either
+     redirect to unspent material or mark it an explicit **DEEPEN** (name what NEW facet the secondary
+     adds beyond the primary — if none, it's repetition).
+   - **Cross-school is NOT a conflict.** Each school is a separate application/reader; the same story
+     reused for a *different* school is expected. Never flag reuse across schools.
 5. **School-specifics:** mark which prompts need school detail (always Why Us; recommend 1–2 others per
    Shemmassian) and point to `documents/secondaries/<school-slug>/_research.md` for hooks.
 
@@ -448,11 +457,24 @@ De-personalized — "the applicant," never a name.
    strong (genuine overlap) vs. thin (generic). Per Shemmassian: fit isn't flattery — it's evidence
    the applicant knows how to use that school's specific resources.
 
-## Output
+## Output — two docs, kept separate
+The school has TWO docs on its Research tab. Keep them distinct:
+- **`_research.md` = school facts** (what the school is: funded projects, labs, faculty, mission/values,
+  programs, clinics, orgs) + sources. This is reference the applicant also fills in themselves.
+- **`_brainstorm.md` = secondary suggestions** (applicant-specific): the fit hooks and angle ideas —
+  "X at this school ↔ the applicant's Y → angle Z" — i.e. your coaching applied to this school's prompts.
+
 **Default: coach in the terminal only — do not write any file.** Summarize the strongest 3–5 fit hooks
-+ their sources as terminal notes. Write to `$CONTENT_DIR/documents/secondaries/<school-slug>/_research.md`
-**only if the applicant explicitly asks** ("save these to my research notes" / "add to _research.md") —
-then append (never overwrite), clearly marked as research notes + sources, creating the file/dir if missing.
++ their sources as terminal notes. When the applicant asks you to save:
+- school facts / sources → append to `$CONTENT_DIR/documents/secondaries/<school-slug>/_research.md`
+- your secondary angle suggestions → append to `$CONTENT_DIR/documents/secondaries/<school-slug>/_brainstorm.md`
+Always **append, never overwrite**; create the file/dir if missing; clearly mark each block. Put fit
+hooks/angles in `_brainstorm.md`, NOT `_research.md` — `_research.md` stays clean school reference.
+
+**Reuse guard:** the applicant's primary (PS, impactful experience, Work/Activities) is read by every
+school. When suggesting an angle, avoid anchoring on a story already spent in the primary (checked
+`- [x]` in `story-bank.md`) unless you explicitly flag it as a DEEPEN with a new facet. Reusing a story
+across *different* schools is fine — never flag that.
 
 Never invent school facts or applicant experiences. Don't draft the essay unless explicitly asked.
 
@@ -466,6 +488,32 @@ real moments that feed them — do NOT write the essay. De-personalized — "the
 **"New material" means new angles and connections across real experiences — NOT inventing biography.**
 Never fabricate an experience, trait, or fact. If you genuinely can't find material, say so and ask
 probing questions; don't fill the gap with fiction.
+
+## Reuse guard (READ FIRST, every run)
+Every school's reader sees the **primary** (personal statement, impactful experience, and the
+Work/Activities entries). So a story already spent there is *already read by this school* — surfacing
+it again in a secondary repeats it. Before proposing anything, build the "already-spent" set:
+- **`story-bank.md` checkboxes:** a checked `- [x]` = already used in the primary. Treat every checked
+  story as spent.
+- **The primary docs:** `$CONTENT_DIR/documents/personal-statement.md`,
+  `documents/impactful-experience.md`, and the activity descriptions (`documents/activities/*` /
+  `data.json`). Skim so you know what each already deploys.
+- **This school's OTHER secondaries** only: `documents/secondaries/<this-slug>/*` + that school's
+  `essays[]`. A story used in one of this school's prompts is spent for this school.
+
+**Cross-school reuse is fine — do NOT treat it as repetition.** Every school is a separate
+application with a separate reader. The same secondary story reused for a *different* school is
+expected and good; never flag that.
+
+Two allowed moves, and you must label which each seed is:
+- **FRESH** — an unspent story/angle (unchecked in the bank, not in the primary or this school's
+  other secondaries). Prefer these.
+- **DEEPEN** — deliberately expanding a story that's already in the primary, when the prompt genuinely
+  calls for it. Only when it adds a **new facet or layer** (not a retell): name where it's already
+  used and state exactly what new depth this adds. If you can't name new depth, it's repetition — drop it.
+
+Default to FRESH. Reach for the checked/spent stories only as an explicit DEEPEN, never as if they were
+new. If the best-fit material is already spent, say so plainly and hunt for an unused facet first.
 
 ## The six categories (Shemmassian)
 Diversity · Adversity · Why Us · Gap Year · Leadership · Additional Info. Each has guiding question(s)
