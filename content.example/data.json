@@ -1,209 +1,159 @@
 {
+  "_demo_note": "Fictional applicant (Jordan Rivera) so the app doesn't ship looking empty. Delete this key and replace with your own data — content/ is gitignored, this file only lives in content.example/.",
   "scorecard": {
-    "composite": null,
+    "composite": 78,
     "red_flag_count": 0,
     "domains": {
       "personal_narrative": {
-        "avg": null,
-        "trend": "→",
-        "last_updated": ""
+        "avg": 8,
+        "trend": "↑",
+        "last_updated": "2026-05-14"
       },
       "clinical_experience": {
-        "avg": null,
+        "avg": 9,
         "trend": "→",
-        "last_updated": ""
+        "last_updated": "2026-05-10"
       },
       "research_academics": {
-        "avg": null,
-        "trend": "→",
-        "last_updated": ""
+        "avg": 7,
+        "trend": "↑",
+        "last_updated": "2026-05-12"
       },
       "extracurriculars": {
-        "avg": null,
+        "avg": 7,
         "trend": "→",
-        "last_updated": ""
+        "last_updated": "2026-05-08"
       },
       "service_community": {
-        "avg": null,
+        "avg": 8,
         "trend": "→",
-        "last_updated": ""
+        "last_updated": "2026-05-10"
       }
     },
     "hard_metrics": {
-      "gpa_cumulative": null,
-      "gpa_bcpm": null,
-      "mcat_total": null,
-      "mcat_cars": null,
-      "mcat_cp": null,
-      "mcat_bb": null,
-      "mcat_ps": null
+      "gpa_cumulative": 3.78,
+      "gpa_bcpm": 3.71,
+      "mcat_total": 514,
+      "mcat_cars": 128,
+      "mcat_cp": 129,
+      "mcat_bb": 130,
+      "mcat_ps": 127
     }
   },
   "competencies": [
-    {
-      "name": "Service Orientation",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Social Skills",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Cultural Competence",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Teamwork",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Oral Communication",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Ethical Responsibility",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Reliability and Dependability",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Resilience and Adaptability",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Capacity for Improvement",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Critical Thinking",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Quantitative Reasoning",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Scientific Inquiry",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Written Communication",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Living and Working with Others",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Empathy and Compassion",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Human Behavior",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    },
-    {
-      "name": "Medical Knowledge",
-      "score": null,
-      "tier": null,
-      "supported_by": []
-    }
+    { "name": "Service Orientation", "score": 9, "tier": "exceptional", "supported_by": ["Emergency Department Volunteer", "Patient Navigator, Free Clinic"] },
+    { "name": "Social Skills", "score": 8, "tier": "strong", "supported_by": ["Patient Navigator, Free Clinic", "Peer Tutor, General & Organic Chemistry"] },
+    { "name": "Cultural Competence", "score": 8, "tier": "strong", "supported_by": ["Global Health Field Program, Kenya", "Patient Navigator, Free Clinic"] },
+    { "name": "Teamwork", "score": 8, "tier": "strong", "supported_by": ["Captain, Varsity Rowing", "Emergency Department Volunteer"] },
+    { "name": "Oral Communication", "score": 7, "tier": "strong", "supported_by": ["Peer Tutor, General & Organic Chemistry", "Captain, Varsity Rowing"] },
+    { "name": "Ethical Responsibility", "score": 7, "tier": "strong", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
+    { "name": "Reliability and Dependability", "score": 9, "tier": "exceptional", "supported_by": ["Emergency Department Volunteer", "Undergraduate Researcher, Tumor Immunology Lab"] },
+    { "name": "Resilience and Adaptability", "score": 7, "tier": "strong", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab", "Captain, Varsity Rowing"] },
+    { "name": "Capacity for Improvement", "score": 7, "tier": "strong", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
+    { "name": "Critical Thinking", "score": 7, "tier": "strong", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab", "Global Health Field Program, Kenya"] },
+    { "name": "Quantitative Reasoning", "score": 6, "tier": "developing", "supported_by": ["Global Health Field Program, Kenya"] },
+    { "name": "Scientific Inquiry", "score": 8, "tier": "strong", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
+    { "name": "Written Communication", "score": 7, "tier": "strong", "supported_by": [] },
+    { "name": "Living and Working with Others", "score": 8, "tier": "strong", "supported_by": ["Captain, Varsity Rowing", "Global Health Field Program, Kenya"] },
+    { "name": "Empathy and Compassion", "score": 9, "tier": "exceptional", "supported_by": ["Patient Navigator, Free Clinic", "Emergency Department Volunteer"] },
+    { "name": "Human Behavior", "score": 6, "tier": "developing", "supported_by": [] },
+    { "name": "Medical Knowledge", "score": 6, "tier": "developing", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab", "Physician Shadowing, Family Medicine"] }
   ],
-  "priorities": [],
+  "priorities": [
+    { "id": "p1", "text": "Strengthen Written Communication evidence — no activity currently supports it directly", "domain": "competencies", "severity": "medium" },
+    { "id": "p2", "text": "Personal statement conclusion still reads slightly generic — tighten the last paragraph", "domain": "personal_narrative", "severity": "low" },
+    { "id": "p3", "text": "Quantify the tutoring impact with a real number for the activity #4 entry", "domain": "activities", "severity": "low" }
+  ],
   "todos": {
-    "open": [],
-    "done": []
+    "open": [
+      { "id": "t1", "text": "Ask Dr. Anand for a rec letter timeline update", "source": "meeting-notes" },
+      { "id": "t2", "text": "Draft why-us secondary bank entry before schools open", "source": "meeting-notes" }
+    ],
+    "done": [
+      { "id": "t0", "text": "Submit primary application", "source": "manual" }
+    ]
   },
   "component_scores": {
-    "personal_statement": {
-      "score": null,
-      "last_scored": ""
-    },
-    "activities": {
-      "score": null,
-      "last_scored": ""
-    },
-    "impactful_experience": {
-      "score": null,
-      "last_scored": ""
-    }
+    "personal_statement": { "score": 8, "last_scored": "2026-05-14" },
+    "activities": { "score": 7, "last_scored": "2026-05-10" },
+    "impactful_experience": { "score": 8, "last_scored": "2026-05-14" }
   },
-  "activity_entries": [],
+  "activity_entries": [
+    { "name": "Emergency Department Volunteer", "description_quality": 8, "most_meaningful_depth": 9 },
+    { "name": "Undergraduate Researcher, Tumor Immunology Lab", "description_quality": 8, "most_meaningful_depth": 8 },
+    { "name": "Patient Navigator, Free Clinic", "description_quality": 9, "most_meaningful_depth": 9 },
+    { "name": "Peer Tutor, General & Organic Chemistry", "description_quality": 6 },
+    { "name": "Physician Shadowing, Family Medicine", "description_quality": 6 },
+    { "name": "Captain, Varsity Rowing", "description_quality": 7 },
+    { "name": "Volunteer, Hospital Gift Shop & Wayfinding", "description_quality": 5 },
+    { "name": "Global Health Field Program, Kenya", "description_quality": 7 }
+  ],
   "rec_letters": [
-    {
-      "recommender": "Dr. Jane Smith",
-      "title": "Professor of Biology",
-      "relationship": "Research supervisor",
-      "status": "pending",
-      "submitted": false,
-      "requested_date": "",
-      "received_date": "",
-      "notes": ""
-    }
+    { "recommender": "Dr. Priya Anand", "title": "Associate Professor, Immunology", "relationship": "Research supervisor", "status": "received", "submitted": true, "requested_date": "2026-01-10", "received_date": "2026-02-20", "notes": "Strong — specifically praised the flow cytometry protocol redesign." },
+    { "recommender": "Dr. Marcus Webb", "title": "Family Physician", "relationship": "Shadowing supervisor", "status": "received", "submitted": true, "requested_date": "2026-01-12", "received_date": "2026-03-01", "notes": "" },
+    { "recommender": "Committee Letter", "title": "Pre-Health Advising Office", "relationship": "Institutional committee letter", "status": "pending", "submitted": false, "requested_date": "2026-01-05", "received_date": "", "notes": "Interview scheduled 2026-06-02" }
   ],
   "schools": [
     {
-      "name": "School Name",
+      "name": "State University School of Medicine",
       "tier": "target",
-      "pipeline": "researching",
+      "pipeline": "secondary-submitted",
       "casper_required": false,
-      "preview_required": false,
-      "secondary_submitted": false,
+      "preview_required": true,
+      "secondary_submitted": true,
       "interview": false,
-      "notes": "",
+      "notes": "In-state; strong fit given rowing + Anand lab connection.",
       "secondary": {
         "research_notes_path": "documents/secondaries/school-name/_research.md",
         "prompt_source_year": "2025-2026 (prior-year)",
         "essays": [
-          {
-            "prompt": "Why do you want to attend our school?",
-            "maps_to": "why-us",
-            "status": "not-started",
-            "char_limit": 300
-          }
+          { "prompt": "Why do you want to attend our school?", "maps_to": "why-us", "status": "submitted", "char_limit": 300 }
         ]
+      }
+    },
+    {
+      "name": "Coastal University Medical School",
+      "tier": "reach",
+      "pipeline": "researching",
+      "casper_required": true,
+      "preview_required": false,
+      "secondary_submitted": false,
+      "interview": false,
+      "notes": "Strong global health track — want to connect Kenya program in why-us.",
+      "secondary": {
+        "research_notes_path": "documents/secondaries/school-name/_research.md",
+        "prompt_source_year": "2025-2026 (prior-year)",
+        "essays": []
+      }
+    },
+    {
+      "name": "Lakeshore College of Medicine",
+      "tier": "safety",
+      "pipeline": "secondary-received",
+      "casper_required": false,
+      "preview_required": false,
+      "secondary_submitted": false,
+      "interview": false,
+      "notes": "Rolling admissions — prioritize this one for turnaround.",
+      "secondary": {
+        "research_notes_path": "documents/secondaries/school-name/_research.md",
+        "prompt_source_year": "2025-2026 (prior-year)",
+        "essays": []
       }
     }
   ],
   "coursework": [
-    {
-      "name": "Organic Chemistry I",
-      "subject": "Chemistry"
-    }
+    { "name": "General Chemistry I", "subject": "Chemistry" },
+    { "name": "General Chemistry II", "subject": "Chemistry" },
+    { "name": "Organic Chemistry I", "subject": "Chemistry" },
+    { "name": "Organic Chemistry II", "subject": "Chemistry" },
+    { "name": "General Biology I", "subject": "Biology" },
+    { "name": "Cell & Molecular Biology", "subject": "Biology" },
+    { "name": "Immunology", "subject": "Biology" },
+    { "name": "Physics I (Calc-based)", "subject": "Physics" },
+    { "name": "Physics II (Calc-based)", "subject": "Physics" },
+    { "name": "Biochemistry", "subject": "Biochemistry" },
+    { "name": "Statistics", "subject": "Math" }
   ],
   "secondaries": {
     "brainstorm_path": "documents/secondaries/_brainstorm.md",
@@ -212,7 +162,7 @@
         "archetype": "adversity",
         "label": "Adversity / Challenge / Failure",
         "doc_path": "documents/secondaries/_bank/adversity.md",
-        "status": "not-started",
+        "status": "drafted",
         "pre_writable": true,
         "guiding_questions": [
           "List 3+ times you failed to complete a task or reach a goal.",
