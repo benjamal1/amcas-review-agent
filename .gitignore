@@ -43,3 +43,7 @@ dist/
 .playwright-mcp/
 /*.png
 dist-static/
+
+# Internal dev-process docs (not part of the shipped app)
+/.planning/
+/UI-REVIEW.md
