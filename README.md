@@ -10,6 +10,11 @@ Standalone local web app for AMCAS application review. One browser window replac
 - Node 20+ (`.nvmrc` pins `20`)
 - [Claude Code CLI](https://docs.claude.com/en/docs/claude-code) — the Terminal panel's Grade Buttons launch `claude`
   with the router agent. Codex users: type `codex` instead — it reads the generated `AGENTS.md` (see [Agent](#agent)).
+- **Linux only:** the Terminal panel depends on `node-pty`, which ships prebuilt binaries for macOS/Windows
+  but not Linux — `npm install` compiles it from source there. Install a C/C++ toolchain first
+  (`sudo apt install build-essential python3` on Debian/Ubuntu, `sudo pacman -S base-devel python` on Arch).
+  If it's missing, `npm install` still succeeds but the Terminal panel shows
+  "node-pty is not available" instead of a shell — fix with `npm rebuild node-pty` after installing the toolchain.
 
 ## Quick start
 
@@ -34,6 +39,18 @@ Lightweight — no database, no background workers. Idle dev instance:
 | Ports | `5173` (frontend), `3001` (API/WebSocket) |
 
 Runs fine on a laptop alongside everything else.
+
+## Removing it
+
+No installer, no system services, no global state. Everything lives in the cloned folder
+(including your data in `content/`, unless you pointed `CONTENT_DIR` elsewhere). To uninstall:
+
+```bash
+rm -rf amcas-review-agent
+```
+
+If you set `CONTENT_DIR` to point outside the repo (e.g. an Obsidian vault), that folder is
+untouched by the delete above — remove it separately if you want your data gone too.
 
 ## Point at your existing vault
 
