@@ -35,6 +35,18 @@ Lightweight — no database, no background workers. Idle dev instance:
 
 Runs fine on a laptop alongside everything else.
 
+## Removing it
+
+No installer, no system services, no global state. Everything lives in the cloned folder
+(including your data in `content/`, unless you pointed `CONTENT_DIR` elsewhere). To uninstall:
+
+```bash
+rm -rf amcas-review-agent
+```
+
+If you set `CONTENT_DIR` to point outside the repo (e.g. an Obsidian vault), that folder is
+untouched by the delete above — remove it separately if you want your data gone too.
+
 ## Point at your existing vault
 
 ```bash
