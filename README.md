@@ -43,7 +43,8 @@ Runs fine on a laptop alongside everything else.
 ## Removing it
 
 No installer, no system services, no global state. Everything lives in the cloned folder
-(including your data in `content/`, unless you pointed `CONTENT_DIR` elsewhere). To uninstall:
+(including your data in `content/`, unless you pointed `CONTENT_DIR` elsewhere). Stop the dev
+server first (`Ctrl+C` in the terminal running `npm run dev`), then:
 
 ```bash
 rm -rf amcas-review-agent
