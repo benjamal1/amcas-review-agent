@@ -1,5 +1,5 @@
 {
-  "_demo_note": "Ships with real scores/metrics from the author's own application (a flex, not a leak — no essay text, recommender names, or school specifics are real) plus placeholder gibberish essays. Click Settings → Clear All Data before entering your own — content/ is tracked in git, so untrack or repoint it first (see README).",
+  "_demo_note": "Ships with the author's real scorecard/metrics/schools/coursework (a flex, not a leak) — but every name that could identify the author or people around them (activities, recommenders, red flags, priorities) plus every essay/document is scrubbed or gibberish. Click Settings → Clear All Data before entering your own — content/ is tracked in git, so untrack or repoint it first (see README).",
   "scorecard": {
     "composite": 82,
     "red_flag_count": 0,
@@ -31,132 +31,2102 @@
       }
     },
     "hard_metrics": {
-      "gpa_cumulative": 4.0,
-      "gpa_bcpm": 4.0,
+      "gpa_cumulative": 4,
+      "gpa_bcpm": 4,
       "mcat_total": 523,
-      "mcat_cars": 129,
       "mcat_cp": 131,
+      "mcat_cars": 129,
       "mcat_bb": 131,
       "mcat_ps": 132
-    }
-  },
-  "competencies": [
-    { "name": "Service Orientation", "score": 8, "tier": "strong", "supported_by": ["Emergency Department Volunteer", "Patient Navigator, Free Clinic"] },
-    { "name": "Social Skills", "score": 8, "tier": "strong", "supported_by": ["Patient Navigator, Free Clinic", "Peer Tutor, General & Organic Chemistry"] },
-    { "name": "Cultural Competence", "score": 7, "tier": "strong", "supported_by": ["Global Health Field Program, Kenya"] },
-    { "name": "Teamwork", "score": 8, "tier": "strong", "supported_by": ["Captain, Varsity Rowing", "Emergency Department Volunteer"] },
-    { "name": "Oral Communication", "score": 8, "tier": "strong", "supported_by": ["Peer Tutor, General & Organic Chemistry"] },
-    { "name": "Ethical Responsibility", "score": 4, "tier": "thin", "supported_by": [] },
-    { "name": "Reliability and Dependability", "score": 9, "tier": "exceptional", "supported_by": ["Emergency Department Volunteer", "Undergraduate Researcher, Tumor Immunology Lab"] },
-    { "name": "Resilience and Adaptability", "score": 9, "tier": "exceptional", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
-    { "name": "Capacity for Improvement", "score": 9, "tier": "exceptional", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
-    { "name": "Critical Thinking", "score": 8, "tier": "strong", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
-    { "name": "Quantitative Reasoning", "score": 9, "tier": "exceptional", "supported_by": ["Global Health Field Program, Kenya"] },
-    { "name": "Scientific Inquiry", "score": 9, "tier": "exceptional", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
-    { "name": "Written Communication", "score": 8, "tier": "strong", "supported_by": [] },
-    { "name": "Living and Working with Others", "score": 6, "tier": "developing", "supported_by": ["Captain, Varsity Rowing"] },
-    { "name": "Empathy and Compassion", "score": 9, "tier": "exceptional", "supported_by": ["Patient Navigator, Free Clinic", "Emergency Department Volunteer"] },
-    { "name": "Human Behavior", "score": 6, "tier": "developing", "supported_by": [] },
-    { "name": "Medical Knowledge", "score": 10, "tier": "exceptional", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab", "Physician Shadowing, Family Medicine"] }
-  ],
-  "priorities": [
-    { "id": "p1", "text": "Strengthen Written Communication evidence — no activity currently supports it directly", "domain": "competencies", "severity": "medium" },
-    { "id": "p2", "text": "Personal statement conclusion still reads slightly generic — tighten the last paragraph", "domain": "personal_narrative", "severity": "low" },
-    { "id": "p3", "text": "Quantify the tutoring impact with a real number for the activity #4 entry", "domain": "activities", "severity": "low" }
-  ],
-  "todos": {
-    "open": [
-      { "id": "t1", "text": "Ask Dr. Anand for a rec letter timeline update", "source": "meeting-notes" },
-      { "id": "t2", "text": "Draft why-us secondary bank entry before schools open", "source": "meeting-notes" }
-    ],
-    "done": [
-      { "id": "t0", "text": "Submit primary application", "source": "manual" }
+    },
+    "composite_history": [
+      {
+        "date": "2026-06-04",
+        "composite": 82,
+        "note": "Full grade run"
+      }
     ]
   },
+  "competencies": [
+    {
+      "name": "Commitment to Learning",
+      "score": 9,
+      "tier": "🟢 Strong",
+      "supported_by": []
+    },
+    {
+      "name": "Cultural Awareness",
+      "score": 7,
+      "tier": "🟡 Present",
+      "supported_by": []
+    },
+    {
+      "name": "Cultural Humility",
+      "score": 6,
+      "tier": "🟡 Present",
+      "supported_by": []
+    },
+    {
+      "name": "Empathy and Compassion",
+      "score": 9,
+      "tier": "🟢 Strong",
+      "supported_by": []
+    },
+    {
+      "name": "Ethical Responsibility",
+      "score": 4,
+      "tier": "🔴 Thin",
+      "supported_by": []
+    },
+    {
+      "name": "Interpersonal Skills",
+      "score": 8,
+      "tier": "🟢 Strong",
+      "supported_by": []
+    },
+    {
+      "name": "Oral Communication",
+      "score": 8,
+      "tier": "🟢 Strong",
+      "supported_by": []
+    },
+    {
+      "name": "Reliability",
+      "score": 9,
+      "tier": "🟢 Strong",
+      "supported_by": []
+    },
+    {
+      "name": "Resilience/Adaptability",
+      "score": 9,
+      "tier": "🟢 Strong",
+      "supported_by": []
+    },
+    {
+      "name": "Service Orientation",
+      "score": 8,
+      "tier": "🟢 Strong",
+      "supported_by": []
+    },
+    {
+      "name": "Teamwork",
+      "score": 8,
+      "tier": "🟢 Strong",
+      "supported_by": []
+    },
+    {
+      "name": "Critical Thinking",
+      "score": 8,
+      "tier": "🟢 Strong",
+      "supported_by": []
+    },
+    {
+      "name": "Quantitative Reasoning",
+      "score": 9,
+      "tier": "🟢 Strong",
+      "supported_by": []
+    },
+    {
+      "name": "Scientific Inquiry",
+      "score": 9,
+      "tier": "🟢 Strong",
+      "supported_by": []
+    },
+    {
+      "name": "Written Communication",
+      "score": 8,
+      "tier": "🟢 Strong",
+      "supported_by": []
+    },
+    {
+      "name": "Living Systems",
+      "score": 10,
+      "tier": "🟢 Strong",
+      "supported_by": []
+    },
+    {
+      "name": "Human Behavior",
+      "score": 6,
+      "tier": "🟡 Present",
+      "supported_by": []
+    }
+  ],
+  "priorities": [
+    "Personal Statement — one paragraph still reads more abstract than the rest; ground it in a concrete detail.",
+    "Activities — weakest entry description is summary-level; name one specific outcome.",
+    "Competency — lowest-scoring competency has no direct essay evidence yet.",
+    "Secondaries — several schools still need why-us material drafted before deadlines."
+  ],
+  "todos": {
+    "open": [],
+    "done": []
+  },
   "component_scores": {
-    "personal_statement": { "score": 7.5, "last_scored": "2026-06-04" },
-    "activities": { "score": 8.8, "last_scored": "2026-06-04" },
-    "impactful_experience": { "score": 7.4, "last_scored": "2026-06-04" },
-    "experiences": { "score": 8.2, "last_scored": "2026-06-04" },
-    "competency": { "score": 8, "last_scored": "2026-06-04" }
+    "personal_statement": {
+      "score": 7.5,
+      "last_scored": "2026-06-04"
+    },
+    "activities": {
+      "score": 8.8,
+      "last_scored": "2026-06-04"
+    },
+    "impactful_experience": {
+      "score": 7.4,
+      "last_scored": "2026-06-04"
+    },
+    "experiences": {
+      "score": 8.2,
+      "last_scored": "2026-06-04"
+    },
+    "competency": {
+      "score": 8,
+      "last_scored": "2026-06-04"
+    }
   },
   "activity_entries": [
-    { "name": "Emergency Department Volunteer", "description_quality": 8, "most_meaningful_depth": 9 },
-    { "name": "Undergraduate Researcher, Tumor Immunology Lab", "description_quality": 8, "most_meaningful_depth": 8 },
-    { "name": "Patient Navigator, Free Clinic", "description_quality": 9, "most_meaningful_depth": 9 },
-    { "name": "Peer Tutor, General & Organic Chemistry", "description_quality": 6 },
-    { "name": "Physician Shadowing, Family Medicine", "description_quality": 6 },
-    { "name": "Captain, Varsity Rowing", "description_quality": 7 },
-    { "name": "Volunteer, Hospital Gift Shop & Wayfinding", "description_quality": 5 },
-    { "name": "Global Health Field Program, Kenya", "description_quality": 7 }
+    {
+      "name": "Research Lab",
+      "type": "Research/Lab",
+      "description_quality": 8,
+      "most_meaningful_depth": 9
+    },
+    {
+      "name": "Clinical Volunteering",
+      "type": "Clinical/Volunteer",
+      "description_quality": 8,
+      "most_meaningful_depth": 9
+    },
+    {
+      "name": "Computational Research Lab",
+      "type": "Research/Lab",
+      "description_quality": 9,
+      "most_meaningful_depth": null
+    },
+    {
+      "name": "Pre-Health Student Organization",
+      "type": "Extracurricular",
+      "description_quality": 7,
+      "most_meaningful_depth": null
+    },
+    {
+      "name": "Global Health Extracurricular",
+      "type": "Extracurricular",
+      "description_quality": 8,
+      "most_meaningful_depth": null
+    },
+    {
+      "name": "Teaching Assistant",
+      "type": "Teaching/TA",
+      "description_quality": 9,
+      "most_meaningful_depth": null
+    },
+    {
+      "name": "Hospital Volunteering",
+      "type": "Clinical/Volunteer",
+      "description_quality": 9,
+      "most_meaningful_depth": null
+    },
+    {
+      "name": "Varsity/Club Athletics",
+      "type": "Extracurricular",
+      "description_quality": 8,
+      "most_meaningful_depth": 9
+    },
+    {
+      "name": "Physician Shadowing",
+      "type": "Physician Shadowing",
+      "description_quality": 8,
+      "most_meaningful_depth": null
+    },
+    {
+      "name": "Pre-Health Mentorship Program",
+      "type": "Teaching/TA",
+      "description_quality": 8,
+      "most_meaningful_depth": null
+    },
+    {
+      "name": "Publications",
+      "type": "Publications",
+      "description_quality": 7,
+      "most_meaningful_depth": null
+    },
+    {
+      "name": "Hobby — Watchmaking",
+      "type": "Hobbies",
+      "description_quality": 9,
+      "most_meaningful_depth": null
+    },
+    {
+      "name": "Awards and Honors",
+      "type": "Honors/Awards",
+      "description_quality": 7,
+      "most_meaningful_depth": null
+    },
+    {
+      "name": "Non-Clinical Volunteering",
+      "type": "Non-Clinical Vol.",
+      "description_quality": 8,
+      "most_meaningful_depth": null
+    },
+    {
+      "name": "Club Athletics",
+      "type": "Extracurricular",
+      "description_quality": 8,
+      "most_meaningful_depth": null
+    }
   ],
   "rec_letters": [
-    { "recommender": "Dr. Priya Anand", "title": "Associate Professor, Immunology", "relationship": "Research supervisor", "status": "received", "submitted": true, "requested_date": "2026-01-10", "received_date": "2026-02-20", "notes": "Strong letter." },
-    { "recommender": "Dr. Marcus Webb", "title": "Family Physician", "relationship": "Shadowing supervisor", "status": "received", "submitted": true, "requested_date": "2026-01-12", "received_date": "2026-03-01", "notes": "" },
-    { "recommender": "Committee Letter", "title": "Pre-Health Advising Office", "relationship": "Institutional committee letter", "status": "pending", "submitted": false, "requested_date": "2026-01-05", "received_date": "", "notes": "Interview scheduled 2026-06-02" }
+    {
+      "recommender": "Recommender 1",
+      "title": "Faculty / Supervisor",
+      "relationship": "Mentor",
+      "status": "pending",
+      "submitted": false,
+      "requested_date": "",
+      "received_date": "",
+      "notes": ""
+    }
   ],
   "schools": [
     {
-      "name": "State University School of Medicine",
+      "name": "Harvard Medical School",
+      "status": "pre-secondary",
       "tier": "target",
-      "pipeline": "secondary-submitted",
-      "casper_required": false,
-      "preview_required": true,
-      "secondary_submitted": true,
-      "interview": false,
-      "notes": "In-state; strong fit given rowing + Anand lab connection.",
+      "rank": 1,
+      "location": "MA",
+      "status_history": [
+        {
+          "status": "pre-secondary",
+          "date": "2026-06-28"
+        }
+      ],
+      "avg_gpa": 3.97,
+      "avg_mcat": 521,
+      "avg_source": "admit.org",
       "secondary": {
-        "research_notes_path": "documents/secondaries/school-name/_research.md",
-        "prompt_source_year": "2025-2026 (prior-year)",
         "essays": [
-          { "prompt": "Why do you want to attend our school?", "maps_to": "why-us", "status": "submitted", "char_limit": 300 }
+          {
+            "prompt": "If there is an important aspect of your personal background or identity not addressed elsewhere in the application that may illuminate how you could contribute to the medical school and that you would like to share with the Committee, we invite you to do so here. Examples might include significant challenges in access to education, unusual socioeconomic factors, diverse ideological perspectives, or other aspects of your personal or family background that help place your prior academic achievements in context or provide further insight into your motivation for a career in medicine or the view points you might bring to the medical school community.",
+            "status": "not-started",
+            "char_limit": 4000,
+            "maps_to": "diversity",
+            "chance": 99,
+            "doc_path": "documents/secondaries/harvard-medical-school/1.md"
+          },
+          {
+            "prompt": "The HST MD program draws on the combined resources of Harvard and MIT to provide a distinct preclinical education tailored to preparing students for careers as transformative physicians who will shape the future practice of medicine. Our students come from the full spectrum of disciplines including biological, physical, engineering and social sciences. HST classes are small, commonly include graduate students and have an emphasis on quantitative and analytic approaches. The unique HST pre-clinical curriculum prepares students well for the HMS clinical education while also emphasizing disease mechanisms and preparing students to solve critical unmet needs in medicine and healthcare (ranging from novel diagnostics and therapeutics to applications of ‘big data’ and systems engineering). Please focus on how your interests, experiences and aspirations have prepared you for HST (rather than identifying specific HST faculty or research opportunities).",
+            "status": "not-started",
+            "char_limit": 4000,
+            "maps_to": "why-us",
+            "chance": 99,
+            "doc_path": "documents/secondaries/harvard-medical-school/2.md"
+          }
+        ]
+      },
+      "admit_slug": "harvard-medical-school"
+    },
+    {
+      "name": "University of California, San Francisco, School of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "CA",
+      "loe_committee_letter": "unknown",
+      "loe_letter_packet": "unknown",
+      "loe_individual_letters": "not_accepted",
+      "admission_notes": "Medicine https://meded.ucsf.edu/prospective-students/md-program-admissions/md-program-application- process. and distributed with attribution for individual, educational, and noncommercial purposes only.",
+      "msar_source": "Agent/reference/msar",
+      "rank": 3,
+      "avg_gpa": 3.92,
+      "avg_mcat": 517,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "university-of-california-san-francisco-school-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "If you wish to update or expand upon your activities, you may provide additional information below.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 3500,
+            "maps_to": "additional",
+            "chance": 99
+          },
+          {
+            "prompt": "UCSF PRIDE values serve as a guiding light for institutional life and activities. Briefly describe how you will contribute to and support our PRIDE values consistent with your goals or life experience.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 3500,
+            "maps_to": "diversity",
+            "chance": 67
+          }
         ]
       }
     },
     {
-      "name": "Coastal University Medical School",
-      "tier": "reach",
-      "pipeline": "researching",
-      "casper_required": true,
-      "preview_required": false,
-      "secondary_submitted": false,
-      "interview": false,
-      "notes": "Strong global health track — want to connect Kenya program in why-us.",
+      "name": "Duke University School of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "rank": 4,
+      "location": "NC",
+      "avg_gpa": 3.91,
+      "avg_mcat": 520,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "duke-university-school-of-medicine",
       "secondary": {
-        "research_notes_path": "documents/secondaries/school-name/_research.md",
-        "prompt_source_year": "2025-2026 (prior-year)",
-        "essays": []
+        "essays": [
+          {
+            "prompt": "Share with us your story. This is your opportunity to allow us to know how you wish to be addressed, recognized, and treated.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2800,
+            "chance": 50,
+            "doc_path": "documents/secondaries/duke-university-school-of-medicine/1.md",
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "Please describe your anticipated educational, employment, volunteer, or other activities between completing your AMCAS application and matriculating to medical school.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2800,
+            "doc_path": "documents/secondaries/duke-university-school-of-medicine/2.md",
+            "chance": 33,
+            "maps_to": "gap-year"
+          },
+          {
+            "prompt": "Trust and rapport are essential in your day-to-day interactions with people. How do you cultivate a relationship with a person who may be very different from you?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2800,
+            "doc_path": "documents/secondaries/duke-university-school-of-medicine/3.md",
+            "chance": 83,
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "Describe a situation in which you chose to advocate for someone who was different from you or for a cause or idea that was different from yours. Define your view of advocacy. What risks, if any, might be associated with your choice to be an advocate?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2800,
+            "doc_path": "documents/secondaries/duke-university-school-of-medicine/4.md",
+            "chance": 99,
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "Not achieving a goal or one's desire can sometimes be disheartening. What have you discovered from your setbacks and disappointments and how does this translate to your current way of thinking?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2800,
+            "doc_path": "documents/secondaries/duke-university-school-of-medicine/5.md",
+            "chance": 96,
+            "maps_to": "adversity"
+          },
+          {
+            "prompt": "What do you value most as a leader and as a contributor? What attributes do you possess as a leader and as a team member and how do you apply them on a daily basis?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2800,
+            "chance": 99,
+            "maps_to": "leadership"
+          },
+          {
+            "prompt": "Critical thinking involves a number of characteristics. Research experience enhances critical analysis skills. Describe any research experience or similar experience in which you utilized critical thinking. How will critical thinking be important in your future career?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2800,
+            "chance": 99,
+            "doc_path": "documents/secondaries/duke-university-school-of-medicine/7.md",
+            "maps_to": "additional"
+          },
+          {
+            "prompt": "Potential sources of health inequities exist. Duke's Moments to Movement (M2M) is a collective stand to address these issues. Discuss your experience with disparities in health, health care and society.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2800,
+            "chance": 92,
+            "doc_path": "documents/secondaries/duke-university-school-of-medicine/8.md",
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "Please let us know of any additional information that you would like us to consider while reviewing your application.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2800,
+            "chance": 99,
+            "maps_to": "additional"
+          }
+        ]
       }
     },
     {
-      "name": "Lakeshore College of Medicine",
-      "tier": "safety",
-      "pipeline": "secondary-received",
-      "casper_required": false,
-      "preview_required": false,
-      "secondary_submitted": false,
-      "interview": false,
-      "notes": "Rolling admissions — prioritize this one for turnaround.",
+      "name": "Johns Hopkins University School of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "rank": 2,
+      "location": "MD",
+      "avg_gpa": 3.97,
+      "avg_mcat": 521,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "johns-hopkins-university-school-of-medicine",
       "secondary": {
-        "research_notes_path": "documents/secondaries/school-name/_research.md",
-        "prompt_source_year": "2025-2026 (prior-year)",
-        "essays": []
+        "essays": [
+          {
+            "prompt": "Briefly describe a situation where you had to overcome adversity. Include lessons learned and how you think it will affect your career as a future physician.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2100,
+            "chance": 99,
+            "maps_to": "adversity"
+          },
+          {
+            "prompt": "Describe an interaction or experience that required you to understand or engage with a perspective different from your own. How did you respond and what was the outcome?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2100,
+            "chance": 33,
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "Please review the Johns Hopkins Medicine Website. Is there an area of medicine or a particular medical specialty at Johns Hopkins that interests you and why?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2100,
+            "chance": 67,
+            "maps_to": "why-us"
+          },
+          {
+            "prompt": "Every future physician has a story. What's yours? Share the experience, insight, or connection that first made you see yourself in medicine—and how it continues to shape your path.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2100,
+            "chance": 33,
+            "maps_to": "additional"
+          },
+          {
+            "prompt": "What draws you to Johns Hopkins School of Medicine? Reflect on how our mission, culture, and academic community align with your values, experiences, and aspirations as a future physician. In your response, please highlight specific aspects of both the Hopkins community (academic, research, and/or extracurricular opportunities) and the Baltimore community, particularly the patients and families that we serve. Elaborate on how you intend to actively engage with and contribute to both of these communities as you pursue your medical education.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2100,
+            "chance": 33,
+            "maps_to": "why-us"
+          },
+          {
+            "prompt": "Would you like to share any additional information with the Admissions Committee about yourself that cannot be found elsewhere in your application? This space can also address any extenuating circumstances (e.g., unexplained gaps in work experience, choice of recommenders, inconsistent or questionable academic performance, areas of weakness, etc.) that you would like the Admissions Committee to consider.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2100,
+            "chance": 67,
+            "maps_to": "additional"
+          },
+          {
+            "prompt": "Please describe what you have been doing since graduation and your plans for the upcoming year.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2100,
+            "chance": 83,
+            "maps_to": "gap-year"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Stanford University School of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "interview_type": "of Medicine Interview and Traditional assessment, presentations |conducted virtually | conducted virtually",
+      "interview_season": "August",
+      "msar_source": "Agent/reference/msar",
+      "rank": 6,
+      "location": "CA",
+      "avg_gpa": 3.95,
+      "avg_mcat": 520,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "stanford-university-school-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "What do you see as the most likely practice scenario for your future medical career? Choose the single answer that best describes your career goals and clinical practice setting. Please describe your motivation for this practice scenario: Why do you feel you are particularly suited for this practice scenario? What knowledge, skills and attitudes have you developed that have prepared you for this career path?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1000,
+            "chance": 99,
+            "maps_to": "additional"
+          },
+          {
+            "prompt": "How will you take advantage of the Stanford Medicine Discovery Curriculum and scholarly concentration requirement to achieve your personal career goals?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1000,
+            "chance": 99,
+            "maps_to": "why-us"
+          },
+          {
+            "prompt": "Describe in a short paragraph your educational and family background. E.g., I grew up in New York City, as the 3rd child of a supermarket cashier and a high school principal. I attended Mann High School where my major interests were boxing and drama.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 600,
+            "chance": 92,
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "Please describe which aspects of your life experiences, interests, and character would help you to make a distinctive contribution to Stanford Medicine.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2000,
+            "chance": 83,
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "Please describe how you have uniquely contributed to a community with which you identify.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1000,
+            "chance": 92,
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "Please describe an experience/situation when you advocated for someone else.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1000,
+            "chance": 96,
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "Please include anything else that will help us understand better how you may uniquely contribute to Stanford Medicine?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1000,
+            "chance": 99,
+            "maps_to": "additional"
+          }
+        ]
+      }
+    },
+    {
+      "name": "NYU Grossman School of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "NY",
+      "loe_committee_letter": "not_accepted",
+      "loe_letter_packet": "not_accepted",
+      "loe_individual_letters": "not_accepted",
+      "preview_required": false,
+      "preview_note": "not using PREview scores in the admissions\n\nUniversity of North Carolina at Chapel Hill\nSchool of Medicine\n\nWe are not using PREview scores in the admissions\nprocess\n\nUniversity of North",
+      "msar_source": "Agent/reference/msar",
+      "rank": 8,
+      "avg_gpa": 3.97,
+      "avg_mcat": 523,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "new-york-university-grossman-school-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "The Admissions Committee evaluates a range of student qualities and life experiences that complement demonstrated academic excellence. What unique qualities do you possess that make you uniquely suited to become a physician or physician scientist? How have your individual lived experiences shaped your core values and desire to be a future leader in our profession?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2500,
+            "chance": 83,
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "The most meaningful achievements are often non-academic in nature. Describe the personal accomplishment that makes you most proud. Why is this important to you?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2500,
+            "chance": 57,
+            "maps_to": "additional"
+          },
+          {
+            "prompt": "Conflicts arise daily from differences in perspectives, priorities, worldviews and traditions. How do you define respect? Describe a situation in which you found it challenging to remain respectful while facing differences?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2500,
+            "chance": 99,
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "Describe a situation in which working with a colleague, family member or friend has been challenging. How did you approach the situation, and what did you gain from the experience that will benefit you as a future health care provider?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2500,
+            "chance": 99,
+            "maps_to": "adversity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Washington University in St. Louis School of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "MO",
+      "loe_committee_letter": "accepted",
+      "loe_letter_packet": "accepted",
+      "loe_individual_letters": "accepted",
+      "msar_source": "Agent/reference/msar",
+      "rank": 10,
+      "avg_gpa": 3.96,
+      "avg_mcat": 521,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "washington-university-in-st-louis-school-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "Describe a time or situation where you have been unsuccessful or failed.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 3000,
+            "chance": 99,
+            "maps_to": "adversity"
+          },
+          {
+            "prompt": "Is there anything else you would like to share with the Committee on Admissions? Some applicants use this space to describe their unique backgrounds, lived experiences, obstacles and/or challenges they faced in their journey to medical school.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 3000,
+            "chance": 99,
+            "maps_to": "additional"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Icahn School of Medicine at Mount Sinai",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "NY",
+      "loe_committee_letter": "unknown",
+      "loe_letter_packet": "unknown",
+      "loe_individual_letters": "not_accepted",
+      "preview_required": false,
+      "preview_note": "PREview for Future use - will not be used in\nthis cycle’s admissions decisions\n\nUniversity of California, Davis, School of\nMedicine\n\nWe are requiring applicants to submit PREview scores",
+      "msar_source": "Agent/reference/msar",
+      "rank": 19,
+      "avg_gpa": 3.95,
+      "avg_mcat": 520,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "icahn-school-of-medicine-at-mount-sinai",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "What is the toughest feedback you ever received? How did you handle it, and what did you learn from it?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1750,
+            "chance": 99,
+            "maps_to": "adversity"
+          },
+          {
+            "prompt": "Describe a situation that you have thought to be unfair or unjust, whether towards yourself or towards others. How did you address this situation, if at all?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1750,
+            "chance": 99,
+            "maps_to": "adversity"
+          },
+          {
+            "prompt": "If you are committed to a particular community or if there is an important aspect of your background not addressed elsewhere in the application, we invite you to do so here. Briefly explain how such factors have influenced your motivation for a career in medicine.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1050,
+            "chance": 99,
+            "maps_to": "diversity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Perelman School of Medicine at the University of Pennsylvania",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "PA",
+      "loe_committee_letter": "unknown",
+      "loe_letter_packet": "unknown",
+      "loe_individual_letters": "accepted",
+      "preview_required": false,
+      "preview_note": "not using PREview scores in the admissions\nPennsylvania process\n\nUniversity of Puerto",
+      "msar_source": "Agent/reference/msar",
+      "rank": 5,
+      "avg_gpa": 3.97,
+      "avg_mcat": 522,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "university-of-pennsylvania-perelman",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "Have you taken or are you planning to take time off between college graduation and medical school matriculation? If yes, please describe your activities during this time.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 500,
+            "chance": 79,
+            "maps_to": "gap-year"
+          },
+          {
+            "prompt": "Have you participated in any global activities outside of the U.S. prior to submitting your AMCAS application?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1000,
+            "chance": 79,
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "How would your life experiences contribute to Perelman? Please explain.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1000,
+            "chance": 33,
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "We are all navigating through challenging times at home and abroad, and physicians and physician-scientists must contend with many instances of uncertainty. Please describe a time when you faced a situation that was ambiguous, confusing, or uncertain, and how you navigated making a decision without complete information.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 3000,
+            "chance": 83,
+            "maps_to": "adversity"
+          },
+          {
+            "prompt": "Have you or your family experienced economic hardships, regardless of current income status?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1000,
+            "chance": 79,
+            "maps_to": "adversity"
+          },
+          {
+            "prompt": "Please share your reasons for applying to the Perelman School of Medicine.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1000,
+            "chance": 99,
+            "maps_to": "why-us"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Yale School of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "CT",
+      "loe_committee_letter": "unknown",
+      "loe_letter_packet": "not_accepted",
+      "loe_individual_letters": "not_accepted",
+      "preview_required": true,
+      "preview_note": "recommending applicants submit PREview",
+      "interview_type": "conducted online",
+      "interview_season": "August",
+      "msar_source": "Agent/reference/msar",
+      "rank": 11,
+      "avg_gpa": 3.96,
+      "avg_mcat": 522,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "yale-school-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "Yale School of Medicine is committed to improving the health of all people. How have your background and experiences prepared you to care for all people including those unlike yourself?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 3500,
+            "maps_to": "diversity",
+            "chance": 33,
+            "doc_path": "documents/secondaries/yale-school-of-medicine/1.md"
+          },
+          {
+            "prompt": "While there is great emphasis on the physician-patient relationship, Yale School of Medicine also emphasizes the importance of training future physicians to care for communities and populations. Describe how your experiences would contribute to this aspect of the mission of the Yale School of Medicine. (MD/PhD applicants: Research is essential to patient care, and all students at Yale School of Medicine complete a research thesis. Tell us how your research interests, skills and experiences would contribute to scholarship at Yale School of Medicine.)",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 3500,
+            "maps_to": "why-us",
+            "chance": 99,
+            "doc_path": "documents/secondaries/yale-school-of-medicine/2.md"
+          },
+          {
+            "prompt": "This section is optional. It should be used to bring to the attention of the Admissions Committee any important information (personal, academic, or professional) not discussed in other sections of your Yale Secondary Application.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 3500,
+            "maps_to": "additional",
+            "chance": 99,
+            "doc_path": "documents/secondaries/yale-school-of-medicine/3.md"
+          },
+          {
+            "prompt": "Is there anything else about your background or identity you wish to share?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 3500,
+            "maps_to": "diversity",
+            "chance": 33,
+            "doc_path": "documents/secondaries/yale-school-of-medicine/4.md"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Mayo Clinic Alix School of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "rank": 14,
+      "avg_gpa": 3.95,
+      "avg_mcat": 522,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "location": "MN",
+      "status_history": [],
+      "admit_slug": "mayo-clinic-school-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "At Mayo Clinic Alix School of Medicine, we seek students whose values align with our mission to put the needs of the patient first. Please share why you are drawn to our school and the top track you selected. What unique strengths do you bring to our community to advance our commitment to excellence, compassion, and innovation?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 3500,
+            "chance": 33,
+            "maps_to": "why-us"
+          },
+          {
+            "prompt": "At Mayo Clinic Alix School of Medicine, we value the vast lived experiences, perspectives, and backgrounds of our students as they contribute to a vibrant learning environment and enhance how we care for our diverse patient population. Reflect on how your personal, cultural, or professional experiences have shaped your identity, and how they may help you contribute to a collaborative learning environment and advocate for your future patients.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 3500,
+            "chance": 33,
+            "maps_to": "diversity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Keck School of Medicine of the University of Southern California",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "rank": 30,
+      "avg_gpa": 3.91,
+      "avg_mcat": 517,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "location": "CA",
+      "status_history": [],
+      "admit_slug": "keck-school-of-medicine-of-the-university-of-southern-california",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "The following questions allow the Admissions Committee to become acquainted with you as an individual. Please answer the questions in 3-5 sentences. What is the most fun you've had lately? If you had to give yourself a nickname, what would it be? What are three things you don't care about at all? Describe a situation in which you didn't get something you felt you deserved.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1000,
+            "chance": 83,
+            "maps_to": "additional"
+          },
+          {
+            "prompt": "Is there anything else you would like us to know?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1400,
+            "chance": 99,
+            "maps_to": "additional"
+          }
+        ]
+      }
+    },
+    {
+      "name": "David Geffen School of Medicine at UCLA",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "rank": 24,
+      "location": "CA",
+      "avg_gpa": 3.86,
+      "avg_mcat": 515,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "university-of-california-los-angeles-david-geffen-school-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "At the David Geffen School of Medicine at UCLA, students are provided with curriculum and experiences enabling them to become an \"Outstanding Physician, AND...,\" dedicating themselves to important societal missions. What missions do you want to embrace? What have you done toward your missions?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 800,
+            "chance": 96,
+            "maps_to": "why-us"
+          },
+          {
+            "prompt": "Respond to the following and indicate how these areas of experience have impacted your progress toward your future career goals in relation to becoming an \"Outstanding Physician, AND...\". A - Describe your most unique leadership, entrepreneurial, or creative activity. B - Describe your most important volunteer work and why it was meaningful. C - Describe your most scholarly project (thesis, research or field of study in basic or clinical science or in the humanities) and provide the total number of hours, dates and advisor.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2400,
+            "chance": 99,
+            "maps_to": "leadership"
+          },
+          {
+            "prompt": "Do you identify as being part of a group that has been marginalized (examples include, but are not limited to, LGBTQIA, disabilities, federally recognized tribe) in terms of access to education or healthcare? Describe how this inequity has impacted you or your community and how educational disparity, health disparity and/or marginalization has impacted you and your community.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 800,
+            "chance": 96,
+            "maps_to": "diversity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Columbia University Vagelos College of Physicians and Surgeons",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "NY",
+      "loe_committee_letter": "unknown",
+      "loe_letter_packet": "unknown",
+      "loe_individual_letters": "not_accepted",
+      "msar_source": "Agent/reference/msar",
+      "rank": 7,
+      "avg_gpa": 3.95,
+      "avg_mcat": 522,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "columbia-university-vagelos-college-of-physicians-and-surgeons",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "Please describe your most meaningful leadership positions.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2100,
+            "maps_to": "leadership",
+            "chance": 99
+          },
+          {
+            "prompt": "Columbia Vagelos College of Physicians and Surgeons values diversity in all its forms. How will your experiences contribute to this important focus of our institution and inform your future role as a physician?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2100,
+            "maps_to": "diversity",
+            "chance": 99
+          },
+          {
+            "prompt": "Is there anything else you would like us to know?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2800,
+            "maps_to": "additional",
+            "chance": 99
+          }
+        ]
+      }
+    },
+    {
+      "name": "Vanderbilt University School of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "TN",
+      "loe_committee_letter": "accepted",
+      "loe_letter_packet": "accepted",
+      "loe_individual_letters": "accepted",
+      "admission_notes": "Vanderbilt only receives verified AMCAS applications, which can take 4-6 weeks from AMCAS. Once received, our committee ensures there is a current MCAT score and then screens to decide to give a secondary application. Once the secondary and letters of evaluations are received, our Interview Review Subcommittee reviews to help determine an interview. We interview on Mondays and Fridays from September to February. After the interview, our Admissions Committee determines who will join the class. We have a December and February wave of admissions; afterwards, candidates not admitted are placed on the waitlist. Vanderbilt's goal is to utilize the waitlist to craft a class that reflects the mission of the school. In the spring, admitted candidates attend Second Look Weekend, which provides these individuals the opportunity to learn more about Nashville and Vanderbilt. Admitted students have a checklist that they can use to stay on track about immunizations, matriculation surveys, and other items. As a reminder, admissions is contingent on a successful criminal background check, compliance with our technical standards and honor code along with the State of Tennessee immunization requirements, and documentation of graduation from an accredited institution. Internationally educated candidates can find the following website helpful: https://registrar.vanderbilt.edu/academic-records/international-degrees.php . Candidates are strongly encouraged to reach out to Admissions to clarify any questions they may have. VANDERBILT SELECTION PROCESS Vanderbilt looks at strong academic performance to help assure the ability to be successful in the curriculum. Although there are no extracurricular requirements, it is recommended to have medical exposures, community engagement, leadership, and research experience before applying. In addition, candidates who are successful typically have either a unique life experience or extracurricular activities that add unique experiences to the class. No one activity to weighed more than the other. Vanderbilt loves to see a strong interest in an activity, instead of using extracurriculars as a checklist for admissions. Having a passion for medicine being evident in the application materials, along with strong letters of support are additional elements Vanderbilt evaluates in the holistic admissions process. For the MD/PhD candidates, the selection process is typically the same. Candidates are encouraged to have strong letters of support for their ability to complete an MD/PhD. The candidates usually have strong research skills. Many candidates have a transition year after graduating college where they work full time in a research lab. Quite a few candidates have been published or done presentations on their research. REAPPLICANTS Vanderbilt does not have a policy against reapplicants, but encourage candidates take time to personally evaluate their application materials. When doing that, many candidates will work on areas of improvement and then reapply later. and distributed with attribution for individual, educational, and noncommercial purposes only.",
+      "msar_source": "Agent/reference/msar",
+      "rank": 9,
+      "avg_gpa": 3.97,
+      "avg_mcat": 522,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "vanderbilt-university-school-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "Please reflect on the upbringing, background, and experiences in your life that have shaped who you are as a person and will help define the person you want to be in the future. In other words, what makes you who you are?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 5600,
+            "maps_to": "diversity",
+            "chance": 96
+          },
+          {
+            "prompt": "Tell us about a time when you interacted with someone who is different than you. What did you learn? Would you do anything differently and if so, what?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 4200,
+            "maps_to": "diversity",
+            "chance": 96
+          },
+          {
+            "prompt": "It is important to understand that everyone needs help at various times in their lives. Reflecting on the last five years, describe a time you asked for help and what you gained from that experience that has influenced your approach to asking for help.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 4200,
+            "maps_to": "adversity",
+            "chance": 96
+          }
+        ]
+      }
+    },
+    {
+      "name": "Cleveland Clinic Lerner College of Medicine of Case Western Reserve University",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "rank": 13,
+      "location": "OH",
+      "tier": "target",
+      "status_history": [],
+      "avg_gpa": 3.98,
+      "avg_mcat": 520,
+      "admit_slug": "cleveland-clinic-lerner-college-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "The Admissions Committee is interested in gaining more insight into you as a person. Please describe a significant personal challenge you have faced, one which you feel has helped to shape you as a person. Examples may include a moral or ethical dilemma, a situation of personal adversity, or a hurdle in your life that you worked hard to overcome. Please include how you got through the experience, how you handled the uncertainty or stress, and what you learned about yourself as a result.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2000,
+            "chance": 86,
+            "maps_to": "adversity"
+          },
+          {
+            "prompt": "Based on your current maturity and wisdom, reflect upon an experience from the past few years that you would handle differently today.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1000,
+            "chance": 67,
+            "maps_to": "adversity"
+          },
+          {
+            "prompt": "Social and structural factors can influence health outcomes and impact how healthcare is delivered within communities. Briefly describe an experience that has broadened your perspective or increased your understanding of people whose life experiences, backgrounds, or circumstances may differ from your own. How did this experience shape your views on health, healthcare access, and/or healthcare delivery?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1500,
+            "chance": 33,
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "One of the four pillars of the Western Reserve2 Curriculum is Research and Scholarship. Although research is not a prerequisite requirement for the University Program, if you have participated in research or other scholarly project (capstone project, honors thesis, etc.), please reflect on the experience, including how you learned from it, what challenged you, and how it may have impacted you educationally and professionally. We are interested in learning what you took away from the experience(s).",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2500,
+            "chance": 33,
+            "maps_to": "why-us"
+          },
+          {
+            "prompt": "Is there any further information that you wish to share with the Admissions Committee that may not be captured in the rest of your application?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2000,
+            "chance": 83,
+            "maps_to": "additional"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Ohio State University College of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "OH",
+      "loe_committee_letter": "not_accepted",
+      "loe_letter_packet": "not_accepted",
+      "loe_individual_letters": "not_accepted",
+      "msar_source": "Agent/reference/msar",
+      "rank": 29,
+      "avg_gpa": 3.9,
+      "avg_mcat": 515,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "ohio-state-university-college-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "The mission statement of The Ohio State University College of Medicine is to \"improve people's lives\" through innovation in research, medical education, and patient care. Please describe how your past experiences predict your potential to contribute in two of these three areas.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1750,
+            "maps_to": "why-us",
+            "chance": 99
+          },
+          {
+            "prompt": "Provide examples of factors contributing to health inequities that exist in the United States.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1750,
+            "maps_to": "diversity",
+            "chance": 67
+          }
+        ]
+      }
+    },
+    {
+      "name": "University of Pittsburgh School of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "PA",
+      "loe_committee_letter": "unknown",
+      "loe_letter_packet": "accepted",
+      "loe_individual_letters": "unknown",
+      "preview_required": false,
+      "preview_note": "PREview for Future use - will not be used in this cycle’s admissions decisions\n\nUniversity of",
+      "msar_source": "Agent/reference/msar",
+      "rank": 17,
+      "avg_gpa": 3.9,
+      "avg_mcat": 517,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "university-of-pittsburgh-school-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "The Three Rivers Curriculum features collaborative team based learning. Therefore, we value your perspective and experience working within teams. Describe a time you worked with others in a collaborative process, challenges encountered and how you overcame these challenges. Discuss any personal growth achieved through the experience.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1750,
+            "chance": 67,
+            "doc_path": "documents/secondaries/university-of-pittsburgh-school-of-medicine/1.md",
+            "maps_to": "leadership"
+          },
+          {
+            "prompt": "Describe a difficult situation you faced, how you responded to this situation and how this helped shape the person you've become.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1750,
+            "chance": 67,
+            "doc_path": "documents/secondaries/university-of-pittsburgh-school-of-medicine/2.md",
+            "maps_to": "adversity"
+          },
+          {
+            "prompt": "Respect for others of different backgrounds is integral to the successful practice of medicine, as is an understanding of social determinants of health. Describe a situation you observed between a patient and the health care system that illustrates the impact of social determinants of health on delivery of care. Describe what you learned from this situation.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1750,
+            "chance": 67,
+            "doc_path": "documents/secondaries/university-of-pittsburgh-school-of-medicine/3.md",
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "If you wish, use this space to tell the UPSOM Admissions Committee anything else about yourself.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1750,
+            "chance": 67,
+            "doc_path": "documents/secondaries/university-of-pittsburgh-school-of-medicine/4.md",
+            "maps_to": "additional"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Weill Cornell Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "NY",
+      "loe_committee_letter": "not_accepted",
+      "loe_letter_packet": "not_accepted",
+      "loe_individual_letters": "not_accepted",
+      "admission_notes": "education/admissions",
+      "msar_source": "Agent/reference/msar",
+      "rank": 15,
+      "avg_gpa": 3.94,
+      "avg_mcat": 519,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "weill-cornell-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "Please write a brief statement giving your reasons for applying to Weill Cornell Medical College.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1525,
+            "chance": 99,
+            "maps_to": "why-us"
+          },
+          {
+            "prompt": "Please describe a challenge you faced and how you addressed it.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1525,
+            "chance": 99,
+            "maps_to": "adversity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Albert Einstein College of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "NY",
+      "loe_committee_letter": "unknown",
+      "loe_letter_packet": "not_accepted",
+      "loe_individual_letters": "not_accepted",
+      "preview_required": false,
+      "preview_note": "not using PREview scores in the admissions",
+      "msar_source": "Agent/reference/msar",
+      "rank": 26,
+      "avg_gpa": 3.91,
+      "avg_mcat": 517,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "albert-einstein-college-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "Please use this space to tell us anything about yourself that you would like us to know.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 3000,
+            "chance": 83,
+            "maps_to": "additional"
+          },
+          {
+            "prompt": "What unique life experiences, personal attributes and/or perspectives will you bring as part of the incoming class? Are there particular challenges or successes that you have encountered?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 3000,
+            "maps_to": "diversity",
+            "chance": 83
+          }
+        ]
+      }
+    },
+    {
+      "name": "Northwestern University The Feinberg School of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "IL",
+      "loe_committee_letter": "unknown",
+      "loe_letter_packet": "accepted",
+      "loe_individual_letters": "accepted",
+      "msar_source": "Agent/reference/msar",
+      "rank": 16,
+      "avg_gpa": 3.94,
+      "avg_mcat": 521,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "northwestern-university-the-feinberg-school-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "Feinberg's mission is to train future leaders who will serve their patients, communities and society. Explain how specific elements of the FSM integrated curriculum will support your future goals in medicine and how FSM, located in Chicago, will help you achieve these professional aspirations.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1400,
+            "chance": 96,
+            "maps_to": "why-us"
+          },
+          {
+            "prompt": "Describe a new hobby or activity you enjoy in your free time outside of school.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1400,
+            "chance": 33,
+            "maps_to": "additional"
+          },
+          {
+            "prompt": "The Feinberg School of Medicine values the totality of our students' experiences. As everyone has their own narrative, please describe how your unique experiences would enrich the Northwestern community.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1400,
+            "chance": 96,
+            "maps_to": "diversity"
+          }
+        ]
+      }
+    },
+    {
+      "name": "University of Michigan Medical School",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "admission_notes": "For more information: https://medschool.umich.edu/programs-admissions/md-program/md- admissions/md-admissions-requirements",
+      "msar_source": "Agent/reference/msar",
+      "rank": 12,
+      "avg_gpa": 3.92,
+      "avg_mcat": 517,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "location": "MI",
+      "status_history": [],
+      "admit_slug": "university-of-michigan-medical-school",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "How do you hope to impact medicine and improve patient care in the future and why do you need a medical degree to fulfill these goals? (MSTP applicants: Describe why you are applying to the University of Michigan MSTP, and if interested in a specific department, program, or area of research for your PhD, please provide a brief explanation. If relevant, please describe your gap/growth year plans.)",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1500,
+            "chance": 67,
+            "maps_to": "why-us"
+          },
+          {
+            "prompt": "Please describe the impact of your identity and experiences on your growth and development, and how it may impact your career as a physician.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1500,
+            "chance": 67,
+            "maps_to": "diversity"
+          },
+          {
+            "prompt": "The University of Michigan Medical School strives to be a place of empowerment, advocacy and change in health care. What experiences have you had in empowerment and advocacy for others that would help to advance this mission?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1500,
+            "chance": 33,
+            "maps_to": "leadership"
+          },
+          {
+            "prompt": "Outside of medicine, and beyond what we can read in your application, tell us what you are curious about or what you have chosen to explore.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1500,
+            "chance": 92,
+            "maps_to": "additional"
+          }
+        ]
+      }
+    },
+    {
+      "name": "University of Chicago Division of the Biological Sciences The Pritzker School of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "IL",
+      "loe_committee_letter": "accepted",
+      "loe_letter_packet": "accepted",
+      "loe_individual_letters": "accepted",
+      "msar_source": "Agent/reference/msar",
+      "rank": 18,
+      "avg_gpa": 3.94,
+      "avg_mcat": 520,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "admit_slug": "university-of-chicago-division-of-the-biological-sciences-the-pritzker-school-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "Students at the Pritzker School of Medicine complete the majority of their clinical training at UChicago Medicine (UCM). UCM, nationally recognized by the AAMC for sustained commitment to community engagement, partnership, and collaboration, has a primary service area where poverty is over double the state level. Additionally, our students lead numerous community-based initiatives throughout Chicago, including six free clinics that primarily serve uninsured patients. Please share with us the personal and professional experiences that have best prepared you to work in this clinical environment.",
+            "status": "not-started",
+            "confirmed": false,
+            "maps_to": "diversity",
+            "char_limit": 3150,
+            "chance": 83
+          },
+          {
+            "prompt": "All MD students participate in our longitudinal Scholarship & Discovery research program, which offers protected curricular time, mentoring, and funding for students to pursue their scholarly interests. Please describe your research interests and share how our research opportunities will help you advance your career goals.",
+            "status": "not-started",
+            "confirmed": false,
+            "maps_to": "why-us",
+            "char_limit": 3150,
+            "chance": 83
+          },
+          {
+            "prompt": "Medical education requires humility and resilience as students learn to become physicians prepared to deliver exceptional care within a rapidly changing and sometimes challenging healthcare landscape. Share with us a difficult or challenging situation you have encountered and how you dealt with it. In your response, identify both the coping skills you called upon to resolve the situation, and the support person(s) from whom you sought advice.",
+            "status": "not-started",
+            "confirmed": false,
+            "maps_to": "adversity",
+            "char_limit": 3150,
+            "chance": 99
+          },
+          {
+            "prompt": "Please feel free to use this space to convey any additional information that you might wish the Committee to know. For example, if you are not currently completing a degree, please share your planned or current activities for this application cycle.",
+            "status": "not-started",
+            "confirmed": false,
+            "maps_to": "additional",
+            "char_limit": 2100,
+            "chance": 99
+          }
+        ]
+      }
+    },
+    {
+      "name": "Case Western Reserve University School of Medicine",
+      "status": "pre-secondary",
+      "program_type": "Regular M.D.",
+      "previously_applied": false,
+      "location": "OH",
+      "loe_committee_letter": "not_accepted",
+      "loe_letter_packet": "unknown",
+      "loe_individual_letters": "unknown",
+      "admission_notes": "Medicine are interpersonal skills, exposure to medicine, well-roundedness, and qualities such as professionalism, empathy, and leadership ability. Applicants for admission must complete a course of study leading to a baccalaureate degree at an accredited U.S. or Canadian college or university prior to matriculation. If you have received your undergraduate degree outside the U.S. or Canada, you must complete at least one year of advanced science-based coursework at an accredited U.S. institution prior to application. This can be achieved through a master’s or Ph.D. degree, a formalized post-baccalaureate program, or through a variety of upper-level science coursework.",
+      "msar_source": "Agent/reference/msar",
+      "avg_gpa": 3.93,
+      "avg_mcat": 518,
+      "avg_source": "admit.org",
+      "tier": "target",
+      "status_history": [],
+      "rank": 23,
+      "admit_slug": "case-western-reserve-university-school-of-medicine",
+      "secondary": {
+        "essays": [
+          {
+            "prompt": "The Admissions Committee is interested in gaining more insight into you as a person. Please describe a significant personal challenge you have faced, one which you feel has helped to shape you as a person. Examples may include a moral or ethical dilemma, a situation of personal adversity, or a hurdle in your life that you worked hard to overcome. Please include how you got through the experience, how you handled the uncertainty or stress, and what you learned about yourself as a result.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2000,
+            "chance": 99,
+            "maps_to": "adversity",
+            "doc_path": "documents/secondaries/case-western-reserve-university-school-of-medicine/1.md"
+          },
+          {
+            "prompt": "Based on your current maturity and wisdom, reflect upon an experience from the past few years that you would handle differently today.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1000,
+            "chance": 83,
+            "maps_to": "adversity",
+            "doc_path": "documents/secondaries/case-western-reserve-university-school-of-medicine/2.md"
+          },
+          {
+            "prompt": "Social and structural factors can influence health outcomes and impact how healthcare is delivered within communities. Briefly describe an experience that has broadened your perspective or increased your understanding of people whose life experiences, backgrounds, or circumstances may differ from your own. How did this experience shape your views on health, healthcare access, and/or healthcare delivery?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 1500,
+            "chance": 33,
+            "maps_to": "diversity",
+            "doc_path": "documents/secondaries/case-western-reserve-university-school-of-medicine/3.md"
+          },
+          {
+            "prompt": "One of the four pillars of the Western Reserve2 Curriculum is Research and Scholarship. Although research is not a prerequisite requirement for the University Program, if you have participated in research or other scholarly project (capstone project, honors thesis, etc.), please reflect on the experience, including how you learned from it, what challenged you, and how it may have impacted you educationally and professionally.",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2500,
+            "chance": 93,
+            "maps_to": "why-us",
+            "doc_path": "documents/secondaries/case-western-reserve-university-school-of-medicine/4.md"
+          },
+          {
+            "prompt": "Is there any further information that you wish to share with the Admissions Committee that may not be captured in the rest of your application?",
+            "status": "not-started",
+            "confirmed": false,
+            "char_limit": 2000,
+            "chance": 94,
+            "maps_to": "additional",
+            "doc_path": "documents/secondaries/case-western-reserve-university-school-of-medicine/5.md"
+          }
+        ]
       }
     }
   ],
   "coursework": [
-    { "name": "General Chemistry I", "subject": "Chemistry" },
-    { "name": "General Chemistry II", "subject": "Chemistry" },
-    { "name": "Organic Chemistry I", "subject": "Chemistry" },
-    { "name": "Organic Chemistry II", "subject": "Chemistry" },
-    { "name": "General Biology I", "subject": "Biology" },
-    { "name": "Cell & Molecular Biology", "subject": "Biology" },
-    { "name": "Immunology", "subject": "Biology" },
-    { "name": "Physics I (Calc-based)", "subject": "Physics" },
-    { "name": "Physics II (Calc-based)", "subject": "Physics" },
-    { "name": "Biochemistry", "subject": "Biochemistry" },
-    { "name": "Statistics", "subject": "Math" }
+    {
+      "name": "Foundation of Living Systems",
+      "subject": "BIOL",
+      "course_no": "BIOL 0200",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S1",
+      "type": "AP",
+      "grade": "T"
+    },
+    {
+      "name": "Principles of Economics",
+      "subject": "BESS",
+      "course_no": "ECON 0110",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S1",
+      "type": "AP",
+      "grade": "T"
+    },
+    {
+      "name": "Intermediate French II",
+      "subject": "FLAN",
+      "course_no": "FREN 0400",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S1",
+      "type": "AP",
+      "grade": "T"
+    },
+    {
+      "name": "Single Variable Calculus, Part I",
+      "subject": "MATH",
+      "course_no": "MATH 0090",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S1",
+      "type": "AP",
+      "grade": "T"
+    },
+    {
+      "name": "Single Variable Calculus, II",
+      "subject": "MATH",
+      "course_no": "MATH 0100",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S1",
+      "type": "AP",
+      "grade": "T"
+    },
+    {
+      "name": "Biotechnology in Medicine",
+      "subject": "BIOL",
+      "course_no": "BIOL 0170",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S1",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Principles of Immunology",
+      "subject": "BIOL",
+      "course_no": "BIOL 0530",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S1",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Equilibrium, Rate, Structure",
+      "subject": "CHEM",
+      "course_no": "CHEM 0330",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S1",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Intro to Engineering: Design",
+      "subject": "PHYS",
+      "course_no": "ENGN 0032",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S1",
+      "type": "PF",
+      "grade": "S*"
+    },
+    {
+      "name": "Multivariable Calculus",
+      "subject": "MATH",
+      "course_no": "MATH 0200",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S1",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Essential Statistics",
+      "subject": "MATH",
+      "course_no": "APMA 0650",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Principles of Physiology",
+      "subject": "BIOL",
+      "course_no": "BIOL 0800",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Organic Chemistry I",
+      "subject": "CHEM",
+      "course_no": "CHEM 0350",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Dynamics and Vibrations",
+      "subject": "PHYS",
+      "course_no": "ENGN 0040",
+      "year": "2023-2024",
+      "level": "FR",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Applied ODEs",
+      "subject": "MATH",
+      "course_no": "APMA 0350",
+      "year": "2024-2025",
+      "level": "SO",
+      "term": "S1",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Genetics",
+      "subject": "BIOL",
+      "course_no": "BIOL 0470",
+      "year": "2024-2025",
+      "level": "SO",
+      "term": "S1",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Organic Chemistry II",
+      "subject": "CHEM",
+      "course_no": "CHEM 0360",
+      "year": "2024-2025",
+      "level": "SO",
+      "term": "S1",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Biomaterials",
+      "subject": "ENGI",
+      "course_no": "ENGN 1490",
+      "year": "2024-2025",
+      "level": "SO",
+      "term": "S1",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Writing + Speaking Portuguese",
+      "subject": "FLAN",
+      "course_no": "POBS 0400",
+      "year": "2024-2025",
+      "level": "SO",
+      "term": "S1",
+      "type": "PF",
+      "grade": "S"
+    },
+    {
+      "name": "Quant Models of Bio Systems",
+      "subject": "MATH",
+      "course_no": "APMA 1070",
+      "year": "2024-2025",
+      "level": "SO",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Biochemistry",
+      "subject": "CHEM",
+      "course_no": "BIOL 0280",
+      "year": "2024-2025",
+      "level": "SO",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Cell and Molecular Biology",
+      "subject": "BIOL",
+      "course_no": "BIOL 0500",
+      "year": "2024-2025",
+      "level": "SO",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Electrical Circuits + Signals",
+      "subject": "ENGI",
+      "course_no": "ENGN 0520",
+      "year": "2024-2025",
+      "level": "SO",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Biomechanics",
+      "subject": "PHYS",
+      "course_no": "ENGN 1210",
+      "year": "2024-2025",
+      "level": "SO",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Fluid Mechanics",
+      "subject": "ENGI",
+      "course_no": "ENGN 0810",
+      "year": "2025-2026",
+      "level": "JR",
+      "term": "S1",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Instrumentation Design",
+      "subject": "ENGI",
+      "course_no": "ENGN 1230",
+      "year": "2025-2026",
+      "level": "JR",
+      "term": "S1",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Control Systems Engineering",
+      "subject": "ENGI",
+      "course_no": "ENGN 1931Y",
+      "year": "2025-2026",
+      "level": "JR",
+      "term": "S1",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Mars, Moon, and the Earth",
+      "subject": "NPSC",
+      "course_no": "EEPS 0050",
+      "year": "2025-2026",
+      "level": "JR",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Intro to Prob & Stats w Calc",
+      "subject": "MATH",
+      "course_no": "APMA 1650",
+      "year": "2025-2026",
+      "level": "JR",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Amer Lit and the Corporation",
+      "subject": "ENGL",
+      "course_no": "ENGL 1561M",
+      "year": "2025-2026",
+      "level": "JR",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Thermodynamics",
+      "subject": "ENGI",
+      "course_no": "ENGN 0720",
+      "year": "2025-2026",
+      "level": "JR",
+      "term": "S2",
+      "type": "PF",
+      "grade": "S"
+    },
+    {
+      "name": "Cardiovascular Engineering",
+      "subject": "BIOL",
+      "course_no": "ENGN 1520",
+      "year": "2025-2026",
+      "level": "JR",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Pattern Recog/Machine Learn",
+      "subject": "COMP",
+      "course_no": "ENGN 2520",
+      "year": "2025-2026",
+      "level": "JR",
+      "term": "S2",
+      "type": "",
+      "grade": "A"
+    },
+    {
+      "name": "Biomedical Engineering Design and Innovation I",
+      "subject": "ENGI",
+      "course_no": "ENGN 1240",
+      "year": "2026-2027",
+      "level": "SR",
+      "term": "S1",
+      "type": "CC",
+      "grade": ""
+    },
+    {
+      "name": "Literary Africa",
+      "subject": "ENGL",
+      "course_no": "ENGL 1760T",
+      "year": "2026-2027",
+      "level": "SR",
+      "term": "S1",
+      "type": "CC",
+      "grade": ""
+    },
+    {
+      "name": "Mind, Brain and Behavior: An Interdisciplinary Approach",
+      "subject": "BESS",
+      "course_no": "CPSY 0010",
+      "year": "2026-2027",
+      "level": "SR",
+      "term": "S1",
+      "type": "CC",
+      "grade": ""
+    },
+    {
+      "name": "Physiological Pharmacology",
+      "subject": "BIOL",
+      "course_no": "BIOL 1260",
+      "year": "2026-2027",
+      "level": "SR",
+      "term": "S1",
+      "type": "CC",
+      "grade": ""
+    },
+    {
+      "name": "Politics and the Psyche",
+      "subject": "BESS",
+      "course_no": "HIST 1830B",
+      "year": "2026-2027",
+      "level": "SR",
+      "term": "S1",
+      "type": "CC",
+      "grade": ""
+    },
+    {
+      "name": "Biomedical Engineering Design and Innovation II",
+      "subject": "ENGI",
+      "course_no": "ENGN 1250",
+      "year": "2026-2027",
+      "level": "SR",
+      "term": "S2",
+      "type": "CC",
+      "grade": ""
+    },
+    {
+      "name": "Basic Physics B",
+      "subject": "PHYS",
+      "course_no": "PHYS 0040",
+      "year": "2026-2027",
+      "level": "SR",
+      "term": "S2",
+      "type": "CC",
+      "grade": ""
+    },
+    {
+      "name": "Transport and Biotransport Processes",
+      "subject": "ENGI",
+      "course_no": "ENGN 1205",
+      "year": "2026-2027",
+      "level": "SR",
+      "term": "S2",
+      "type": "CC",
+      "grade": ""
+    },
+    {
+      "name": "Computer Vision",
+      "subject": "COMP",
+      "course_no": "ENGN 2560",
+      "year": "2026-2027",
+      "level": "SR",
+      "term": "S2",
+      "type": "CC",
+      "grade": ""
+    },
+    {
+      "name": "The Simple Art of Murder",
+      "subject": "ENGL",
+      "course_no": "ENGL 100T",
+      "year": "2026-2027",
+      "level": "SR",
+      "term": "S2",
+      "type": "CC",
+      "grade": ""
+    }
   ],
+  "red_flags": [
+    {
+      "id": "RF-005",
+      "flag": "(scrubbed placeholder — see your real red flags in your own data)",
+      "location": "Rec Letters",
+      "status": "resolved",
+      "resolved_date": "2026-05-17",
+      "resolution": "(scrubbed placeholder)"
+    },
+    {
+      "id": "RF-007",
+      "flag": "(scrubbed placeholder — see your real red flags in your own data)",
+      "location": "Scorecard",
+      "status": "resolved",
+      "resolved_date": "2026-05-17",
+      "resolution": "(scrubbed placeholder)"
+    },
+    {
+      "id": "RF-001",
+      "flag": "(scrubbed placeholder — see your real red flags in your own data)",
+      "location": "Activities #6",
+      "status": "resolved",
+      "resolved_date": "2026-05-29",
+      "resolution": "(scrubbed placeholder)"
+    },
+    {
+      "id": "RF-002",
+      "flag": "(scrubbed placeholder — see your real red flags in your own data)",
+      "location": "Activities #9",
+      "status": "resolved",
+      "resolved_date": "2026-05-29",
+      "resolution": "(scrubbed placeholder)"
+    },
+    {
+      "id": "RF-003",
+      "flag": "(scrubbed placeholder — see your real red flags in your own data)",
+      "location": "PS + Activities #2",
+      "status": "resolved",
+      "resolved_date": "2026-06-04",
+      "resolution": "(scrubbed placeholder)"
+    },
+    {
+      "id": "RF-004",
+      "flag": "(scrubbed placeholder — see your real red flags in your own data)",
+      "location": "PS + Activities #9",
+      "status": "resolved",
+      "resolved_date": "2026-06-04",
+      "resolution": "(scrubbed placeholder)"
+    },
+    {
+      "id": "RF-006",
+      "flag": "(scrubbed placeholder — see your real red flags in your own data)",
+      "location": "Activities #3",
+      "status": "resolved",
+      "resolved_date": "2026-06-04",
+      "resolution": "(scrubbed placeholder)"
+    }
+  ],
+  "application_checklist": {
+    "amcas_submitted_date": "2026-06-05",
+    "lor_count": 6,
+    "transcripts_sent": true,
+    "mcat_released": true,
+    "committee_letter": true
+  },
+  "primary_components": {
+    "personal_statement": {
+      "status": "submitted",
+      "status_history": [
+        {
+          "status": "submitted",
+          "date": "2026-06-27"
+        }
+      ]
+    },
+    "activities": {
+      "status": "submitted",
+      "status_history": [
+        {
+          "status": "submitted",
+          "date": "2026-06-27"
+        }
+      ]
+    },
+    "most_meaningful": {
+      "status": "submitted",
+      "status_history": [
+        {
+          "status": "submitted",
+          "date": "2026-06-27"
+        }
+      ]
+    },
+    "impactful_experience": {
+      "status": "submitted",
+      "status_history": [
+        {
+          "status": "submitted",
+          "date": "2026-06-27"
+        }
+      ]
+    },
+    "letters_eval": {
+      "status": "submitted",
+      "status_history": [
+        {
+          "status": "submitted",
+          "date": "2026-06-27"
+        }
+      ]
+    },
+    "transcripts": {
+      "status": "submitted",
+      "status_history": [
+        {
+          "status": "submitted",
+          "date": "2026-06-27"
+        }
+      ]
+    },
+    "coursework_list": {
+      "status": "submitted",
+      "status_history": [
+        {
+          "status": "submitted",
+          "date": "2026-06-27"
+        }
+      ]
+    },
+    "mcat": {
+      "status": "submitted",
+      "status_history": [
+        {
+          "status": "submitted",
+          "date": "2026-06-27"
+        }
+      ]
+    },
+    "biographic": {
+      "status": "submitted",
+      "status_history": [
+        {
+          "status": "submitted",
+          "date": "2026-06-27"
+        }
+      ]
+    }
+  },
+  "activity_log": [],
   "secondaries": {
     "brainstorm_path": "documents/secondaries/_brainstorm.md",
     "essay_bank": [
@@ -165,41 +2135,21 @@
         "label": "Adversity / Challenge / Failure",
         "doc_path": "documents/secondaries/_bank/adversity.md",
         "status": "not-started",
-        "pre_writable": true,
-        "guiding_questions": [
-          "List 3+ times you failed to complete a task or reach a goal.",
-          "List 3+ times you fell short of your own expectations.",
-          "List 3+ times you fell short of someone else's expectations.",
-          "List 3+ times you had to actively resolve a conflict or significant issue.",
-          "For each: what emotions did you feel? who did you go to for support? what actions did you take? what skills or insights did you gain, and how will they apply in med school and as a physician?"
-        ]
+        "pre_writable": true
       },
       {
         "archetype": "leadership",
         "label": "Leadership",
         "doc_path": "documents/secondaries/_bank/leadership.md",
         "status": "not-started",
-        "pre_writable": true,
-        "guiding_questions": [
-          "What is my leadership style, and where have I demonstrated it (formal and informal)?",
-          "For each experience: what were your responsibilities and your plan?",
-          "What obstacles arose, and how did you overcome them?",
-          "What was the outcome, and what did you learn?",
-          "How does it apply to medicine?"
-        ]
+        "pre_writable": true
       },
       {
         "archetype": "diversity",
         "label": "Diversity / Contribution",
         "doc_path": "documents/secondaries/_bank/diversity.md",
         "status": "not-started",
-        "pre_writable": true,
-        "guiding_questions": [
-          "List your identities — ethnic, cultural, religious, geographic, hobby-based. Where does your sense of identity come from?",
-          "How do you engage with the communities tied to those identities? What is rewarding or challenging? Give specific examples.",
-          "List quirks, unexpected traits, or characteristics that make you you. How do others perceive them?",
-          "Describe times you worked or communicated with someone whose worldview differed significantly. What approaches did you use, and what did you learn?"
-        ]
+        "pre_writable": true
       },
       {
         "archetype": "service",
@@ -220,29 +2170,14 @@
         "label": "Additional Info / Anything else",
         "doc_path": "documents/secondaries/_bank/additional.md",
         "status": "not-started",
-        "pre_writable": true,
-        "guiding_questions": [
-          "What significant experiences, skills, or interests haven't I written about yet?",
-          "Which 2–3 meaningful activities deserve more depth than the work/activities section allowed?",
-          "Are there academic or extracurricular gaps to explain — only if the impact was significant (illness, hardship, loss)?",
-          "Do non-medical experiences (growing up abroad, sports, arts, cultural work) connect explicitly to skills that make me a better physician?",
-          "Does anything I wrote for other schools apply here but hasn’t been shared yet?"
-        ]
+        "pre_writable": true
       },
       {
         "archetype": "why-us",
         "label": "Why Us",
         "doc_path": "documents/secondaries/_bank/why-us.md",
         "status": "not-started",
-        "pre_writable": false,
-        "guiding_questions": [
-          "Why am I applying to medical school?",
-          "List 3+ courses or academic tracks you want to pursue at this school.",
-          "List 3+ faculty research projects that interest you.",
-          "List 3+ clinical or community-service programs you want to join.",
-          "How does each connect to your prior experiences and future goals — and what makes it unique vs. other schools?",
-          "Name 3 ways you could give back to the school community through those opportunities."
-        ]
+        "pre_writable": false
       }
     ]
   }
