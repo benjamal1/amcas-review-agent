@@ -13,6 +13,8 @@
 .editor-wrap { display: flex; flex-direction: column; height: 100%; overflow: hidden; }
 .editor-toolbar { display: flex; align-items: center; gap: 8px; padding: 4px 10px; background: var(--color-raised); border-bottom: 1px solid var(--color-hairline); min-height: 30px; flex-shrink: 0; flex-wrap: wrap; }
 .editor-toolbar__path { font-family: var(--font-mono); font-size: 11px; color: var(--color-muted); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; max-width: 200px; }
+.editor-toolbar__mode { font-size: 11px; background: none; border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); color: var(--color-text); padding: 2px 8px; cursor: pointer; }
+.editor-toolbar__mode:hover { border-color: var(--color-accent); color: var(--color-accent); }
 .editor-toolbar__save { font-size: 11px; }
 .editor-toolbar__save--saved { color: var(--color-pos); }
 .editor-toolbar__save--error { color: var(--color-danger); }

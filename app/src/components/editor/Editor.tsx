@@ -61,6 +61,8 @@ function EditorCM({ filePath, onSave }: EditorProps) {
   const fmRef = useRef<Record<string, unknown>>({})
   const [saveState, setSaveState] = useState<'idle' | 'saving' | 'saved' | 'error'>('idle')
   const [charCount, setCharCount] = useState(0)
+  const [docText, setDocText] = useState('')
+  const [mode, setMode] = useState<'edit' | 'view'>('edit')
 
   const save = useCallback(async (content: string) => {
     if (!filePath || IS_STATIC) return // static export is read-only
@@ -89,7 +91,7 @@ function EditorCM({ filePath, onSave }: EditorProps) {
               EditorView.lineWrapping, // essays are one long line per paragraph — wrap them
               EditorView.updateListener.of(u => {
                 if (!u.docChanged) return
-                const c = u.state.doc.toString(); setCharCount(c.length)
+                const c = u.state.doc.toString(); setCharCount(c.length); setDocText(c)
                 if (debRef.current) clearTimeout(debRef.current)
                 debRef.current = setTimeout(() => save(c), 800)
               }),
@@ -102,6 +104,7 @@ function EditorCM({ filePath, onSave }: EditorProps) {
           }),
         })
         setCharCount(content.length)
+        setDocText(content)
         setSaveState('idle')
       })
       .catch(() => { if (!dead) setSaveState('error') })
@@ -112,6 +115,9 @@ function EditorCM({ filePath, onSave }: EditorProps) {
       viewRef.current = null
     }
   }, [filePath, save])
+
+  // Reset to edit mode whenever the doc changes so the toggle doesn't leak across files.
+  useEffect(() => { setMode('edit') }, [filePath])
 
   const lim = filePath ? detectLimit(filePath) : null
   const over = lim && charCount > lim.limit
@@ -124,6 +130,9 @@ function EditorCM({ filePath, onSave }: EditorProps) {
             <span className="editor-toolbar__path" title={filePath}>
               {(filePath.split('/').pop() ?? filePath).replace(/\.md$/, '')}
             </span>
+            <button className="editor-toolbar__mode" onClick={() => setMode(m => m === 'edit' ? 'view' : 'edit')}>
+              {mode === 'edit' ? '👁 View' : '✎ Edit'}
+            </button>
             <span className={`editor-toolbar__save editor-toolbar__save--${saveState}`}>
               {saveState === 'saving' ? 'saving…' : saveState === 'saved' ? '✓ saved' : saveState === 'error' ? '⚠ error' : ''}
             </span>
@@ -131,7 +140,11 @@ function EditorCM({ filePath, onSave }: EditorProps) {
           </>
         ) : <span className="editor-toolbar__empty">Select a file to edit</span>}
       </div>
-      <div ref={ref} className="editor-cm" />
+      <div ref={ref} className="editor-cm" style={{ display: mode === 'edit' ? 'block' : 'none' }} />
+      {mode === 'view' && (
+        <article className="editor-cm editor-cm--rendered markdown-body"
+          dangerouslySetInnerHTML={{ __html: docText ? (marked.parse(docText) as string) : '' }} />
+      )}
     </div>
   )
 }

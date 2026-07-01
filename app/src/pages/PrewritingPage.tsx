@@ -130,8 +130,8 @@ export function PrewritingPage() {
                 <p className="tracker__hint prewrite__note" style={{ marginBottom: 4 }}>No prompts mapped here yet — run Cluster my prompts.</p>
               )
               return (
-                <div className="prewrite__schools">
-                  <span className="prewrite__schools-label">{mapped.length} school{mapped.length === 1 ? '' : 's'} use this</span>
+                <details className="prewrite__schools">
+                  <summary className="prewrite__schools-label">{mapped.length} school{mapped.length === 1 ? '' : 's'} use this</summary>
                   <ul>
                     {mapped.map(sc => (
                       <li key={sc.name}>
@@ -144,7 +144,7 @@ export function PrewritingPage() {
                       </li>
                     ))}
                   </ul>
-                </div>
+                </details>
               )
             })()}
             <GuidingQuestions
@@ -167,15 +167,15 @@ function GuidingQuestions({ questions, onSave }: { questions: string[]; onSave: 
 
   if (!editing) {
     return (
-      <div className="prewrite__qs">
-        <div className="prewrite__qs-head">
-          <span>Guiding questions</span>
-          <button onClick={start}>✎ Edit</button>
-        </div>
+      <details className="prewrite__qs">
+        <summary className="prewrite__qs-head">
+          <span>Guiding questions{questions.length > 0 ? ` (${questions.length})` : ''}</span>
+          <button onClick={e => { e.preventDefault(); start() }}>✎ Edit</button>
+        </summary>
         {questions.length === 0
           ? <p className="tracker__hint">No questions yet — Edit to add.</p>
           : <ol className="prewrite__qlist">{questions.map((q, i) => <li key={i} onClick={start} title="Click to edit">{q}</li>)}</ol>}
-      </div>
+      </details>
     )
   }
 
