@@ -21,7 +21,7 @@ const RUBRICS = path.join(repoRoot, 'Agent', 'rubrics')
 const OUT = path.join(repoRoot, 'dist-static')
 
 // Local cruft / non-shareable dirs excluded from the export.
-const SKIP = new Set(['content.example', 'node_modules', '.git'])
+const SKIP = new Set(['node_modules', '.git'])
 
 async function walkMd(dir, base = dir) {
   const out = []
@@ -39,8 +39,7 @@ async function walkMd(dir, base = dir) {
 async function main() {
   await fs.access(OUT).catch(() => { throw new Error(`${OUT} not found — run "vite build" (VITE_STATIC=1) first`) })
 
-  // 1. Copy the content tree (essays, feedback, story-bank, applicant-image, data.json, …),
-  //    skipping local cruft (content.example, etc.).
+  // 1. Copy the content tree (essays, feedback, story-bank, applicant-image, data.json, …).
   await fs.cp(CONTENT, OUT, {
     recursive: true,
     filter: src => !SKIP.has(path.basename(src)),

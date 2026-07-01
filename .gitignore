@@ -22,8 +22,10 @@ node_modules/
 # Personal data (should already be cleared in this repo, but just in case)
 # Meeting Notes/*.md is tracked (contains only the README placeholder)
 
-# Content directory (gitignored — use content.example/ as template)
-/content/
+# content/ ships tracked with demo data (see README) — real personal data belongs
+# in a separate directory pointed to via CONTENT_DIR / the Settings page, not here.
+# This override file backs that Settings page; never commit it.
+.local-config.json
 
 # Generated score files
 *-scores.md

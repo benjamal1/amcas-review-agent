@@ -8,6 +8,7 @@ const SECTIONS: { title: string; items: Item[] }[] = [
   { title: 'Guide', items: [
     { to: '/guide', label: 'User Guide' },
     { to: '/claude', label: 'Claude' },
+    { to: '/settings', label: 'Settings' },
   ] },
   { title: 'General', items: [
     { to: '/', label: 'Overview', end: true },

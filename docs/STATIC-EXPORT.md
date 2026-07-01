@@ -14,7 +14,8 @@ Produces `dist-static/` (gitignored — contains real personal data, never commi
 2. `scripts/build-static-content.mjs` — copies `content/` + `Agent/rubrics/` into `dist-static/` and
    generates `files-manifest.json` + `rubrics-manifest.json` (these replace the server's list endpoints).
 
-`content.example/` is excluded. Point at different data with `CONTENT_DIR=/path npm run build:static`.
+Point at different data with `CONTENT_DIR=/path npm run build:static` — do this before publishing, since
+the repo's own `content/` is demo data.
 
 ## Push to the Mac (for Netlify Drop)
 

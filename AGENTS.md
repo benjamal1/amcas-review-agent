@@ -365,8 +365,6 @@ diversity · adversity · why-us · gap-year · leadership · additional
   reshuffle prompts already assigned or relabel existing themes.
 - Never invent prompts or schools. Never rewrite the applicant's text.
 
-Do not change `content.example/` — only the live `data.json` under `$CONTENT_DIR`.
-
 After writing the file, report the path. Do not edit any other file.
 
 ---
