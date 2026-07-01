@@ -19,8 +19,10 @@ const RUBRICS_DIR = path.resolve(process.env.RUBRICS_DIR ?? 'Agent/rubrics')
 const PORT = Number(process.env.PORT ?? 3001)
 const HOST = '127.0.0.1'
 
-// First-run: seed content/ from content.example/ if absent
-const contentExample = new URL('../../content.example', import.meta.url).pathname
+// First-run: seed content/ from content.example/ if absent.
+// Resolved against cwd, not import.meta.url — cwd is repo root in both
+// `npm run dev:server` (tsx, unbuilt) and `npm start` (dist/server/index.js).
+const contentExample = path.resolve(process.cwd(), 'content.example')
 if (!existsSync(CONTENT_DIR) && existsSync(contentExample)) {
   cpSync(contentExample, CONTENT_DIR, { recursive: true })
   console.log(`[server] First run — copied content.example → ${CONTENT_DIR}`)
