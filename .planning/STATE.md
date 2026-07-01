@@ -1,6 +1,6 @@
 # STATE — amcas-review-agent
 
-last_updated: 2026-07-01
+last_updated: 2026-07-01b
 current_phase: 08-agent-restructure-web-editing (DONE) — milestone complete; post-milestone work ad-hoc on `main`
 milestone: Agent restructure + web editing (DONE)
 mode: shipping feature work directly on `main` (no active GSD phase)
@@ -51,6 +51,12 @@ Prior session's ECONNRESET was a stale socket, not a real fault.
   cross-essay/primary reuse guard on secondary agents; school Research tab split into
   `_research`/`_brainstorm`; Primaries editor scoped to primary docs; deleted 22 agent-dumped
   `_research.md` (backed up). Deployed via Netlify Drop from `~/Desktop/amcas-review-site` on the Mac.
+- **2026-07-01 (later, commit `72be535`):** sidebar **orange "C" badge** on Claude-authored pages
+  (Applicant Image, Story Bank, Activity Log, Review, Grading, Score History). Trimmed all 22
+  activity-log mapping entries to bare `prompt -> category (story)` (dropped research-flag/reuse-cap
+  bookkeeping — user request). **Gotcha surfaced:** the shared static export is a frozen snapshot;
+  it doesn't reflect `content/` edits until `npm run build:static` + redeploy (caused a "nothing is
+  changing" confusion — user was viewing the Netlify site, not localhost). Export rebuilt + re-pushed.
 
 ## Next
 1. Static export polish if desired: render activity entries read-only in static too.
