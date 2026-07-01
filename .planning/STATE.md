@@ -1,9 +1,9 @@
 # STATE — amcas-review-agent
 
-last_updated: 2026-06-27
-current_phase: 08-agent-restructure-web-editing (DONE)
-milestone: Agent restructure + web editing
-mode: implemented + verified (26 tests, build green) → shipping
+last_updated: 2026-07-01
+current_phase: 08-agent-restructure-web-editing (DONE) — milestone complete; post-milestone work ad-hoc on `main`
+milestone: Agent restructure + web editing (DONE)
+mode: shipping feature work directly on `main` (no active GSD phase)
 
 ## Milestone
 Rebuild Obsidian-vault folder → standalone local web app. Same repo (`main`),
@@ -42,11 +42,21 @@ Phase 08 (agent restructure + web editing) DONE on branch `working-structure-con
 node-pty ESM fix (`createRequire`, commit 1056d97) confirmed working — no `[pty] unavailable`.
 Prior session's ECONNRESET was a stale socket, not a real fault.
 
+## Post-milestone work (ad-hoc on `main`, not GSD-phased)
+- Secondaries workspace (prewriting, per-school prompt-mapping, essay prioritization) + 13 subagents.
+- admit.org Chance% likelihood + weighted reuse.
+- **2026-07-01** (commit `8f2b2c8`): shareable **static export** (`npm run build:static` → `dist-static/`,
+  read-only, no server; `lib/docs.ts` data-access layer branching on `IS_STATIC`); dockable
+  right-sidebar terminal; `@container` narrow-pane responsiveness; coursework AMCAS fields (43 rows);
+  cross-essay/primary reuse guard on secondary agents; school Research tab split into
+  `_research`/`_brainstorm`; Primaries editor scoped to primary docs; deleted 22 agent-dumped
+  `_research.md` (backed up). Deployed via Netlify Drop from `~/Desktop/amcas-review-site` on the Mac.
+
 ## Next
-1. Populate `content/data.json` with real applicant data (or point CONTENT_DIR at live source).
-2. Exercise a grade button → confirm terminal injects scoring phrase end-to-end in browser.
-3. Push to GitHub when ready.
-4. Backlog (ROADMAP.md): School List interactivity, Secondaries panel, generalize.
+1. Static export polish if desired: render activity entries read-only in static too.
+2. Public-release restructure still open (spec `.planning/specs/2026-06-27-public-release-restructure-plan.md`):
+   LICENSE, move personal `content/`/`.planning/` out, `Agent/` source-vs-runtime split.
+3. Backlog (ROADMAP.md): School List interactivity, generalize for broader use.
 
 ## Backlog / non-goals
 See ROADMAP.md. Parked non-goals: SDK, headless, hosting.
