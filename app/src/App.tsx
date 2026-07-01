@@ -23,6 +23,7 @@ import { EditorPage } from './pages/EditorPage'
 import { GradingPage } from './pages/GradingPage'
 import { EssayPrioritizationPage } from './pages/EssayPrioritizationPage'
 import { ActivityLogPage } from './pages/ActivityLogPage'
+import { SettingsPage } from './pages/SettingsPage'
 
 function LayoutInner() {
   const { side } = useTerminalDock()
@@ -53,6 +54,7 @@ export default function App() {
           <Route index element={<OverviewPage />} />
           <Route path="guide" element={<UserGuidePage />} />
           <Route path="claude" element={<ClaudePage />} />
+          <Route path="settings" element={<SettingsPage />} />
           <Route path="tracker" element={<ApplicationTrackerPage />} />
           <Route path="grading" element={<GradingPage />} />
           <Route path="secondaries" element={<SecondariesPage />} />

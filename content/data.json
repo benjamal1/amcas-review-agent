@@ -1,63 +1,63 @@
 {
-  "_demo_note": "Fictional applicant (Jordan Rivera) so the app doesn't ship looking empty. Delete this key and replace with your own data — content/ is gitignored, this file only lives in content.example/.",
+  "_demo_note": "Ships with real scores/metrics from the author's own application (a flex, not a leak — no essay text, recommender names, or school specifics are real) plus placeholder gibberish essays. Click Settings → Clear All Data before entering your own — content/ is tracked in git, so untrack or repoint it first (see README).",
   "scorecard": {
-    "composite": 78,
+    "composite": 82,
     "red_flag_count": 0,
     "domains": {
       "personal_narrative": {
-        "avg": 8,
-        "trend": "↑",
-        "last_updated": "2026-05-14"
+        "avg": 7.5,
+        "trend": "→",
+        "last_updated": "2026-06-04"
       },
       "clinical_experience": {
-        "avg": 9,
-        "trend": "→",
-        "last_updated": "2026-05-10"
+        "avg": 8,
+        "trend": "↑",
+        "last_updated": "2026-06-04"
       },
       "research_academics": {
-        "avg": 7,
+        "avg": 9,
         "trend": "↑",
-        "last_updated": "2026-05-12"
+        "last_updated": "2026-06-04"
       },
       "extracurriculars": {
-        "avg": 7,
-        "trend": "→",
-        "last_updated": "2026-05-08"
+        "avg": 8,
+        "trend": "↑",
+        "last_updated": "2026-06-04"
       },
       "service_community": {
         "avg": 8,
-        "trend": "→",
-        "last_updated": "2026-05-10"
+        "trend": "↑",
+        "last_updated": "2026-06-04"
       }
     },
     "hard_metrics": {
-      "gpa_cumulative": 3.78,
-      "gpa_bcpm": 3.71,
-      "mcat_total": 514,
-      "mcat_cars": 128,
-      "mcat_cp": 129,
-      "mcat_bb": 130,
-      "mcat_ps": 127
+      "gpa_cumulative": 4.0,
+      "gpa_bcpm": 4.0,
+      "mcat_total": 523,
+      "mcat_cars": 129,
+      "mcat_cp": 131,
+      "mcat_bb": 131,
+      "mcat_ps": 132
     }
   },
   "competencies": [
-    { "name": "Service Orientation", "score": 9, "tier": "exceptional", "supported_by": ["Emergency Department Volunteer", "Patient Navigator, Free Clinic"] },
+    { "name": "Service Orientation", "score": 8, "tier": "strong", "supported_by": ["Emergency Department Volunteer", "Patient Navigator, Free Clinic"] },
     { "name": "Social Skills", "score": 8, "tier": "strong", "supported_by": ["Patient Navigator, Free Clinic", "Peer Tutor, General & Organic Chemistry"] },
-    { "name": "Cultural Competence", "score": 8, "tier": "strong", "supported_by": ["Global Health Field Program, Kenya", "Patient Navigator, Free Clinic"] },
+    { "name": "Cultural Competence", "score": 7, "tier": "strong", "supported_by": ["Global Health Field Program, Kenya"] },
     { "name": "Teamwork", "score": 8, "tier": "strong", "supported_by": ["Captain, Varsity Rowing", "Emergency Department Volunteer"] },
-    { "name": "Oral Communication", "score": 7, "tier": "strong", "supported_by": ["Peer Tutor, General & Organic Chemistry", "Captain, Varsity Rowing"] },
-    { "name": "Ethical Responsibility", "score": 7, "tier": "strong", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
+    { "name": "Oral Communication", "score": 8, "tier": "strong", "supported_by": ["Peer Tutor, General & Organic Chemistry"] },
+    { "name": "Ethical Responsibility", "score": 4, "tier": "thin", "supported_by": [] },
     { "name": "Reliability and Dependability", "score": 9, "tier": "exceptional", "supported_by": ["Emergency Department Volunteer", "Undergraduate Researcher, Tumor Immunology Lab"] },
-    { "name": "Resilience and Adaptability", "score": 7, "tier": "strong", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab", "Captain, Varsity Rowing"] },
-    { "name": "Capacity for Improvement", "score": 7, "tier": "strong", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
-    { "name": "Critical Thinking", "score": 7, "tier": "strong", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab", "Global Health Field Program, Kenya"] },
-    { "name": "Quantitative Reasoning", "score": 6, "tier": "developing", "supported_by": ["Global Health Field Program, Kenya"] },
-    { "name": "Scientific Inquiry", "score": 8, "tier": "strong", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
-    { "name": "Written Communication", "score": 7, "tier": "strong", "supported_by": [] },
-    { "name": "Living and Working with Others", "score": 8, "tier": "strong", "supported_by": ["Captain, Varsity Rowing", "Global Health Field Program, Kenya"] },
+    { "name": "Resilience and Adaptability", "score": 9, "tier": "exceptional", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
+    { "name": "Capacity for Improvement", "score": 9, "tier": "exceptional", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
+    { "name": "Critical Thinking", "score": 8, "tier": "strong", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
+    { "name": "Quantitative Reasoning", "score": 9, "tier": "exceptional", "supported_by": ["Global Health Field Program, Kenya"] },
+    { "name": "Scientific Inquiry", "score": 9, "tier": "exceptional", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab"] },
+    { "name": "Written Communication", "score": 8, "tier": "strong", "supported_by": [] },
+    { "name": "Living and Working with Others", "score": 6, "tier": "developing", "supported_by": ["Captain, Varsity Rowing"] },
     { "name": "Empathy and Compassion", "score": 9, "tier": "exceptional", "supported_by": ["Patient Navigator, Free Clinic", "Emergency Department Volunteer"] },
     { "name": "Human Behavior", "score": 6, "tier": "developing", "supported_by": [] },
-    { "name": "Medical Knowledge", "score": 6, "tier": "developing", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab", "Physician Shadowing, Family Medicine"] }
+    { "name": "Medical Knowledge", "score": 10, "tier": "exceptional", "supported_by": ["Undergraduate Researcher, Tumor Immunology Lab", "Physician Shadowing, Family Medicine"] }
   ],
   "priorities": [
     { "id": "p1", "text": "Strengthen Written Communication evidence — no activity currently supports it directly", "domain": "competencies", "severity": "medium" },
@@ -74,9 +74,11 @@
     ]
   },
   "component_scores": {
-    "personal_statement": { "score": 8, "last_scored": "2026-05-14" },
-    "activities": { "score": 7, "last_scored": "2026-05-10" },
-    "impactful_experience": { "score": 8, "last_scored": "2026-05-14" }
+    "personal_statement": { "score": 7.5, "last_scored": "2026-06-04" },
+    "activities": { "score": 8.8, "last_scored": "2026-06-04" },
+    "impactful_experience": { "score": 7.4, "last_scored": "2026-06-04" },
+    "experiences": { "score": 8.2, "last_scored": "2026-06-04" },
+    "competency": { "score": 8, "last_scored": "2026-06-04" }
   },
   "activity_entries": [
     { "name": "Emergency Department Volunteer", "description_quality": 8, "most_meaningful_depth": 9 },
@@ -89,7 +91,7 @@
     { "name": "Global Health Field Program, Kenya", "description_quality": 7 }
   ],
   "rec_letters": [
-    { "recommender": "Dr. Priya Anand", "title": "Associate Professor, Immunology", "relationship": "Research supervisor", "status": "received", "submitted": true, "requested_date": "2026-01-10", "received_date": "2026-02-20", "notes": "Strong — specifically praised the flow cytometry protocol redesign." },
+    { "recommender": "Dr. Priya Anand", "title": "Associate Professor, Immunology", "relationship": "Research supervisor", "status": "received", "submitted": true, "requested_date": "2026-01-10", "received_date": "2026-02-20", "notes": "Strong letter." },
     { "recommender": "Dr. Marcus Webb", "title": "Family Physician", "relationship": "Shadowing supervisor", "status": "received", "submitted": true, "requested_date": "2026-01-12", "received_date": "2026-03-01", "notes": "" },
     { "recommender": "Committee Letter", "title": "Pre-Health Advising Office", "relationship": "Institutional committee letter", "status": "pending", "submitted": false, "requested_date": "2026-01-05", "received_date": "", "notes": "Interview scheduled 2026-06-02" }
   ],
@@ -162,7 +164,7 @@
         "archetype": "adversity",
         "label": "Adversity / Challenge / Failure",
         "doc_path": "documents/secondaries/_bank/adversity.md",
-        "status": "drafted",
+        "status": "not-started",
         "pre_writable": true,
         "guiding_questions": [
           "List 3+ times you failed to complete a task or reach a goal.",

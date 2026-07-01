@@ -10,4 +10,6 @@ most_meaningful: false
 order: 7
 ---
 
-Staffed the hospital gift shop and lobby information desk during the first two years I couldn't yet be placed in a clinical volunteer role. Directed visitors, ran the register, and restocked inventory. Entry point that led directly to the ED volunteer position once I turned 18.
+Placeholder gibberish, not real. Staffed lorem ipsum dolor sit amet and lobby information desk
+during the first two years, consectetur adipiscing elit. Directed sed do eiusmod tempor, ran the
+register, and restocked ut labore et dolore magna aliqua.

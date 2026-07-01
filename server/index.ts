@@ -3,31 +3,25 @@ import staticPlugin from '@fastify/static'
 import websocketPlugin from '@fastify/websocket'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { existsSync, cpSync } from 'node:fs'
 import { registerFileRoutes } from './files.js'
 import { registerRubricRoutes } from './rubrics.js'
 import { registerAgentConfigRoutes } from './agent-config.js'
 import { registerSchoolRoutes } from './schools.js'
 import { registerPtyRoute } from './pty.js'
 import { registerWatchRoute } from './watch.js'
+import { registerConfigRoutes, resolveContentDir } from './config.js'
+import { registerResetRoute } from './reset.js'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
 
-const CONTENT_DIR = path.resolve(process.env.CONTENT_DIR ?? './content')
 // resolved against cwd (= repo root in both `npm run dev:server` and `npm start`)
+const REPO_ROOT = process.cwd()
+const CONTENT_DIR = resolveContentDir(REPO_ROOT)
 const RUBRICS_DIR = path.resolve(process.env.RUBRICS_DIR ?? 'Agent/rubrics')
 const PORT = Number(process.env.PORT ?? 3001)
 const HOST = '127.0.0.1'
 
-// First-run: seed content/ from content.example/ if absent.
-// Resolved against cwd, not import.meta.url — cwd is repo root in both
-// `npm run dev:server` (tsx, unbuilt) and `npm start` (dist/server/index.js).
-const contentExample = path.resolve(process.cwd(), 'content.example')
-if (!existsSync(CONTENT_DIR) && existsSync(contentExample)) {
-  cpSync(contentExample, CONTENT_DIR, { recursive: true })
-  console.log(`[server] First run — copied content.example → ${CONTENT_DIR}`)
-}
-
+// content/ ships with the repo (demo data pre-filled) — no first-run seed needed.
 console.log(`[server] CONTENT_DIR → ${CONTENT_DIR}`)
 
 const app = Fastify({ logger: false })
@@ -49,6 +43,8 @@ await registerFileRoutes(app, CONTENT_DIR)
 registerRubricRoutes(app, RUBRICS_DIR)
 registerAgentConfigRoutes(app, process.cwd())
 registerSchoolRoutes(app, CONTENT_DIR)
+registerConfigRoutes(app, REPO_ROOT, CONTENT_DIR)
+registerResetRoute(app, CONTENT_DIR)
 
 registerPtyRoute(app, CONTENT_DIR)
 registerWatchRoute(app, CONTENT_DIR)

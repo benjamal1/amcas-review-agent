@@ -25,7 +25,35 @@ npm install
 npm run dev
 ```
 
-Open **http://localhost:5173**. First run copies `content.example/` → `content/` (gitignored). That's it — no database, no accounts, no config.
+Open **http://localhost:5173**. `content/` ships already filled with a demo applicant so the app
+isn't blank on first look. That's it — no database, no accounts, no config.
+
+## Getting started
+
+`content/` is tracked in git and pre-filled with demo data (real scores, gibberish essays) — good
+for exploring the UI, not for your real application. Before entering your own data:
+
+1. **Detach it from git**, so your real application never accidentally gets committed:
+   ```bash
+   git rm -r --cached content && echo '/content/' >> .gitignore && git commit -m "untrack content/"
+   ```
+   (Or point somewhere else entirely — Settings → Content Directory, or `CONTENT_DIR=/path npm run dev`.
+   See [Point at your own data](#point-at-your-own-data).)
+2. **Wipe the demo data** — open the app, **Settings** (sidebar) → **Clear All Data**. Resets
+   `content/` to blank: no scores, blank essay templates, one empty activity/school/rec-letter row.
+3. **Fill in the basics first**: GPA/MCAT and school list on the **Overview**/**Application Tracker**
+   pages (these are edited in the website, not the terminal), then paste your personal statement and
+   activities into the **Editor**.
+4. **Or skip typing it all in** — if you already have an AMCAS PDF, a transcript, or a school list
+   as files, open the **Terminal** panel (sidebar, bottom), type `claude`, and ask it directly:
+   > *"read my AMCAS PDF at ~/Downloads/AMCAS.pdf and fill in my bio, MCAT, activities, coursework,
+   > and school list"*
+
+   It scans the document and writes the structured fields into `data.json` and your essays into
+   `documents/`. Always double-check the values afterward — treat it as a fast first pass, not a
+   black box. (Codex users: type `codex` instead of `claude` — see [Agent](#agent).)
+5. Once your primaries are in, ask the agent to grade: *"grade my full application"* (or use the
+   **Grade Buttons** in the Terminal panel, which inject the trigger phrases for you).
 
 ## Resource usage
 
@@ -53,11 +81,15 @@ rm -rf amcas-review-agent
 If you set `CONTENT_DIR` to point outside the repo (e.g. an Obsidian vault), that folder is
 untouched by the delete above — remove it separately if you want your data gone too.
 
-## Point at your existing vault
+## Point at your own data
 
-```bash
-CONTENT_DIR=/path/to/obsidian/vault npm run dev
-```
+Two ways to use a content directory other than the repo's own `content/`:
+
+- **Settings page** (in-app) — set a Content Directory path and save; restart the dev server to apply.
+- **Environment variable** — always wins over the Settings page:
+  ```bash
+  CONTENT_DIR=/path/to/obsidian/vault npm run dev
+  ```
 
 ## Using it
 
