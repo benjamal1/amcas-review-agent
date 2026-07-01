@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { useTerminalDock } from '../terminal/TerminalDock'
 
-type Item = { to: string; label: string; end?: boolean }
+// claude: page whose content is authored solely by the Claude agent (not user-edited) → orange "C".
+type Item = { to: string; label: string; end?: boolean; claude?: boolean }
 const SECTIONS: { title: string; items: Item[] }[] = [
   { title: 'Guide', items: [
     { to: '/guide', label: 'User Guide' },
@@ -11,19 +12,19 @@ const SECTIONS: { title: string; items: Item[] }[] = [
   { title: 'General', items: [
     { to: '/', label: 'Overview', end: true },
     { to: '/tracker', label: 'Application Tracker' },
-    { to: '/applicant-image', label: 'Applicant Image' },
-    { to: '/story-bank', label: 'Story Bank' },
+    { to: '/applicant-image', label: 'Applicant Image', claude: true },
+    { to: '/story-bank', label: 'Story Bank', claude: true },
     { to: '/meeting-notes', label: 'Meeting Notes' },
     { to: '/knowledge', label: 'Knowledge' },
-    { to: '/log', label: 'Activity Log' },
+    { to: '/log', label: 'Activity Log', claude: true },
   ] },
   { title: 'Primaries', items: [
-    { to: '/grading', label: 'Grading' },
+    { to: '/grading', label: 'Grading', claude: true },
     { to: '/editor', label: 'Editor' },
-    { to: '/review', label: 'Review' },
+    { to: '/review', label: 'Review', claude: true },
     { to: '/coursework', label: 'Coursework' },
     { to: '/rubrics', label: 'Rubrics' },
-    { to: '/score-history', label: 'Score History' },
+    { to: '/score-history', label: 'Score History', claude: true },
   ] },
   { title: 'Secondaries', items: [
     { to: '/secondaries/prewriting', label: 'Prewriting' },
@@ -60,7 +61,10 @@ export function Sidebar() {
                     <li key={n.to}>
                       <NavLink to={n.to} end={n.end}
                         className={({ isActive }) => `sidebar__link${isActive ? ' sidebar__link--active' : ''}`}
-                      >{n.label}</NavLink>
+                      >
+                        <span className="sidebar__link-label">{n.label}</span>
+                        {n.claude && <span className="sidebar__c" title="Claude-authored — written solely by the agent">C</span>}
+                      </NavLink>
                     </li>
                   ))}
                 </ul>
