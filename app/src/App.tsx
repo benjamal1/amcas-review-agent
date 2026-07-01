@@ -1,6 +1,6 @@
 import { HashRouter, Routes, Route, Outlet } from 'react-router-dom'
 import { Sidebar } from './components/layout/Sidebar'
-import { TerminalDock, TerminalDockProvider } from './components/terminal/TerminalDock'
+import { TerminalDock, TerminalDockProvider, useTerminalDock } from './components/terminal/TerminalDock'
 import { UserGuidePage } from './pages/UserGuidePage'
 import { ClaudePage } from './pages/ClaudePage'
 import { OverviewPage } from './pages/OverviewPage'
@@ -24,16 +24,23 @@ import { GradingPage } from './pages/GradingPage'
 import { EssayPrioritizationPage } from './pages/EssayPrioritizationPage'
 import { ActivityLogPage } from './pages/ActivityLogPage'
 
+function LayoutInner() {
+  const { side } = useTerminalDock()
+  return (
+    <div className="app-shell">
+      <Sidebar />
+      <main className={`app-content app-content--term-${side}`}>
+        <div className="app-content__page"><Outlet /></div>
+        <TerminalDock />
+      </main>
+    </div>
+  )
+}
+
 function Layout() {
   return (
     <TerminalDockProvider>
-      <div className="app-shell">
-        <Sidebar />
-        <main className="app-content">
-          <div className="app-content__page"><Outlet /></div>
-          <TerminalDock />
-        </main>
-      </div>
+      <LayoutInner />
     </TerminalDockProvider>
   )
 }

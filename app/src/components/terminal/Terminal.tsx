@@ -4,6 +4,7 @@ import { FitAddon } from '@xterm/addon-fit'
 import { WebglAddon } from '@xterm/addon-webgl'
 import '@xterm/xterm/css/xterm.css'
 import '../../styles/terminal.css'
+import { IS_STATIC } from '../../lib/env'
 
 // Shared refs so buttons can inject into the running session
 let _ws: WebSocket | null = null
@@ -13,15 +14,19 @@ export function getSharedTerminal() { return { ws: _ws, xterm: _xterm } }
 // Inject a trigger phrase into the shared terminal. Claude is auto-started on connect (see connect()),
 // so this only types the phrase — no fragile "is a session running?" detection / relaunch.
 export function injectPhrase(phrase: string) {
+  if (IS_STATIC) { alert('The Claude agent runs only in the full local app — this shared export is read-only.'); return }
   if (!_ws || _ws.readyState !== WebSocket.OPEN) { alert('Terminal not connected. Open the terminal panel.'); return }
-  _ws.send(JSON.stringify({ type: 'input', data: phrase + '\n' }))
+  // Claude's TUI reads \n as a literal newline (Shift+Enter) and \r as submit (Enter). Send the
+  // text, then \r on the next tick so it lands as a real Enter outside the paste burst.
+  _ws.send(JSON.stringify({ type: 'input', data: phrase }))
+  setTimeout(() => _ws?.send(JSON.stringify({ type: 'input', data: '\r' })), 40)
 }
 
 export function Terminal() {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
-    if (!ref.current) return
+    if (IS_STATIC || !ref.current) return // no PTY server in the static export
     const xterm = new XTerm({
       theme: { background: '#0F1419', foreground: '#C9D1D9', cursor: '#36D6C3', selectionBackground: '#2A323C', black: '#0F1419', brightBlack: '#2A323C', red: '#F85149', green: '#3FB950', yellow: '#D29922', blue: '#58A6FF', magenta: '#BC8CFF', cyan: '#36D6C3', white: '#C9D1D9', brightWhite: '#E6EDF3' },
       fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
@@ -73,5 +78,10 @@ export function Terminal() {
     }
   }, [])
 
+  if (IS_STATIC) return (
+    <div className="terminal-container terminal-container--static">
+      Terminal &amp; Claude agent run only in the full local app — this shared export is read-only.
+    </div>
+  )
   return <div ref={ref} className="terminal-container" />
 }

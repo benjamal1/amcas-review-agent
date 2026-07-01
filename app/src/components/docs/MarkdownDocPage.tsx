@@ -1,6 +1,8 @@
 import { useState, useEffect, useRef } from 'react'
 import { marked } from 'marked'
 import { Editor } from '../editor/Editor'
+import { fetchDoc } from '../../lib/docs'
+import { IS_STATIC } from '../../lib/env'
 
 const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')
 type Heading = { id: string; text: string; level: number }
@@ -16,9 +18,8 @@ export function MarkdownDocPage({ path, intro }: { path: string; intro: string }
   useEffect(() => {
     if (mode !== 'view') return
     let dead = false
-    fetch(`/api/file?path=${encodeURIComponent(path)}`)
-      .then(r => r.json())
-      .then(({ content }: { content: string }) => { if (!dead) setHtml(marked.parse(content) as string) })
+    fetchDoc(path)
+      .then(content => { if (!dead) setHtml(marked.parse(content) as string) })
       .catch(() => { if (!dead) setHtml('<p class="docs__error">Could not load.</p>') })
     return () => { dead = true }
   }, [path, mode])
@@ -42,9 +43,11 @@ export function MarkdownDocPage({ path, intro }: { path: string; intro: string }
     <div className="page docpage">
       <div className="docpage__bar">
         <span className="docpage__intro">{intro}</span>
-        <button className="docpage__toggle" onClick={() => setMode(m => (m === 'view' ? 'edit' : 'view'))}>
-          {mode === 'view' ? '✎ Edit' : '✓ Done'}
-        </button>
+        {!IS_STATIC && (
+          <button className="docpage__toggle" onClick={() => setMode(m => (m === 'view' ? 'edit' : 'view'))}>
+            {mode === 'view' ? '✎ Edit' : '✓ Done'}
+          </button>
+        )}
       </div>
       <div className="docpage__body">
         {mode === 'view' && toc.length > 0 && (

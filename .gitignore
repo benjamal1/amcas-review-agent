@@ -42,3 +42,4 @@ dist/
 # Playwright MCP screenshot/snapshot artifacts
 .playwright-mcp/
 /*.png
+dist-static/

@@ -8,6 +8,7 @@ import { ScorecardSummary } from '../components/dashboard/ScorecardSummary'
 import { injectPhrase } from '../components/terminal/Terminal'
 import { AgentButton } from '../components/terminal/AgentButton'
 import { schoolSlug, findSchoolBySlug, ARCHETYPE_CATALOG, archetypeLabel as mapsLabel } from '../lib/secondaries'
+import { fetchDoc } from '../lib/docs'
 import { plusDays } from '../lib/format'
 import type { AppData, ComponentStatus, SchoolEntry, SchoolSecondary, SecondaryEssay } from '../lib/types'
 
@@ -60,6 +61,7 @@ export function SchoolResearchTab() {
   if (!school) return null
   const sec = school.secondary ?? { essays: [] as SecondaryEssay[] }
   const notesPath = sec.research_notes_path ?? `documents/secondaries/${slug}/_research.md`
+  const brainstormPath = `documents/secondaries/${slug}/_brainstorm.md`
   const admitSlug = school.admit_slug as string | undefined
 
   return (
@@ -77,8 +79,14 @@ export function SchoolResearchTab() {
         <ResearchLinks admitSlug={admitSlug} links={sec.links ?? []} onSave={ls => editSecondary(s => ({ ...s, links: ls }))} />
       </section>
       <section className="sec-research__notes">
-        <h3 className="tracker__h">Why-us notes</h3>
-        <div className="editor-view__doc"><Editor filePath={notesPath} /></div>
+        <div className="sec-research__doc">
+          <h3 className="tracker__h">Research notes <span className="tracker__hint">— school facts you find out</span></h3>
+          <div className="editor-view__doc"><Editor filePath={notesPath} /></div>
+        </div>
+        <div className="sec-research__doc">
+          <h3 className="tracker__h">School-specific brainstorming <span className="tracker__hint">— secondary angle suggestions</span></h3>
+          <div className="editor-view__doc"><Editor filePath={brainstormPath} /></div>
+        </div>
       </section>
     </div>
   )
@@ -284,9 +292,8 @@ function ReadonlyDoc({ path }: { path: string }) {
   const [content, setContent] = useState<string | null>(null)
   useEffect(() => {
     let dead = false
-    fetch(`/api/file?path=${encodeURIComponent(path)}`)
-      .then(r => (r.ok ? r.json() : { content: '' }))
-      .then(d => { if (!dead) setContent(d.content ?? '') })
+    fetchDoc(path)
+      .then(c => { if (!dead) setContent(c ?? '') })
       .catch(() => { if (!dead) setContent('') })
     return () => { dead = true }
   }, [path])

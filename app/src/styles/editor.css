@@ -22,6 +22,8 @@
 .editor-toolbar__empty { font-size: 11px; color: var(--color-muted); }
 .editor-cm { flex: 1; overflow: hidden; }
 .editor-cm .cm-editor { height: 100%; }
+/* Static export: rendered read-only markdown in place of the code editor. */
+.editor-cm--rendered { overflow: auto; padding: 16px 22px; }
 .editor-panel { display: grid; grid-template-columns: 200px 1fr; height: 100%; overflow: hidden; }
 .editor-panel__tree { border-right: 1px solid var(--color-hairline); overflow-y: auto; }
 .editor-panel__editor { overflow: hidden; }

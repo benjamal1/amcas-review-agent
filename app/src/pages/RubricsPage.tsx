@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { marked } from 'marked'
+import { fetchRubrics, fetchRubric } from '../lib/docs'
 
 // Read-only viewer for the scoring rubrics (Agent/rubrics/*.md).
 // ponytail: marked without sanitizer — rubrics are app-shipped local files, not user input.
@@ -12,18 +13,16 @@ export function RubricsPage() {
   const [html, setHtml] = useState<string>('')
 
   useEffect(() => {
-    fetch('/api/rubrics')
-      .then(r => r.json())
-      .then((f: string[]) => { setFiles(f); if (f.length) setSelected(f[0]) })
+    fetchRubrics()
+      .then(f => { setFiles(f); if (f.length) setSelected(f[0]) })
       .catch(() => setFiles([]))
   }, [])
 
   useEffect(() => {
     if (!selected) { setHtml(''); return }
     let dead = false
-    fetch(`/api/rubric?name=${encodeURIComponent(selected)}`)
-      .then(r => r.json())
-      .then(({ content }: { content: string }) => { if (!dead) setHtml(marked.parse(content) as string) })
+    fetchRubric(selected)
+      .then(content => { if (!dead) setHtml(marked.parse(content) as string) })
       .catch(() => { if (!dead) setHtml('<p class="docs__error">Could not load.</p>') })
     return () => { dead = true }
   }, [selected])

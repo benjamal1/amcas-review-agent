@@ -8,6 +8,8 @@
     "dev:server": "tsx watch server/index.ts",
     "dev:client": "vite --config app/vite.config.ts",
     "build": "vite build --config app/vite.config.ts && tsc -p server/tsconfig.json",
+    "build:static": "VITE_STATIC=1 vite build --config app/vite.config.ts && node scripts/build-static-content.mjs",
+    "preview:static": "vite preview --config app/vite.config.ts --outDir ../dist-static",
     "start": "node dist/server/index.js",
     "test": "vitest run"
   },

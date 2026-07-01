@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from 'react'
 import { marked } from 'marked'
 import { Editor } from '../components/editor/Editor'
 import { headingSlug as slug } from '../lib/format'
+import { fetchDoc, saveDoc } from '../lib/docs'
+import { IS_STATIC } from '../lib/env'
 
 const PATH = 'story-bank.md'
 const TASK = /^(\s*[-*] )\[[ xX]\]/
@@ -34,18 +36,15 @@ export function StoryBankPage() {
   useEffect(() => {
     if (mode !== 'view') return
     let dead = false
-    fetch(`/api/file?path=${encodeURIComponent(PATH)}`).then(r => r.json())
-      .then(({ content }: { content: string }) => { if (!dead) setContent(content ?? '') })
+    fetchDoc(PATH)
+      .then(content => { if (!dead) setContent(content ?? '') })
       .catch(() => { if (!dead) setContent('') })
     return () => { dead = true }
   }, [mode])
 
   async function persist(next: string) {
     setContent(next) // optimistic
-    await fetch(`/api/file?path=${encodeURIComponent(PATH)}`, {
-      method: 'PUT', headers: { 'content-type': 'application/json' },
-      body: JSON.stringify({ content: next, frontmatter: {} }),
-    }).catch(() => {})
+    await saveDoc(PATH, next, {}).catch(() => {}) // no-op in static export
   }
 
   const html = mode === 'view' ? (marked.parse(content) as string) : ''
@@ -62,8 +61,9 @@ export function StoryBankPage() {
     }))
     const boxes = [...el.querySelectorAll('input[type=checkbox]')] as HTMLInputElement[]
     const wired = boxes.map((box, idx) => {
-      box.disabled = false
       box.closest('li')?.classList.toggle('story--used', box.checked)
+      if (IS_STATIC) { box.disabled = true; return () => {} } // read-only export: show state, don't flip
+      box.disabled = false
       const h = () => persist(flipLine(contentRef.current, idx, box.checked))
       box.addEventListener('change', h)
       return () => box.removeEventListener('change', h)
@@ -79,9 +79,11 @@ export function StoryBankPage() {
       <div className="docpage__bar">
         <span className="docpage__intro">Story Bank — raw moments for essays & secondaries. Check a story to mark it used.</span>
         <span className="story__counter">{used}/{total} used</span>
-        <button className="docpage__toggle" onClick={() => setMode(m => (m === 'view' ? 'edit' : 'view'))}>
-          {mode === 'view' ? '✎ Edit' : '✓ Done'}
-        </button>
+        {!IS_STATIC && (
+          <button className="docpage__toggle" onClick={() => setMode(m => (m === 'view' ? 'edit' : 'view'))}>
+            {mode === 'view' ? '✎ Edit' : '✓ Done'}
+          </button>
+        )}
       </div>
       <div className="docpage__body">
         {mode === 'view' && toc.length > 0 && (

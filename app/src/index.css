@@ -52,7 +52,12 @@ body {
   display: flex;
   flex-direction: column;
 }
-.app-content__page { flex: 1; min-height: 0; overflow: hidden; }
+/* Query container: page-layout grids respond to THIS width (shrinks when the terminal docks
+   right), not the viewport — so a docked terminal collapses multi-column pages to single column. */
+.app-content__page { flex: 1; min-width: 0; min-height: 0; overflow: hidden; container: pane / inline-size; }
+
+/* Right dock: page and terminal sit side by side so page text reflows beside it, not under. */
+.app-content--term-right { flex-direction: row; }
 
 /* ── Global terminal dock (toggled from sidebar, mounted once) ── */
 .term-dock {
@@ -62,6 +67,18 @@ body {
   display: flex; flex-direction: column;
 }
 .term-dock:not(.term-dock--open) { border-top: 0; }
+
+/* Right-docked variant: vertical panel with a left-edge resize strip. */
+.term-dock--right { border-top: 0; border-left: 1px solid var(--color-hairline); position: relative; }
+.term-dock--right:not(.term-dock--open) { border-left: 0; }
+.term-dock--right .term-dock__handle { cursor: default; }
+.term-dock__redge {
+  position: absolute; left: 0; top: 0; bottom: 0; width: 5px; z-index: 2;
+  cursor: col-resize; background: transparent;
+}
+.term-dock__redge:hover { background: var(--color-hairline); }
+.term-dock__side { margin-left: auto; background: none; border: none; color: var(--color-muted); cursor: pointer; font-size: 13px; padding: 0 2px; }
+.term-dock__side:hover { color: var(--color-text); }
 .term-dock__handle {
   height: 22px; flex-shrink: 0; cursor: row-resize; background: var(--color-raised);
   display: flex; align-items: center; gap: 8px; padding: 0 10px;
@@ -70,7 +87,7 @@ body {
 .term-dock__handle:hover { background: var(--color-bg); }
 .term-dock__grip { width: 28px; height: 3px; border-radius: 2px; background: var(--color-hairline); }
 .term-dock__title { font-size: 9px; font-weight: 700; letter-spacing: .12em; color: var(--color-muted); }
-.term-dock__close { margin-left: auto; background: none; border: none; color: var(--color-muted); cursor: pointer; font-size: 12px; }
+.term-dock__close { background: none; border: none; color: var(--color-muted); cursor: pointer; font-size: 12px; }
 .term-dock__close:hover { color: var(--color-danger); }
 .term-dock__body { flex: 1; min-height: 0; overflow: hidden; }
 
@@ -521,6 +538,8 @@ body {
 .sec-school__tab--active { color: var(--color-bg); background: var(--color-accent); font-weight: 600; }
 .sec-school__body { display: flex; flex-direction: column; gap: 16px; }
 .sec-research { display: grid; grid-template-columns: 1.3fr 1fr; gap: 18px; align-items: start; }
+.sec-research__notes { display: flex; flex-direction: column; gap: 16px; }
+.sec-research__doc .editor-view__doc { height: 320px; border: 1px solid var(--color-hairline); border-radius: var(--radius-sm); overflow: hidden; margin-top: 6px; }
 .sec-research__prompt { width: 100%; min-width: 200px; white-space: normal; }
 .sec-research__del { background: none; border: none; color: var(--color-muted); cursor: pointer; }
 .sec-research__del:hover { color: var(--color-danger); }
@@ -566,3 +585,41 @@ body {
 .actlog__item { display: flex; gap: 12px; padding: 8px 0; border-bottom: 1px solid var(--color-hairline); font-size: 13px; }
 .actlog__date { flex-shrink: 0; width: 92px; color: var(--color-muted); font-family: var(--font-mono); font-size: 12px; }
 .actlog__summary { color: var(--color-text); line-height: 1.5; }
+
+/* ═══ Narrow-pane responsiveness ═══
+   The .app-content__page container shrinks when the terminal docks right. These container
+   queries collapse multi-column page layouts to a single column (and tighten dense tile grids)
+   so pages stay usable at ~half width instead of overflowing/clipping. Viewport media queries
+   would not fire here — the pane shrinks, not the window. */
+
+/* Big two/three-column page layouts → stack. */
+@container pane (max-width: 860px) {
+  .sec-research,
+  .dashboard__overview,
+  .dashboard__scores,
+  .rollup__row,
+  .editor-view__main--split,
+  .activity-form,
+  .docs2,
+  .page--docs,
+  .page--editor-view,
+  .sec-school__body.page--editor-view { grid-template-columns: 1fr; }
+  .sec-school__body.page--editor-view { height: auto; }
+  /* Stacked file/essay trees become short scroll strips above the content, not tall sidebars. */
+  .page--editor-view .editor-view__tree,
+  .sec-school__body.page--editor-view .editor-view__tree,
+  .page--docs .docs__list { max-height: 150px; }
+  .component-cards { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Very narrow: single-column tiles, drop optional nav/columns. */
+@container pane (max-width: 560px) {
+  .component-cards,
+  .tracker__cl-grid { grid-template-columns: 1fr; }
+  .domain-tiles { grid-template-columns: repeat(auto-fit, minmax(110px, 1fr)); }
+  .school-tiers { grid-template-columns: repeat(auto-fit, minmax(96px, 1fr)); }
+  .heatmap__grid { grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); }
+  .docpage__toc { display: none; }
+  .tracker__comp { grid-template-columns: 1fr auto; }
+  .tracker__comp .tracker__comp-date { display: none; }
+}

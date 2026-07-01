@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { marked } from 'marked'
 import { useData } from '../hooks/useData'
+import { fetchFiles, fetchDoc } from '../lib/docs'
 import type { ScoreSnapshot } from '../lib/types'
 
 import { pretty } from '../lib/format'
@@ -20,11 +21,10 @@ export function ReviewPage() {
 
   useEffect(() => {
     let dead = false
-    fetch('/api/files?dir=feedback').then(r => r.json()).then(async (files: string[]) => {
+    fetchFiles('feedback', false).then(async f => {
+      const files = f as string[]
       const settled = await Promise.allSettled(files.map(async p => {
-        const r = await fetch(`/api/file?path=${encodeURIComponent(p)}`)
-        if (!r.ok) throw new Error(`load ${p}`)
-        const { content } = await r.json()
+        const content = await fetchDoc(p)
         return { path: p, html: marked.parse(content ?? '') as string, title: (p.split('/').pop() ?? p).replace(/\.md$/, '') }
       }))
       // one bad file shouldn't drop the rest

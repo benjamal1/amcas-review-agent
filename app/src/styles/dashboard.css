@@ -91,7 +91,7 @@
 .todos__list { list-style: none; padding: 0; margin: 4px 0; font-size: 11px; max-height: 140px; overflow-y: auto; }
 .todos__list li { padding: 1px 0; }
 .todos__done s { color: var(--color-muted); }
-.todos__add, .rec-list__add, .school-add, .coursework-panel tr:last-child { display: flex; gap: 4px; margin-top: 4px; }
+.todos__add, .rec-list__add, .school-add { display: flex; gap: 4px; margin-top: 4px; }
 .todos__add button, .rec-list__add button, .school-add button, .school-detail button {
   background: var(--color-accent); color: #fff; border: none; border-radius: 3px; padding: 2px 8px; font-size: 11px; cursor: pointer;
 }
@@ -109,6 +109,12 @@
 .school-detail__notes textarea { min-height: 40px; resize: vertical; }
 .school-detail__req-result { font-size: 10px; margin-top: 4px; }
 .school-detail__err { color: var(--color-danger); font-size: 10px; }
-.coursework-panel table { width: 100%; }
-.coursework-panel td { padding: 1px 2px; }
 .coursework-panel button { background: none; border: 1px solid var(--color-hairline); color: var(--color-muted); border-radius: 3px; cursor: pointer; }
+/* AMCAS Academic Record grid: many columns → horizontal scroll rather than crush. */
+.coursework-panel__scroll { overflow-x: auto; }
+.coursework-table { width: 100%; border-collapse: collapse; min-width: 640px; }
+.coursework-table th { font-size: 9px; text-transform: uppercase; letter-spacing: .05em; color: var(--color-muted); text-align: left; font-weight: 700; padding: 2px; white-space: nowrap; }
+.coursework-table td { padding: 1px 2px; }
+.coursework-table input { min-width: 0; }
+.coursework-table .cw-xs { width: 44px; }
+.coursework-table .cw-sm { width: 78px; }
